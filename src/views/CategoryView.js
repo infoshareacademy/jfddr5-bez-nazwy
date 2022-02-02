@@ -1,5 +1,5 @@
 const CategoryView = () => {
-  return <div></div>;
+  return <div>CategoryView</div>;
 };
 
 export default CategoryView;
