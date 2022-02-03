@@ -7,6 +7,9 @@ import {
 	signOut,
 } from "firebase/auth";
 
+import { collection, getDocs, getFirestore } from "firebase/firestore";
+import { useEffect } from "react";
+
 const firebaseConfig = {
 	apiKey: "AIzaSyDyt3k2BzoM2Oav67VHJh38Dbtp3T0Vn_4",
 	authDomain: "petsy-83eb2.firebaseapp.com",
@@ -44,4 +47,18 @@ const logoutUser = () => {
 	signOut(auth);
 };
 
+export const getBusinessList = async(callback)=>{
+  const businessSnapshot = await getDocs(collection(db, "business"));
+  console.log(businessSnapshot)
+  const businessList = businessSnapshot.docs.map((doc)=>({
+    id:doc.id,
+    name: doc.data().name,
+    category: doc.data().category,
+    city: doc.data().city,
+    contact: doc.data().contact,
+  }))
+  callback(businessList)
+} 
+
 export { db, auth, registerUser, loginUser, logoutUser };
+
