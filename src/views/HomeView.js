@@ -1,17 +1,7 @@
-import React, { useState } from "react";
-import Modal from "./UserFormModal";
+import Header from "../components/Header/Header";
 
-const HomeView = () => {
-	const [show, setShow] = useState(false);
-
-	return (
-		<>
-			<button onClick={() => setShow(!show)}>
-				Zaloguj się / załóż konto
-			</button>
-			<Modal show={show} />
-		</>
-	);
+const HomeView = (props) => {
+	return <Header currentUser={props.currentUser} />;
 };
 
 export default HomeView;
