@@ -5,7 +5,7 @@ import ProductView from "./views/ProductView";
 import ProfileView from "./views/ProfileView";
 import { useEffect, useState } from "react";
 import { getBusinessList } from "./utils/db";
-
+import itemView from "./components/CategoryList/CategoryList"
 
 
 
