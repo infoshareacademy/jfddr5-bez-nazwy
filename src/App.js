@@ -9,26 +9,28 @@ import { businessListContext } from "./contexts/BusinessListContext";
 
 function App() {
 	const [currentUser, setCurrentUser] = useState(null);
-  const [businessList, setBusinessList] = useState([]);
+	const [businessList, setBusinessList] = useState([]);
 
 	useEffect(() => {
 		return auth.onAuthStateChanged(setCurrentUser);
 	}, []);
 
-  useEffect(() => {
+	useEffect(() => {
 		getBusinessList(setBusinessList);
-		console.log(businessList);
 	}, []);
-  
+
 	return (
-    <businessListContext.Provider value={businessList}>
-		<Routes>
-			<Route path="/" element={<HomeView currentUser={currentUser} />} />
-			<Route path="/category" element={<CategoryView />} />
-			<Route path="/product" element={<ProductView />} />
-			<Route path="/profile" element={<ProfileView />} />
-		</Routes>
-    </businessListContext.Provider>
+		<businessListContext.Provider value={businessList}>
+			<Routes>
+				<Route
+					path="/"
+					element={<HomeView currentUser={currentUser} />}
+				/>
+				<Route path="/category" element={<CategoryView />} />
+				<Route path="/product" element={<ProductView />} />
+				<Route path="/profile" element={<ProfileView />} />
+			</Routes>
+		</businessListContext.Provider>
 	);
 }
 

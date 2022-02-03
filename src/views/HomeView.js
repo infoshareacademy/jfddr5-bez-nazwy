@@ -1,12 +1,11 @@
-
 import Header from "../components/Header/Header";
 import CategoryListBar from "../components/Header/CategoryListBar/CategoryListBar";
 
-const HomeView = () => {
+const HomeView = (props) => {
 	return (
 		<div>
 			HomeView
-      <Header currentUser={props.currentUser}
+			<Header currentUser={props.currentUser} />
 			<CategoryListBar />
 		</div>
 	);

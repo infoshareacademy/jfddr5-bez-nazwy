@@ -34,13 +34,11 @@ const Modal = (props) => {
 		<div className={styles.modal} onClick={props.onClose}>
 			<div
 				className={styles.modalContent}
-				onClick={(e) => e.stopPropagation()}
-			>
+				onClick={(e) => e.stopPropagation()}>
 				{props.showRegister && (
 					<form
 						className={styles.modalForm}
-						onSubmit={handleRegister}
-					>
+						onSubmit={handleRegister}>
 						<input
 							type="email"
 							placeholder="E-mail"
