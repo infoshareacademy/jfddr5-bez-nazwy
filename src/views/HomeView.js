@@ -1,10 +1,10 @@
 import CategoryListBar from "../components/Header/CategoryListBar/CategoryListBar";
 
-const HomeView = ({ businessList }) => {
+const HomeView = () => {
 	return (
 		<div>
 			HomeView
-			<CategoryListBar businessList={businessList} />
+			<CategoryListBar />
 		</div>
 	);
 };

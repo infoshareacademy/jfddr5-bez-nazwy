@@ -6,7 +6,6 @@ import { businessListContext } from "../../../contexts/BusinessListContext";
 const CategoryListBar = () => {
 	const businessList = useContext(businessListContext);
 	const [category, setCategory] = useState("");
-	console.log(category);
 	return (
 		<div>
 			<div className={s.categoryBar}>
