@@ -13,6 +13,7 @@ function App() {
 	const [currentUser, setCurrentUser] = useState(null);
 	const [businessList, setBusinessList] = useState([]);
 	const [product, setProduct] = useState("");
+	const [category, setCategory] = useState("");
 
 	useEffect(() => {
 		return auth.onAuthStateChanged(setCurrentUser);
@@ -29,7 +30,10 @@ function App() {
 					path="*"
 					element={
 						<>
-							<CategoryListBar />
+							<CategoryListBar
+								category={category}
+								setCategory={setCategory}
+							/>
 						</>
 					}></Route>
 				<Route
@@ -44,6 +48,7 @@ function App() {
 							product={product}
 							setProduct={setProduct}
 							currentUser={currentUser}
+							setCategory={setCategory}
 						/>
 					}
 				/>

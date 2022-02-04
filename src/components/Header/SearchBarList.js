@@ -1,7 +1,12 @@
 import { useContext } from "react";
 import { businessListContext } from "../../contexts/BusinessListContext";
 
-export const SearchBarList = ({ header, setValue, inputRef, categoryList }) => {
+export const SearchBarList = ({
+	header,
+	setSearchValue,
+	inputRef,
+	categoryList,
+}) => {
 	console.log(categoryList);
 	const businessList = useContext(businessListContext);
 
@@ -11,10 +16,13 @@ export const SearchBarList = ({ header, setValue, inputRef, categoryList }) => {
 			<ul>
 				{header === "Salony" &&
 					businessList.map((bus) => {
-						console.log(bus.name);
-						if (bus.name.includes(inputRef.current.value)) {
+						const myName = bus.name.toLowerCase();
+						const myValue = inputRef.current.value.toLowerCase();
+
+						console.log(myName, myValue, myName.includes(myValue));
+						if (myName.includes(myValue)) {
 							return (
-								<li onClick={() => setValue(bus.name)}>
+								<li onClick={() => setSearchValue(bus.name)}>
 									{bus.name}
 								</li>
 							);
@@ -24,8 +32,16 @@ export const SearchBarList = ({ header, setValue, inputRef, categoryList }) => {
 				{header === "Usługi" &&
 					categoryList.map((category) => {
 						console.log(category);
-						if (category.includes(inputRef.current.value)) {
-							return <li>{category}</li>;
+						if (
+							category
+								.toLowerCase()
+								.includes(inputRef.current.value.toLowerCase())
+						) {
+							return (
+								<li onClick={() => setSearchValue(category)}>
+									{category}
+								</li>
+							);
 						}
 						return;
 					})}

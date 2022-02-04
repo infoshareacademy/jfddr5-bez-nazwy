@@ -3,9 +3,10 @@ import { useNavigate } from "react-router-dom";
 import { businessListContext } from "../../contexts/BusinessListContext";
 import { SearchBarList } from "./SearchBarList";
 
-export const SearchBar = ({ searchType, setProduct }) => {
-	const [value, setValue] = useState("");
+export const SearchBar = ({ searchType, setProduct, setCategory }) => {
+	const [searchValue, setSearchValue] = useState("");
 	const navigate = useNavigate();
+
 	const inputRef = useRef();
 	const businessList = useContext(businessListContext);
 
@@ -15,15 +16,22 @@ export const SearchBar = ({ searchType, setProduct }) => {
 
 	const handleSubmit = (e) => {
 		e.preventDefault();
-
-		if (businessList.some((bus) => value === bus.name)) {
-			const businessObj = businessList.find((bus) => value == bus.name);
+		//name
+		if (businessList.some((business) => searchValue === business.name)) {
+			const businessObj = businessList.find(
+				(business) => searchValue === business.name,
+			);
 			console.log(businessObj);
 			setProduct(businessObj);
 			navigate(`/product/${businessObj.id}`);
-		} else if (businessList.some((bus) => value === bus.category)) {
-			//todo Emilia
-			navigate(`/category`);
+			//category
+		} else if (categoryList.some((category) => searchValue === category)) {
+			const category = categoryList.find(
+				(category) => searchValue == category,
+			);
+			console.log(category);
+			setCategory(category);
+			navigate(`/${category}`);
 		}
 		//city
 
@@ -31,7 +39,7 @@ export const SearchBar = ({ searchType, setProduct }) => {
 	};
 
 	const handleChange = (e) => {
-		setValue(e.target.value);
+		setSearchValue(e.target.value);
 		console.log(e.target.value);
 		console.log(inputRef.current.value);
 	};
@@ -41,37 +49,40 @@ export const SearchBar = ({ searchType, setProduct }) => {
 			<form onSubmit={handleSubmit}>
 				<input
 					type="text"
-					placeholder={
-						searchType === "service" ? "Czego szukasz?" : "Miasto"
-					}
-					value={value}
+					placeholder="Czego szukasz?"
+					value={searchValue}
 					onChange={handleChange}
 					ref={inputRef}></input>
+				<input type="text" placeholder="Gdzie jesteś?"></input>
 				<button type="submit">Szukaj</button>
 			</form>
 			{inputRef.current &&
 				inputRef.current.value.length >= 3 &&
 				businessList.some((business) =>
-					business.name.includes(inputRef.current.value),
+					business.name
+						.toLowerCase()
+						.includes(inputRef.current.value.toLowerCase()),
 				) && (
 					<SearchBarList
 						categoryList={categoryList}
 						header="Salony"
 						inputRef={inputRef}
-						setValue={setValue}
+						setSearchValue={setSearchValue}
 					/>
 				)}
 
 			{inputRef.current &&
 				inputRef.current.value.length >= 3 &&
 				categoryList.some((category) =>
-					category.includes(inputRef.current.value),
+					category
+						.toLowerCase()
+						.includes(inputRef.current.value.toLowerCase()),
 				) && (
 					<SearchBarList
 						categoryList={categoryList}
 						header="Usługi"
 						inputRef={inputRef}
-						setValue={setValue}
+						setSearchValue={setSearchValue}
 					/>
 				)}
 		</div>

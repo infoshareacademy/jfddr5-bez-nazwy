@@ -9,6 +9,7 @@ const Header = ({
 	searchType,
 	handleSearchType,
 	currentUser,
+	setCategory,
 }) => {
 	const [showLogin, setShowLogin] = useState(false);
 	const [showRegister, setShowRegister] = useState(false);
@@ -48,6 +49,7 @@ const Header = ({
 					setProduct={setProduct}
 					searchType={searchType}
 					handleSearchType={handleSearchType}
+					setCategory={setCategory}
 				/>
 			</div>
 		</>

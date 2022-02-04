@@ -2,7 +2,7 @@ import { useState } from "react";
 import Header from "../components/Header/Header";
 import CategoryListBar from "../components/Header/CategoryListBar/CategoryListBar";
 
-const HomeView = ({ setProduct, product }) => {
+const HomeView = ({ setProduct, product, setCategory }) => {
 	const [searchType, setSearchType] = useState(null);
 
 	return (
@@ -12,6 +12,7 @@ const HomeView = ({ setProduct, product }) => {
 				product={product}
 				searchType={searchType}
 				handleSearchType={setSearchType}
+				setCategory={setCategory}
 			/>
 		</div>
 	);

@@ -3,9 +3,8 @@ import s from "./CategoryListBar.module.css";
 import CategoryList from "../../CategoryList/CategoryList";
 import { businessListContext } from "../../../contexts/BusinessListContext";
 import { Link, Route, Routes } from "react-router-dom";
-const CategoryListBar = () => {
+const CategoryListBar = ({ category, setCategory }) => {
 	const businessList = useContext(businessListContext);
-	const [category, setCategory] = useState("");
 
 	return (
 		<div>

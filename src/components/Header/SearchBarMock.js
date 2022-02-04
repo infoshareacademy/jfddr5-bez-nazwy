@@ -1,13 +1,14 @@
 import searchIcon from "./img/search.png";
 import pinIcon from "./img/pin.png";
 import styles from "./SearchBarMock.module.css";
-import { SearchBar } from "./SerachBar";
+import { SearchBar } from "./SearchBar";
 
 export const SearchBarMock = ({
 	searchType,
 	handleSearchType,
 	setProduct,
 	product,
+	setCategory,
 }) => {
 	const handleSearch = (value) => {
 		handleSearchType(value);
@@ -34,6 +35,7 @@ export const SearchBarMock = ({
 				product={product}
 				setProduct={setProduct}
 				searchType={searchType}
+				setCategory={setCategory}
 			/>
 		</div>
 	);
