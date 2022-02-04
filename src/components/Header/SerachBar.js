@@ -1,39 +1,40 @@
-import { useReducer, useRef, useState } from "react";
-import { Navigate, useNavigate } from "react-router-dom";
+import { useRef, useState } from "react";
+import { useNavigate } from "react-router-dom";
+import { SearchBarList } from "./SearchBarList";
 
-export const SearchBar = ({
-	searchType,
-	businessList,
-	productId,
-	setProductId,
-}) => {
+export const SearchBar = ({ searchType, businessList, setProductId }) => {
 	const [value, setValue] = useState("");
 	const navigate = useNavigate();
 	const inputRef = useRef();
 
+	const categoryList = Array.from(
+		new Set(businessList.map((business) => business.category)),
+	);
+
 	const handleSubmit = (e) => {
 		e.preventDefault();
-		const businessObj = businessList.find((bus) => value === bus.name);
-		console.log(businessObj.id);
-		setProductId(businessObj.id);
-		navigate(`/product/${businessObj.id}`);
+
+		if (businessList.some((bus) => value === bus.name)) {
+			const businessObj = businessList.find((bus) => value == bus.name);
+			console.log(businessObj.id);
+			setProductId(businessObj.id);
+			navigate(`/product/${businessObj.id}`);
+		} else if (businessList.some((bus) => value === bus.category)) {
+			//todo Emilia
+			navigate(`/category`);
+		}
+		//city
+
+		//both
 	};
 
 	const handleChange = (e) => {
 		setValue(e.target.value);
 		console.log(e.target.value);
 		console.log(inputRef.current.value);
-		// const listsFilter = businessList.filter((bus) => {
-		// 	if (
-		// 		bus.name.includes(e.target.value) &&
-		// 		e.target.value.length >= 3
-		// 	) {
-		// 		return bus.name;
-		// 	}
-		// 	return;
-		// });
 	};
 	return (
+		//searchtype service
 		<div>
 			<form onSubmit={handleSubmit}>
 				<input
@@ -48,16 +49,31 @@ export const SearchBar = ({
 			</form>
 			{inputRef.current &&
 				inputRef.current.value.length >= 3 &&
-				businessList.map((bus) => {
-					if (bus.name.includes(inputRef.current.value)) {
-						return (
-							<p key={bus.id} onClick={() => setValue(bus.name)}>
-								{bus.name}
-							</p>
-						);
-					}
-					return;
-				})}
+				businessList.some((business) =>
+					business.name.includes(inputRef.current.value),
+				) && (
+					<SearchBarList
+						categoryList={categoryList}
+						businessList={businessList}
+						header="Salony"
+						inputRef={inputRef}
+						setValue={setValue}
+					/>
+				)}
+
+			{inputRef.current &&
+				inputRef.current.value.length >= 3 &&
+				categoryList.some((category) =>
+					category.includes(inputRef.current.value),
+				) && (
+					<SearchBarList
+						categoryList={categoryList}
+						businessList={businessList}
+						header="Usługi"
+						inputRef={inputRef}
+						setValue={setValue}
+					/>
+				)}
 		</div>
 	);
 };
