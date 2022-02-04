@@ -3,39 +3,52 @@ import ReactDOM from "react-dom";
 import { loginUser, registerUser } from "../../../utils/db";
 import styles from "./UserFormModal.module.css";
 
-const Modal = (props) => {
+const Modal = ({ showLogin, showRegister, onClose }) => {
 	const [username, setUsername] = useState("");
 	const [email, setEmail] = useState("");
 	const [password, setPassword] = useState("");
 	const [city, setCity] = useState("");
+	const [registerErrorMessage, setRegisterErrorMessage] = useState(null);
+	const [loginErrorMessage, setLoginErrorMessage] = useState(null);
 
-	const handleRegister = (e) => {
+	const handleRegister = async (e) => {
 		e.preventDefault();
-		registerUser(username, email, password, city);
+		const returnedMessage = await registerUser(
+			username,
+			email,
+			password,
+			city,
+		);
+		setRegisterErrorMessage(returnedMessage);
 		setUsername("");
 		setEmail("");
 		setPassword("");
 		setCity("");
-		props.onClose();
+		if (returnedMessage === undefined) {
+			onClose();
+		}
 	};
 
-	const handleLogin = (e) => {
+	const handleLogin = async (e) => {
 		e.preventDefault();
-		loginUser(email, password);
+		const returnedMessage = await loginUser(email, password);
+		setLoginErrorMessage(returnedMessage);
 		setEmail("");
 		setPassword("");
-		props.onClose();
+		if (returnedMessage === undefined) {
+			onClose();
+		}
 	};
 
-	if (!props.showLogin && !props.showRegister) {
+	if (!showLogin && !showRegister) {
 		return null;
 	}
 	return ReactDOM.createPortal(
-		<div className={styles.modal} onClick={props.onClose}>
+		<div className={styles.modal} onClick={onClose}>
 			<div
 				className={styles.modalContent}
 				onClick={(e) => e.stopPropagation()}>
-				{props.showRegister && (
+				{showRegister && (
 					<form
 						className={styles.modalForm}
 						onSubmit={handleRegister}>
@@ -64,9 +77,12 @@ const Modal = (props) => {
 							onChange={(e) => setCity(e.target.value)}
 						/>
 						<button type="submit">Zarejestruj się</button>
+						{registerErrorMessage !== null && (
+							<p>{registerErrorMessage}</p>
+						)}
 					</form>
 				)}
-				{props.showLogin && (
+				{showLogin && (
 					<form className={styles.modalForm} onSubmit={handleLogin}>
 						<input
 							type="email"
@@ -81,6 +97,9 @@ const Modal = (props) => {
 							onChange={(e) => setPassword(e.target.value)}
 						/>
 						<button type="submit">Zaloguj się</button>
+						{loginErrorMessage !== null && (
+							<p>{loginErrorMessage}</p>
+						)}
 					</form>
 				)}
 			</div>

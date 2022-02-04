@@ -2,7 +2,7 @@ import { useState } from "react";
 import { logoutUser } from "../../utils/db";
 import Modal from "./UserFormModal/UserFormModal";
 
-const Header = (props) => {
+const Header = ({ currentUser }) => {
 	const [showLogin, setShowLogin] = useState(false);
 	const [showRegister, setShowRegister] = useState(false);
 
@@ -13,7 +13,7 @@ const Header = (props) => {
 
 	return (
 		<>
-			{!props.currentUser ? (
+			{!currentUser ? (
 				<>
 					<button onClick={() => setShowLogin(!showLogin)}>
 						Logowanie
@@ -24,14 +24,13 @@ const Header = (props) => {
 				</>
 			) : (
 				<>
-					<p>Cześć, {props.currentUser.email}!</p>
+					<p>Cześć, {currentUser.displayName}!</p>
 					<button onClick={handleLogout}>Wyloguj się</button>
 				</>
 			)}
 			<Modal
 				showLogin={showLogin}
 				showRegister={showRegister}
-				currentUser={props.currentUser}
 				onClose={() => setShowLogin(false) || setShowRegister(false)}
 			/>
 		</>
