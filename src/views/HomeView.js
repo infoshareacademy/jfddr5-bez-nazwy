@@ -13,6 +13,7 @@ const HomeView = ({ setProduct, product, setCategory }) => {
 				searchType={searchType}
 				handleSearchType={setSearchType}
 				setCategory={setCategory}
+        currentUser={currentUser}
 			/>
 		</div>
 	);

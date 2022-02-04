@@ -39,10 +39,8 @@ const Header = ({
 			<Modal
 				showLogin={showLogin}
 				showRegister={showRegister}
-				currentUser={currentUser}
 				onClose={() => setShowLogin(false) || setShowRegister(false)}
 			/>
-
 			<div>
 				<SearchBarMock
 					product={product}
