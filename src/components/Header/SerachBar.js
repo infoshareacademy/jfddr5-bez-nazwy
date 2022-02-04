@@ -1,11 +1,13 @@
-import { useRef, useState } from "react";
+import { useContext, useRef, useState } from "react";
 import { useNavigate } from "react-router-dom";
+import { businessListContext } from "../../contexts/BusinessListContext";
 import { SearchBarList } from "./SearchBarList";
 
-export const SearchBar = ({ searchType, businessList, setProductId }) => {
+export const SearchBar = ({ searchType, setProduct }) => {
 	const [value, setValue] = useState("");
 	const navigate = useNavigate();
 	const inputRef = useRef();
+	const businessList = useContext(businessListContext);
 
 	const categoryList = Array.from(
 		new Set(businessList.map((business) => business.category)),
@@ -16,8 +18,8 @@ export const SearchBar = ({ searchType, businessList, setProductId }) => {
 
 		if (businessList.some((bus) => value === bus.name)) {
 			const businessObj = businessList.find((bus) => value == bus.name);
-			console.log(businessObj.id);
-			setProductId(businessObj.id);
+			console.log(businessObj);
+			setProduct(businessObj);
 			navigate(`/product/${businessObj.id}`);
 		} else if (businessList.some((bus) => value === bus.category)) {
 			//todo Emilia
@@ -54,7 +56,6 @@ export const SearchBar = ({ searchType, businessList, setProductId }) => {
 				) && (
 					<SearchBarList
 						categoryList={categoryList}
-						businessList={businessList}
 						header="Salony"
 						inputRef={inputRef}
 						setValue={setValue}
@@ -68,7 +69,6 @@ export const SearchBar = ({ searchType, businessList, setProductId }) => {
 				) && (
 					<SearchBarList
 						categoryList={categoryList}
-						businessList={businessList}
 						header="Usługi"
 						inputRef={inputRef}
 						setValue={setValue}

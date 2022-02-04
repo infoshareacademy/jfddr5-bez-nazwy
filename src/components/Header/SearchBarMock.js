@@ -6,10 +6,8 @@ import { SearchBar } from "./SerachBar";
 export const SearchBarMock = ({
 	searchType,
 	handleSearchType,
-	businessList,
-	setBusinessList,
-	setProductId,
-	productId,
+	setProduct,
+	product,
 }) => {
 	const handleSearch = (value) => {
 		handleSearchType(value);
@@ -33,11 +31,9 @@ export const SearchBarMock = ({
 				</div>
 			</div>
 			<SearchBar
-				productId={productId}
-				setProductId={setProductId}
+				product={product}
+				setProduct={setProduct}
 				searchType={searchType}
-				businessList={businessList}
-				setBusinessList={setBusinessList}
 			/>
 		</div>
 	);

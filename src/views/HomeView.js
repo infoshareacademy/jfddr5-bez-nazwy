@@ -1,16 +1,15 @@
 import { useState } from "react";
 import Header from "../components/Header/Header";
+import CategoryListBar from "../components/Header/CategoryListBar/CategoryListBar";
 
-const HomeView = (props) => {
+const HomeView = ({ setProduct, product }) => {
 	const [searchType, setSearchType] = useState(null);
 
 	return (
 		<div>
 			<Header
-				setProductId={props.setProductId}
-				productId={props.productId}
-				businessList={props.businessList}
-				setBusinessList={props.setBusinessList}
+				setProduct={setProduct}
+				product={product}
 				searchType={searchType}
 				handleSearchType={setSearchType}
 			/>

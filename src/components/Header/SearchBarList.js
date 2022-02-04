@@ -1,11 +1,9 @@
-export const SearchBarList = ({
-	header,
-	businessList,
-	setValue,
-	inputRef,
-	categoryList,
-}) => {
+import { useContext } from "react";
+import { businessListContext } from "../../contexts/BusinessListContext";
+
+export const SearchBarList = ({ header, setValue, inputRef, categoryList }) => {
 	console.log(categoryList);
+	const businessList = useContext(businessListContext);
 
 	return (
 		<div>
@@ -15,7 +13,11 @@ export const SearchBarList = ({
 					businessList.map((bus) => {
 						console.log(bus.name);
 						if (bus.name.includes(inputRef.current.value)) {
-							return <li>{bus.name}</li>;
+							return (
+								<li onClick={() => setValue(bus.name)}>
+									{bus.name}
+								</li>
+							);
 						}
 						return;
 					})}

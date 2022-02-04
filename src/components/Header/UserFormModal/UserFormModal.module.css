@@ -1,0 +1,26 @@
+.modal {
+	position: fixed;
+	left: 0;
+	top: 0;
+	right: 0;
+	bottom: 0;
+	background-color: rgba(0, 0, 0, 0.5);
+	display: flex;
+	justify-content: center;
+	align-items: center;
+}
+
+.modalContent {
+	width: 250px;
+	padding: 50px;
+	background-color: rgb(255, 255, 255);
+	border-radius: 10px;
+	border: 1px solid black;
+}
+
+.modalForm {
+	display: flex;
+	align-items: center;
+	flex-direction: column;
+	gap: 15px;
+}
