@@ -20,12 +20,12 @@ const Modal = ({ showLogin, showRegister, onClose }) => {
 			city,
 		);
 		setRegisterErrorMessage(returnedMessage);
-		setUsername("");
-		setEmail("");
-		setPassword("");
-		setCity("");
 		if (returnedMessage === undefined) {
 			onClose();
+			setUsername("");
+			setEmail("");
+			setPassword("");
+			setCity("");
 		}
 	};
 
@@ -33,10 +33,10 @@ const Modal = ({ showLogin, showRegister, onClose }) => {
 		e.preventDefault();
 		const returnedMessage = await loginUser(email, password);
 		setLoginErrorMessage(returnedMessage);
-		setEmail("");
-		setPassword("");
 		if (returnedMessage === undefined) {
 			onClose();
+			setEmail("");
+			setPassword("");
 		}
 	};
 
@@ -57,24 +57,28 @@ const Modal = ({ showLogin, showRegister, onClose }) => {
 							placeholder="E-mail"
 							value={email}
 							onChange={(e) => setEmail(e.target.value)}
+							required
 						/>
 						<input
 							type="password"
 							placeholder="Hasło"
 							value={password}
 							onChange={(e) => setPassword(e.target.value)}
+							required
 						/>
 						<input
 							type="text"
 							placeholder="Nazwa użytkownika"
 							value={username}
 							onChange={(e) => setUsername(e.target.value)}
+							required
 						/>
 						<input
 							type="text"
 							placeholder="Miasto"
 							value={city}
 							onChange={(e) => setCity(e.target.value)}
+							required
 						/>
 						<button type="submit">Zarejestruj się</button>
 						{registerErrorMessage !== null && (
@@ -89,12 +93,14 @@ const Modal = ({ showLogin, showRegister, onClose }) => {
 							placeholder="E-mail"
 							value={email}
 							onChange={(e) => setEmail(e.target.value)}
+							required
 						/>
 						<input
 							type="password"
 							placeholder="Hasło"
 							value={password}
 							onChange={(e) => setPassword(e.target.value)}
+							required
 						/>
 						<button type="submit">Zaloguj się</button>
 						{loginErrorMessage !== null && (

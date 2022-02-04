@@ -36,7 +36,6 @@ const registerUser = async (username, email, password, city) => {
 			password,
 		);
 		const user = response.user;
-		response.user.displayName = username;
 		await setDoc(doc(db, "users", user.uid), {
 			username,
 			authProvider: "local",
