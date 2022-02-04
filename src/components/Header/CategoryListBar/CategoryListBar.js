@@ -2,52 +2,59 @@ import { useContext, useState } from "react";
 import s from "./CategoryListBar.module.css";
 import CategoryList from "../../CategoryList/CategoryList";
 import { businessListContext } from "../../../contexts/BusinessListContext";
-
+import { Link, Route, Routes } from "react-router-dom";
 const CategoryListBar = () => {
 	const businessList = useContext(businessListContext);
 	const [category, setCategory] = useState("");
+
 	return (
 		<div>
 			<div className={s.categoryBar}>
-				<div
+				<Link
+					to="Groomer"
 					className={s.category}
 					onClick={() => setCategory("Groomer")}>
 					Groomer
-				</div>
-				<div
+				</Link>
+				<Link
+					to="Weterynarz"
 					className={s.category}
 					onClick={() => setCategory("Weterynarz")}>
 					Weterynarz
-				</div>
-				<div
+				</Link>
+				<Link
+					to="Behawiorysta"
 					className={s.category}
 					onClick={() => setCategory("Behawiorysta")}>
 					Behawiorysta
-				</div>
-				<div
+				</Link>
+				<Link
+					to="Hotel"
 					className={s.category}
 					onClick={() => setCategory("Hotel")}>
 					Psi hotel
-				</div>
-				<div
+				</Link>
+				<Link
+					to="Hodowla"
 					className={s.category}
 					onClick={() => setCategory("Hodowla")}>
 					Hodowla
-				</div>
+				</Link>
 			</div>
-
-			{businessList.map((bus) => {
-				if (bus.category === category) {
-					return (
-						<CategoryList
-							key={bus.id}
-							id={bus.id}
-							name={bus.name}
-							contact={bus.contact}
-						/>
-					);
-				}
-			})}
+			<Routes>
+				<Route
+					path={category}
+					element={businessList.map((business) => {
+						if (business.category === category) {
+							return (
+								<CategoryList
+									key={business.id}
+									business={business}
+								/>
+							);
+						}
+					})}></Route>
+			</Routes>
 		</div>
 	);
 };
