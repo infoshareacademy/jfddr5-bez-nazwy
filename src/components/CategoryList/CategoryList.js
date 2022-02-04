@@ -1,5 +1,10 @@
-const CategoryList = ({ business }) => {
-	return <div>{business.name}</div>;
+const CategoryList = ({ city, name }) => {
+	console.log(city);
+	return (
+		<div>
+			{city} {name}
+		</div>
+	);
 };
 
 export default CategoryList;
