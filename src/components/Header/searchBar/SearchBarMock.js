@@ -1,6 +1,6 @@
 import searchIcon from "./img/search.png";
 import pinIcon from "./img/pin.png";
-import styles from "./SearchBarMock.module.css";
+import styles from "./SearchBar.module.css";
 import { SearchBar } from "./SearchBar";
 
 export const SearchBarMock = ({
@@ -12,7 +12,6 @@ export const SearchBarMock = ({
 }) => {
 	const handleSearch = (value) => {
 		handleSearchType(value);
-		console.log(searchType);
 	};
 
 	return (
@@ -25,7 +24,7 @@ export const SearchBarMock = ({
 					<span>Znajdź i zarezerwuj usługę</span>
 				</div>
 				<div
-					className={styles.mock}
+					className={`${styles.mock} ${styles.mockTwo}`}
 					onClick={() => handleSearch("localization")}>
 					<img src={pinIcon}></img>
 					<span>Lokalizacja</span>

@@ -12,8 +12,9 @@ import Header from "./components/Header/Header";
 function App() {
 	const [currentUser, setCurrentUser] = useState(null);
 	const [businessList, setBusinessList] = useState([]);
-	const [product, setProduct] = useState("");
 	const [category, setCategory] = useState("");
+
+	const [product, setProduct] = useState("");
 
 	useEffect(() => {
 		return auth.onAuthStateChanged(setCurrentUser);
@@ -25,21 +26,6 @@ function App() {
 
 	return (
 		<businessListContext.Provider value={businessList}>
-			<Routes>
-				<Route
-					path="*"
-					element={
-						<>
-							<CategoryListBar
-								category={category}
-								setCategory={setCategory}
-							/>
-						</>
-					}></Route>
-				<Route
-					path="/profile"
-					element={<Header currentUser={currentUser} />}></Route>
-			</Routes>
 			<Routes>
 				<Route
 					path="*"
@@ -59,6 +45,21 @@ function App() {
 					element={<ProductView product={product} />}
 				/>
 				<Route path="/profile" element={<ProfileView />} />
+			</Routes>
+			<Routes>
+				<Route
+					path="*"
+					element={
+						<>
+							<CategoryListBar
+								category={category}
+								setCategory={setCategory}
+							/>
+						</>
+					}></Route>
+				<Route
+					path="/profile"
+					element={<Header currentUser={currentUser} />}></Route>
 			</Routes>
 		</businessListContext.Provider>
 	);

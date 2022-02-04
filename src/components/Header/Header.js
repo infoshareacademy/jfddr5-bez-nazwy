@@ -1,4 +1,4 @@
-import { SearchBarMock } from "./SearchBarMock";
+import { SearchBarMock } from "./searchBar/SearchBarMock";
 import { useState } from "react";
 import { logoutUser } from "../../utils/db";
 import Modal from "./UserFormModal/UserFormModal";
