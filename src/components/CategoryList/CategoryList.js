@@ -1,5 +1,5 @@
-const CategoryList = ({ name }) => {
-	return <div>{name}</div>;
+const CategoryList = ({ business }) => {
+	return <div>{business.name}</div>;
 };
 
 export default CategoryList;

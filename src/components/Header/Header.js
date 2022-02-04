@@ -1,8 +1,16 @@
+import { SearchBarMock } from "./SearchBarMock";
 import { useState } from "react";
 import { logoutUser } from "../../utils/db";
 import Modal from "./UserFormModal/UserFormModal";
 
-const Header = ({ currentUser }) => {
+const Header = ({
+	setProduct,
+	product,
+	searchType,
+	handleSearchType,
+	currentUser,
+	setCategory,
+}) => {
 	const [showLogin, setShowLogin] = useState(false);
 	const [showRegister, setShowRegister] = useState(false);
 
@@ -24,7 +32,7 @@ const Header = ({ currentUser }) => {
 				</>
 			) : (
 				<>
-					<p>Cześć, {currentUser.displayName}!</p>
+					<p>Cześć, {currentUser.email}!</p>
 					<button onClick={handleLogout}>Wyloguj się</button>
 				</>
 			)}
@@ -33,6 +41,15 @@ const Header = ({ currentUser }) => {
 				showRegister={showRegister}
 				onClose={() => setShowLogin(false) || setShowRegister(false)}
 			/>
+			<div>
+				<SearchBarMock
+					product={product}
+					setProduct={setProduct}
+					searchType={searchType}
+					handleSearchType={handleSearchType}
+					setCategory={setCategory}
+				/>
+			</div>
 		</>
 	);
 };

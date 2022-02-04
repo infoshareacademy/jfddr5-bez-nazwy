@@ -1,12 +1,20 @@
+import { useState } from "react";
 import Header from "../components/Header/Header";
 import CategoryListBar from "../components/Header/CategoryListBar/CategoryListBar";
 
-const HomeView = ({ currentUser }) => {
+const HomeView = ({ setProduct, product, setCategory }) => {
+	const [searchType, setSearchType] = useState(null);
+
 	return (
 		<div>
-			HomeView
-			<Header currentUser={currentUser} />
-			<CategoryListBar />
+			<Header
+				setProduct={setProduct}
+				product={product}
+				searchType={searchType}
+				handleSearchType={setSearchType}
+				setCategory={setCategory}
+        currentUser={currentUser}
+			/>
 		</div>
 	);
 };
