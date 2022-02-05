@@ -3,6 +3,7 @@ import { useNavigate } from "react-router-dom";
 import { businessListContext } from "../../../contexts/BusinessListContext";
 import { SearchBarList } from "./SearchBarList";
 import styles from "./SearchBar.module.css";
+import { pathNormalize } from "../../../utils/pathNormalize";
 
 export const SearchBar = ({
 	displaySearchBar,
@@ -38,23 +39,44 @@ export const SearchBar = ({
 			navigate(`/product/${businessObj.id}`);
 			onClose();
 			//category
-		} else if (categoryList.some((category) => searchValue === category)) {
+		}
+		if (categoryList.some((category) => searchValue === category)) {
 			const category = categoryList.find(
 				(category) => searchValue === category,
 			);
+			const categoryPath = pathNormalize(category);
 			setCategory(category);
-			navigate(`/${category}`);
+			navigate(`/${categoryPath}`);
 			onClose();
 		}
 		//city
-		else if (cityList.some((city) => cityValue === city)) {
+		if (cityList.some((city) => cityValue === city)) {
 			const city = cityList.find((city) => cityValue === city);
 			console.log(city);
-			setCity(city);
-			navigate(`/${city}`);
+			const cityPath = pathNormalize(city);
+			console.log(city);
+			setCity(() => city);
+			navigate(`/${cityPath}`);
 			onClose();
 		}
 		//both
+		if (
+			categoryList.some((category) => searchValue === category) &&
+			cityList.some((city) => cityValue === city)
+		) {
+			const category = categoryList.find(
+				(category) => searchValue === category,
+			);
+			const city = cityList.find((city) => cityValue === city);
+
+			const categoryPath = pathNormalize(category);
+			const cityPath = pathNormalize(city);
+			console.log(categoryPath, cityPath);
+			setCity(city);
+			setCategory(category);
+			navigate(`/${categoryPath}/${cityPath}`);
+			onClose();
+		}
 	};
 
 	if (!displaySearchBar) {

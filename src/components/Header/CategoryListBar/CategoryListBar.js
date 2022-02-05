@@ -10,31 +10,31 @@ const CategoryListBar = ({ category, setCategory }) => {
 		<div>
 			<div className={s.categoryBar}>
 				<Link
-					to="Groomer"
+					to="groomer"
 					className={s.category}
 					onClick={() => setCategory("Groomer")}>
 					Groomer
 				</Link>
 				<Link
-					to="Weterynarz"
+					to="weterynarz"
 					className={s.category}
 					onClick={() => setCategory("Weterynarz")}>
 					Weterynarz
 				</Link>
 				<Link
-					to="Behawiorysta"
+					to="behawiorysta"
 					className={s.category}
 					onClick={() => setCategory("Behawiorysta")}>
 					Behawiorysta
 				</Link>
 				<Link
-					to="Hotel"
+					to="hotel"
 					className={s.category}
 					onClick={() => setCategory("Hotel")}>
 					Psi hotel
 				</Link>
 				<Link
-					to="Hodowla"
+					to="hodowla"
 					className={s.category}
 					onClick={() => setCategory("Hodowla")}>
 					Hodowla

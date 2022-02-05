@@ -37,6 +37,7 @@ function App() {
 							setProduct={setProduct}
 							currentUser={currentUser}
 							setCategory={setCategory}
+							setCity={setCity}
 						/>
 					}
 				/>
@@ -61,9 +62,7 @@ function App() {
 					}></Route>
 				<Route
 					path="/profile"
-					element={
-						<Header currentUser={currentUser} setCity={setCity} />
-					}></Route>
+					element={<Header currentUser={currentUser} />}></Route>
 			</Routes>
 			<FilteredBusinessList city={city} category={category} />
 		</businessListContext.Provider>
