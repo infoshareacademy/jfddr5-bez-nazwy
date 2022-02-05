@@ -1,18 +1,14 @@
 import { useState } from "react";
 import Header from "../components/Header/Header";
 
-const HomeView = ({ setProduct, product, setCategory, currentUser }) => {
-	const [searchType, setSearchType] = useState(null);
-
+const HomeView = ({ setProduct, product, setCategory, setCity }) => {
 	return (
 		<div>
 			<Header
 				setProduct={setProduct}
 				product={product}
-				searchType={searchType}
-				handleSearchType={setSearchType}
 				setCategory={setCategory}
-				currentUser={currentUser}
+				setCity={setCity}
 			/>
 		</div>
 	);
