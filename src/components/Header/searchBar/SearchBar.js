@@ -2,6 +2,7 @@ import { useContext, useRef, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { businessListContext } from "../../../contexts/BusinessListContext";
 import { SearchBarList } from "./SearchBarList";
+import styles from "./SearchBar.module.css";
 
 export const SearchBar = ({ searchType, setProduct, setCategory }) => {
 	const [searchValue, setSearchValue] = useState("");
@@ -48,78 +49,86 @@ export const SearchBar = ({ searchType, setProduct, setCategory }) => {
 
 	return (
 		//searchtype service
-		<div>
-			<form onSubmit={handleSubmit}>
-				<input
-					type="text"
-					placeholder="Czego szukasz?"
-					value={searchValue}
-					onChange={(e) => setSearchValue(e.target.value)}
-					ref={searchInputRef}></input>
-				<input
-					type="text"
-					placeholder="Gdzie jesteś?"
-					value={cityValue}
-					onChange={(e) => setCityValue(e.target.value)}
-					ref={cityInputRef}></input>
-				<button type="submit">Szukaj</button>
-			</form>
 
-			{(document.activeElement === searchInputRef.current ||
-				cityInputRef.current) && (
-				<div>
-					{document.activeElement === searchInputRef.current &&
-						searchInputRef.current.value.length >= 3 &&
-						businessList.some((business) =>
-							business.name
-								.toLowerCase()
-								.includes(
-									searchInputRef.current.value.toLowerCase(),
-								),
-						) && (
-							<SearchBarList
-								categoryList={categoryList}
-								header="Salony"
-								searchInputRef={searchInputRef}
-								setSearchValue={setSearchValue}
-							/>
-						)}
+		<div className={styles.searchBarModal}>
+			<div className={styles.searchBarModalContent}>
+				<form
+					onSubmit={handleSubmit}
+					className={styles.searchBarModalForm}>
+					<div className={styles.searchBarModalInputs}>
+						<input
+							type="text"
+							placeholder="Czego szukasz?"
+							value={searchValue}
+							onChange={(e) => setSearchValue(e.target.value)}
+							ref={searchInputRef}></input>
+						<input
+							type="text"
+							placeholder="Gdzie jesteś?"
+							value={cityValue}
+							onChange={(e) => setCityValue(e.target.value)}
+							ref={cityInputRef}></input>
+					</div>
+					{(document.activeElement === searchInputRef.current ||
+						cityInputRef.current) && (
+						<div>
+							{document.activeElement ===
+								searchInputRef.current &&
+								searchInputRef.current.value.length >= 3 &&
+								businessList.some((business) =>
+									business.name
+										.toLowerCase()
+										.includes(
+											searchInputRef.current.value.toLowerCase(),
+										),
+								) && (
+									<SearchBarList
+										categoryList={categoryList}
+										header="Salony"
+										searchInputRef={searchInputRef}
+										setSearchValue={setSearchValue}
+									/>
+								)}
 
-					{document.activeElement === searchInputRef.current &&
-						searchInputRef.current.value.length >= 3 &&
-						categoryList.some((category) =>
-							category
-								.toLowerCase()
-								.includes(
-									searchInputRef.current.value.toLowerCase(),
-								),
-						) && (
-							<SearchBarList
-								categoryList={categoryList}
-								header="Usługi"
-								searchInputRef={searchInputRef}
-								setSearchValue={setSearchValue}
-							/>
-						)}
+							{document.activeElement ===
+								searchInputRef.current &&
+								searchInputRef.current.value.length >= 3 &&
+								categoryList.some((category) =>
+									category
+										.toLowerCase()
+										.includes(
+											searchInputRef.current.value.toLowerCase(),
+										),
+								) && (
+									<SearchBarList
+										categoryList={categoryList}
+										header="Usługi"
+										searchInputRef={searchInputRef}
+										setSearchValue={setSearchValue}
+									/>
+								)}
 
-					{document.activeElement === cityInputRef.current &&
-						cityInputRef.current.value.length >= 1 &&
-						cityList.some((city) =>
-							city
-								.toLowerCase()
-								.includes(
-									cityInputRef.current.value.toLowerCase(),
-								),
-						) && (
-							<SearchBarList
-								cityList={cityList}
-								header="Miasta"
-								cityInputRef={cityInputRef}
-								setCityValue={setCityValue}
-							/>
-						)}
-				</div>
-			)}
+							{document.activeElement === cityInputRef.current &&
+								cityInputRef.current.value.length >= 1 &&
+								cityList.some((city) =>
+									city
+										.toLowerCase()
+										.includes(
+											cityInputRef.current.value.toLowerCase(),
+										),
+								) && (
+									<SearchBarList
+										cityList={cityList}
+										header="Miasta"
+										cityInputRef={cityInputRef}
+										setCityValue={setCityValue}
+									/>
+								)}
+						</div>
+					)}
+					<button type="submit">Szukaj</button>
+				</form>
+			</div>
 		</div>
 	);
 };

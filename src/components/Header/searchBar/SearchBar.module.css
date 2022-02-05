@@ -30,3 +30,44 @@
 	height: 20px;
 	opacity: 0.3;
 }
+
+.searchBarModal {
+	position: fixed;
+	left: 0;
+	top: 0;
+	right: 0;
+	bottom: 0;
+	background-color: rgba(0, 0, 0, 0.5);
+	display: flex;
+	justify-content: center;
+	align-items: center;
+}
+
+.searchBarModalContent {
+	width: 550px;
+	height: 300px;
+	padding: 50px;
+	background-color: rgb(255, 255, 255);
+	border-radius: 10px;
+	border: 1px solid black;
+}
+
+.searchBarModalForm {
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+}
+
+.searchBarModalInputs {
+	display: flex;
+}
+
+.searchBarModalInputs input {
+	width: 250px;
+	padding: 10px;
+}
+
+.searchBarModalForm button {
+	width: 100px;
+	height: 40px;
+}
