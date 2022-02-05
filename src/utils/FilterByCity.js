@@ -1,21 +1,25 @@
-import CategoryList from "../components/CategoryList/CategoryList"
+import FilteredBusinessList from "../components/CategoryList/FilteredBusinessList";
 
-const FilterByCity = ({ businessList, setBusinessLis }) => {
+const FilterByCity = ({ businessList, city }) => {
 	const cityList = Array.from(
 		new Set(businessList.map((business) => business.city)),
 	);
-	const cityS = "Gdańsk";
-	
 
 	return (
-		<div>
-			{businessList.map((business) => {
-				if (business.city === cityS) {
-                    return <CategoryList key= {business.id} city= {business.city} name={business.name} />
-				}
-               
-			})}
-		</div>
+		<Routes>
+			<Route
+				path={city}
+				element={businessList.map((business) => {
+					if (business.city === city) {
+						return (
+							<FilteredBusinessList
+								key={business.id}
+								business={business}
+							/>
+						);
+					}
+				})}></Route>
+		</Routes>
 	);
 };
 

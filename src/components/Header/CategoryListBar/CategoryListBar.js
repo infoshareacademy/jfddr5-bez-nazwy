@@ -1,8 +1,8 @@
-import { useContext, useState } from "react";
+import { useContext } from "react";
 import s from "./CategoryListBar.module.css";
-import CategoryList from "../../CategoryList/CategoryList";
+import FilteredBusinessList from "../../CategoryList/FilteredBusinessList";
 import { businessListContext } from "../../../contexts/BusinessListContext";
-import { Link, Route, Routes } from "react-router-dom";
+import { Link } from "react-router-dom";
 const CategoryListBar = ({ category, setCategory }) => {
 	const businessList = useContext(businessListContext);
 
@@ -40,20 +40,6 @@ const CategoryListBar = ({ category, setCategory }) => {
 					Hodowla
 				</Link>
 			</div>
-			<Routes>
-				<Route
-					path={category}
-					element={businessList.map((business) => {
-						if (business.category === category) {
-							return (
-								<CategoryList
-									key={business.id}
-									business={business}
-								/>
-							);
-						}
-					})}></Route>
-			</Routes>
 		</div>
 	);
 };

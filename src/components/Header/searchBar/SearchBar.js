@@ -4,7 +4,13 @@ import { businessListContext } from "../../../contexts/BusinessListContext";
 import { SearchBarList } from "./SearchBarList";
 import styles from "./SearchBar.module.css";
 
-export const SearchBar = ({ searchType, setProduct, setCategory }) => {
+export const SearchBar = ({
+	displaySearchBar,
+	setProduct,
+	setCategory,
+	onClose,
+	setCity,
+}) => {
 	const [searchValue, setSearchValue] = useState("");
 	const [cityValue, setCityValue] = useState("");
 	const navigate = useNavigate();
@@ -30,6 +36,7 @@ export const SearchBar = ({ searchType, setProduct, setCategory }) => {
 			);
 			setProduct(businessObj);
 			navigate(`/product/${businessObj.id}`);
+			onClose();
 			//category
 		} else if (categoryList.some((category) => searchValue === category)) {
 			const category = categoryList.find(
@@ -37,21 +44,30 @@ export const SearchBar = ({ searchType, setProduct, setCategory }) => {
 			);
 			setCategory(category);
 			navigate(`/${category}`);
+			onClose();
 		}
 		//city
 		else if (cityList.some((city) => cityValue === city)) {
 			const city = cityList.find((city) => cityValue === city);
-
+			console.log(city);
+			setCity(city);
 			navigate(`/${city}`);
+			onClose();
 		}
 		//both
 	};
 
+	if (!displaySearchBar) {
+		return;
+	}
+
 	return (
 		//searchtype service
 
-		<div className={styles.searchBarModal}>
-			<div className={styles.searchBarModalContent}>
+		<div className={styles.searchBarModal} onClick={onClose}>
+			<div
+				className={styles.searchBarModalContent}
+				onClick={(e) => e.stopPropagation()}>
 				<form
 					onSubmit={handleSubmit}
 					className={styles.searchBarModalForm}>
@@ -69,63 +85,66 @@ export const SearchBar = ({ searchType, setProduct, setCategory }) => {
 							onChange={(e) => setCityValue(e.target.value)}
 							ref={cityInputRef}></input>
 					</div>
-					{(document.activeElement === searchInputRef.current ||
-						cityInputRef.current) && (
-						<div>
-							{document.activeElement ===
-								searchInputRef.current &&
-								searchInputRef.current.value.length >= 3 &&
-								businessList.some((business) =>
-									business.name
-										.toLowerCase()
-										.includes(
-											searchInputRef.current.value.toLowerCase(),
-										),
-								) && (
-									<SearchBarList
-										categoryList={categoryList}
-										header="Salony"
-										searchInputRef={searchInputRef}
-										setSearchValue={setSearchValue}
-									/>
-								)}
+					<div className={styles.searchBarModalList}>
+						{(document.activeElement === searchInputRef.current ||
+							cityInputRef.current) && (
+							<div>
+								{document.activeElement ===
+									searchInputRef.current &&
+									searchInputRef.current.value.length >= 3 &&
+									businessList.some((business) =>
+										business.name
+											.toLowerCase()
+											.includes(
+												searchInputRef.current.value.toLowerCase(),
+											),
+									) && (
+										<SearchBarList
+											categoryList={categoryList}
+											header="Salony"
+											searchInputRef={searchInputRef}
+											setSearchValue={setSearchValue}
+										/>
+									)}
 
-							{document.activeElement ===
-								searchInputRef.current &&
-								searchInputRef.current.value.length >= 3 &&
-								categoryList.some((category) =>
-									category
-										.toLowerCase()
-										.includes(
-											searchInputRef.current.value.toLowerCase(),
-										),
-								) && (
-									<SearchBarList
-										categoryList={categoryList}
-										header="Usługi"
-										searchInputRef={searchInputRef}
-										setSearchValue={setSearchValue}
-									/>
-								)}
+								{document.activeElement ===
+									searchInputRef.current &&
+									searchInputRef.current.value.length >= 3 &&
+									categoryList.some((category) =>
+										category
+											.toLowerCase()
+											.includes(
+												searchInputRef.current.value.toLowerCase(),
+											),
+									) && (
+										<SearchBarList
+											categoryList={categoryList}
+											header="Usługi"
+											searchInputRef={searchInputRef}
+											setSearchValue={setSearchValue}
+										/>
+									)}
 
-							{document.activeElement === cityInputRef.current &&
-								cityInputRef.current.value.length >= 1 &&
-								cityList.some((city) =>
-									city
-										.toLowerCase()
-										.includes(
-											cityInputRef.current.value.toLowerCase(),
-										),
-								) && (
-									<SearchBarList
-										cityList={cityList}
-										header="Miasta"
-										cityInputRef={cityInputRef}
-										setCityValue={setCityValue}
-									/>
-								)}
-						</div>
-					)}
+								{document.activeElement ===
+									cityInputRef.current &&
+									cityInputRef.current.value.length >= 1 &&
+									cityList.some((city) =>
+										city
+											.toLowerCase()
+											.includes(
+												cityInputRef.current.value.toLowerCase(),
+											),
+									) && (
+										<SearchBarList
+											cityList={cityList}
+											header="Miasta"
+											cityInputRef={cityInputRef}
+											setCityValue={setCityValue}
+										/>
+									)}
+							</div>
+						)}
+					</div>
 					<button type="submit">Szukaj</button>
 				</form>
 			</div>

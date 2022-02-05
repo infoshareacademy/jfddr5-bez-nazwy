@@ -54,20 +54,29 @@
 
 .searchBarModalForm {
 	display: flex;
+	height: inherit;
 	flex-direction: column;
 	align-items: center;
+	justify-content: flex-start;
 }
 
 .searchBarModalInputs {
+	justify-self: flex-start;
 	display: flex;
 }
 
+.searchBarModalList {
+	flex: 1;
+	align-self: flex-start;
+}
 .searchBarModalInputs input {
 	width: 250px;
+	height: 20px;
 	padding: 10px;
 }
 
 .searchBarModalForm button {
 	width: 100px;
 	height: 40px;
+	justify-self: flex-end;
 }

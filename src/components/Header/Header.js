@@ -3,14 +3,7 @@ import { useState } from "react";
 import { logoutUser } from "../../utils/db";
 import Modal from "./UserFormModal/UserFormModal";
 
-const Header = ({
-	setProduct,
-	product,
-	searchType,
-	handleSearchType,
-	currentUser,
-	setCategory,
-}) => {
+const Header = ({ setProduct, product, currentUser, setCategory, setCity }) => {
 	const [showLogin, setShowLogin] = useState(false);
 	const [showRegister, setShowRegister] = useState(false);
 
@@ -47,9 +40,8 @@ const Header = ({
 				<SearchBarMock
 					product={product}
 					setProduct={setProduct}
-					searchType={searchType}
-					handleSearchType={handleSearchType}
 					setCategory={setCategory}
+					setCity={setCity}
 				/>
 			</div>
 		</>
