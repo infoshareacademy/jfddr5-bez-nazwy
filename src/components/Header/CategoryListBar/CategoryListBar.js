@@ -3,31 +3,14 @@ import s from "./CategoryListBar.module.css";
 import CategoryList from "../../CategoryList/CategoryList";
 import { businessListContext } from "../../../contexts/BusinessListContext";
 import { Link, Route, Routes } from "react-router-dom";
-import { getDocs, collection } from "firebase/firestore";
-import { db } from "../../../utils/db";
 
-const CategoryListBar = ({ category, setCategory }) => {
+const CategoryListBar = ({
+	category,
+	setCategory,
+	setServicesList,
+	servicesList,
+}) => {
 	const businessList = useContext(businessListContext);
-	const [servicesList, setServicesList] = useState([]);
-
-	const newArray = [];
-
-	const getServicesList = async (id) => {
-		const servicesSnapshot = await getDocs(
-			collection(db, "business", id, "services"),
-		);
-		const servicesList = servicesSnapshot.docs.map((doc) => ({
-			id: doc.id,
-			name: doc.data().name,
-			price: doc.data().price,
-			slot: doc.data().slot,
-		}));
-		setServicesList((prevValue) => [...prevValue, { id, servicesList }]);
-	};
-	useEffect(() => {
-		newArray.map((id) => getServicesList(id));
-		return setServicesList([]);
-	}, [category]);
 
 	return (
 		<div>
@@ -70,12 +53,13 @@ const CategoryListBar = ({ category, setCategory }) => {
 						<div>
 							{businessList.map((business) => {
 								if (business.category === category) {
-									newArray.push(business.id);
 									return (
 										<CategoryList
 											key={business.id}
 											business={business}
+											setServicesList={setServicesList}
 											servicesList={servicesList}
+											category={category}
 										/>
 									);
 								}

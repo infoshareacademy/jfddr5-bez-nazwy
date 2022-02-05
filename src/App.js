@@ -4,14 +4,16 @@ import CategoryView from "./views/CategoryView";
 import ProductView from "./views/ProductView";
 import ProfileView from "./views/ProfileView";
 import { useState, useEffect } from "react";
-import { auth, getBusinessList } from "./utils/db";
+import { auth, getBusinessList, getServicesList } from "./utils/db";
 import { businessListContext } from "./contexts/BusinessListContext";
+
 import CategoryListBar from "./components/Header/CategoryListBar/CategoryListBar";
 import Header from "./components/Header/Header";
 
 function App() {
 	const [currentUser, setCurrentUser] = useState(null);
 	const [businessList, setBusinessList] = useState([]);
+	const [servicesList, setServicesList] = useState([]);
 	const [product, setProduct] = useState("");
 	const [category, setCategory] = useState("");
 
@@ -33,6 +35,8 @@ function App() {
 							<CategoryListBar
 								category={category}
 								setCategory={setCategory}
+								setServicesList={setServicesList}
+								servicesList={servicesList}
 							/>
 						</>
 					}></Route>
