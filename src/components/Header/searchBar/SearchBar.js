@@ -20,6 +20,10 @@ export const SearchBar = ({
 	const cityInputRef = useRef();
 	const businessList = useContext(businessListContext);
 
+	const nameList = Array.from(
+		new Set(businessList.map((business) => business.name)),
+	);
+
 	const categoryList = Array.from(
 		new Set(businessList.map((business) => business.category)),
 	);
@@ -28,6 +32,13 @@ export const SearchBar = ({
 		new Set(businessList.map((business) => business.city)),
 	);
 
+	const isIncluded = (array, value) => {
+		return array.some((item) =>
+			item.toLowerCase().includes(value.toLowerCase()),
+		);
+	};
+
+	console.log(isIncluded(nameList, searchInputRef.current.value));
 	const handleSubmit = (e) => {
 		e.preventDefault();
 		//name
