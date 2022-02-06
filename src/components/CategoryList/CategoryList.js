@@ -11,7 +11,7 @@ const CategoryList = ({
 	useEffect(() => {
 		getServicesList(setServicesList, business.id);
 		return setServicesList([]);
-	}, [category]);
+	}, []);
 	console.log(servicesList);
 
 	return (
@@ -21,19 +21,19 @@ const CategoryList = ({
 				<h3>{business.city}</h3>
 			</div>
 			<div>
-				{servicesList.length === 0 &&
-					servicesList?.map((bus) => {
-						if (bus.businessId === business.id) {
-							bus.services.map((service) => {
-								return (
-									<p key={service.id}>
-										{service.name}, {service.price},{" "}
-										{service.slot}
-									</p>
-								);
-							});
-						}
-					})}
+				{servicesList.map((bus) => (
+					<div>
+						{bus.businessId === business.id
+							? bus.services.map((service) => (
+									<div>
+										<div>{service.name}</div>
+										<div>{service.price}zł</div>
+										<button>Zarezerwuj</button>
+									</div>
+							  ))
+							: null}
+					</div>
+				))}
 			</div>
 		</div>
 	);
