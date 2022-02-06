@@ -4,8 +4,9 @@ import CategoryView from "./views/CategoryView";
 import ProductView from "./views/ProductView";
 import ProfileView from "./views/ProfileView";
 import { useState, useEffect } from "react";
-import { auth, getBusinessList } from "./utils/db";
+import { auth, getBusinessList, getServicesList } from "./utils/db";
 import { businessListContext } from "./contexts/BusinessListContext";
+
 import CategoryListBar from "./components/Header/CategoryListBar/CategoryListBar";
 import Header from "./components/Header/Header";
 import FilterPaths from "./components/CategoryList/FilterPaths";
@@ -13,6 +14,9 @@ import FilterPaths from "./components/CategoryList/FilterPaths";
 function App() {
 	const [currentUser, setCurrentUser] = useState(null);
 	const [businessList, setBusinessList] = useState([]);
+
+	const [servicesList, setServicesList] = useState([]);
+
 	const [category, setCategory] = useState("");
 	const [city, setCity] = useState("");
 
@@ -32,6 +36,25 @@ function App() {
 				<Route
 					path="*"
 					element={
+
+						<>
+							<CategoryListBar
+								category={category}
+								setCategory={setCategory}
+								setServicesList={setServicesList}
+								servicesList={servicesList}
+							/>
+						</>
+					}></Route>
+				<Route
+					path="/profile"
+					element={<Header currentUser={currentUser} />}></Route>
+			</Routes>
+			<Routes>
+				<Route
+					path="*"
+					element={
+
 						<HomeView
 							product={product}
 							setProduct={setProduct}

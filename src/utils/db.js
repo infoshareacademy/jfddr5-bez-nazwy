@@ -88,9 +88,8 @@ const logoutUser = () => {
 	signOut(auth);
 };
 
-export const getBusinessList = async (callback) => {
+const getBusinessList = async (callback) => {
 	const businessSnapshot = await getDocs(collection(db, "business"));
-	console.log(businessSnapshot);
 	const businessList = businessSnapshot.docs.map((doc) => ({
 		id: doc.id,
 		name: doc.data().name,
@@ -100,5 +99,28 @@ export const getBusinessList = async (callback) => {
 	}));
 	callback(businessList);
 };
+const getServicesList = async (callback, id) => {
+	const servicesSnapshot = await getDocs(
+		collection(db, `business/${id}/services`),
+	);
+	const servicesList = servicesSnapshot.docs.map((doc) => ({
+		id: doc.id,
+		name: doc.data().name,
+		price: doc.data().price,
+		slot: doc.data().slot,
+	}));
+	callback((prevValue) => [
+		...prevValue,
+		{ services: [...servicesList], businessId: id },
+	]);
+};
 
-export { db, auth, registerUser, loginUser, logoutUser };
+export {
+	db,
+	auth,
+	registerUser,
+	loginUser,
+	logoutUser,
+	getBusinessList,
+	getServicesList,
+};
