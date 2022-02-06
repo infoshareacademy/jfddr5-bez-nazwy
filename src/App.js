@@ -33,10 +33,9 @@ function App() {
 	return (
 		<businessListContext.Provider value={businessList}>
 			<Routes>
-				<Route
+				{/* <Route
 					path="*"
 					element={
-
 						<>
 							<CategoryListBar
 								category={category}
@@ -48,13 +47,12 @@ function App() {
 					}></Route>
 				<Route
 					path="/profile"
-					element={<Header currentUser={currentUser} />}></Route>
+					element={<Header currentUser={currentUser} />}></Route> */}
 			</Routes>
 			<Routes>
 				<Route
 					path="*"
 					element={
-
 						<HomeView
 							product={product}
 							setProduct={setProduct}
@@ -88,7 +86,12 @@ function App() {
 					path="/profile"
 					element={<Header currentUser={currentUser} />}></Route>
 			</Routes>
-			<FilterPaths city={city} category={category} />
+			<FilterPaths
+				city={city}
+				category={category}
+				setServicesList={setServicesList}
+				servicesList={servicesList}
+			/>
 		</businessListContext.Provider>
 	);
 }

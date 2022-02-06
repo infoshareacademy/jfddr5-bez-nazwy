@@ -10,7 +10,6 @@ const CategoryListBar = ({
 	setServicesList,
 	servicesList,
 }) => {
-
 	const businessList = useContext(businessListContext);
 
 	return (
@@ -48,7 +47,7 @@ const CategoryListBar = ({
 				</Link>
 			</div>
 
-			<Routes>
+			{/* <Routes>
 				<Route
 					path={category}
 					element={
@@ -68,7 +67,7 @@ const CategoryListBar = ({
 							})}
 						</div>
 					}></Route>
-			</Routes>
+			</Routes> */}
 		</div>
 	);
 };

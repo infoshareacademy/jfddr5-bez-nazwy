@@ -1,33 +1,39 @@
 import { useContext } from "react";
-import { BusinessListItem } from "../components/CategoryList/BusinessListItem";
+import CategoryList from "../components/CategoryList/CategoryList";
 import { businessListContext } from "../contexts/BusinessListContext";
 
-const CategoryView = ({ city, category }) => {
+const CategoryView = ({ city, category, setServicesList, servicesList }) => {
 	const businessList = useContext(businessListContext);
 	return (
 		<div>
 			{businessList.map((business) => {
 				if (business.category === category && !city) {
 					return (
-						<BusinessListItem
+						<CategoryList
 							key={business.id}
 							business={business}
+							setServicesList={setServicesList}
+							servicesList={servicesList}
 						/>
 					);
 				}
 				if (business.city === city && !category) {
 					return (
-						<BusinessListItem
+						<CategoryList
 							key={business.id}
 							business={business}
+							setServicesList={setServicesList}
+							servicesList={servicesList}
 						/>
 					);
 				}
 				if (business.city === city && business.category === category) {
 					return (
-						<BusinessListItem
+						<CategoryList
 							key={business.id}
 							business={business}
+							setServicesList={setServicesList}
+							servicesList={servicesList}
 						/>
 					);
 				}
