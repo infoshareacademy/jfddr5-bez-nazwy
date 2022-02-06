@@ -1,4 +1,4 @@
-import { useContext, useEffect, useState } from "react";
+import { useContext } from "react";
 import s from "./CategoryListBar.module.css";
 import CategoryList from "../../CategoryList/CategoryList";
 import { businessListContext } from "../../../contexts/BusinessListContext";
@@ -10,42 +10,44 @@ const CategoryListBar = ({
 	setServicesList,
 	servicesList,
 }) => {
+
 	const businessList = useContext(businessListContext);
 
 	return (
 		<div>
 			<div className={s.categoryBar}>
 				<Link
-					to="Groomer"
+					to="groomer"
 					className={s.category}
 					onClick={() => setCategory("Groomer")}>
 					Groomer
 				</Link>
 				<Link
-					to="Weterynarz"
+					to="weterynarz"
 					className={s.category}
 					onClick={() => setCategory("Weterynarz")}>
 					Weterynarz
 				</Link>
 				<Link
-					to="Behawiorysta"
+					to="behawiorysta"
 					className={s.category}
 					onClick={() => setCategory("Behawiorysta")}>
 					Behawiorysta
 				</Link>
 				<Link
-					to="Hotel"
+					to="hotel"
 					className={s.category}
 					onClick={() => setCategory("Hotel")}>
 					Psi hotel
 				</Link>
 				<Link
-					to="Hodowla"
+					to="hodowla"
 					className={s.category}
 					onClick={() => setCategory("Hodowla")}>
 					Hodowla
 				</Link>
 			</div>
+
 			<Routes>
 				<Route
 					path={category}

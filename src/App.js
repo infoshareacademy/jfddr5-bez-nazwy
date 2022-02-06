@@ -9,13 +9,18 @@ import { businessListContext } from "./contexts/BusinessListContext";
 
 import CategoryListBar from "./components/Header/CategoryListBar/CategoryListBar";
 import Header from "./components/Header/Header";
+import FilterPaths from "./components/CategoryList/FilterPaths";
 
 function App() {
 	const [currentUser, setCurrentUser] = useState(null);
 	const [businessList, setBusinessList] = useState([]);
+
 	const [servicesList, setServicesList] = useState([]);
-	const [product, setProduct] = useState("");
+
 	const [category, setCategory] = useState("");
+	const [city, setCity] = useState("");
+
+	const [product, setProduct] = useState("");
 
 	useEffect(() => {
 		return auth.onAuthStateChanged(setCurrentUser);
@@ -31,6 +36,7 @@ function App() {
 				<Route
 					path="*"
 					element={
+
 						<>
 							<CategoryListBar
 								category={category}
@@ -48,11 +54,14 @@ function App() {
 				<Route
 					path="*"
 					element={
+
 						<HomeView
 							product={product}
 							setProduct={setProduct}
 							currentUser={currentUser}
 							setCategory={setCategory}
+							setCity={setCity}
+							city={city}
 						/>
 					}
 				/>
@@ -64,6 +73,22 @@ function App() {
 				/>
 				<Route path="/profile" element={<ProfileView />} />
 			</Routes>
+			<Routes>
+				<Route
+					path="*"
+					element={
+						<>
+							<CategoryListBar
+								category={category}
+								setCategory={setCategory}
+							/>
+						</>
+					}></Route>
+				<Route
+					path="/profile"
+					element={<Header currentUser={currentUser} />}></Route>
+			</Routes>
+			<FilterPaths city={city} category={category} />
 		</businessListContext.Provider>
 	);
 }
