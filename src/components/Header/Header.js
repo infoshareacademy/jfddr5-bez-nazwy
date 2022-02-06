@@ -3,7 +3,14 @@ import { useState } from "react";
 import { logoutUser } from "../../utils/db";
 import Modal from "./UserFormModal/UserFormModal";
 
-const Header = ({ setProduct, product, currentUser, setCategory, setCity }) => {
+const Header = ({
+	setProduct,
+	product,
+	currentUser,
+	setCategory,
+	setCity,
+	city,
+}) => {
 	const [showLogin, setShowLogin] = useState(false);
 	const [showRegister, setShowRegister] = useState(false);
 
@@ -40,6 +47,7 @@ const Header = ({ setProduct, product, currentUser, setCategory, setCity }) => {
 					setProduct={setProduct}
 					setCategory={setCategory}
 					setCity={setCity}
+					city={city}
 				/>
 			</div>
 		</>

@@ -9,6 +9,7 @@ export const SearchBarMock = ({
 	product,
 	setCategory,
 	setCity,
+	city,
 }) => {
 	const [displaySearchBar, setDisplaySearchBar] = useState(false);
 	const handleSearch = () => {
@@ -26,7 +27,7 @@ export const SearchBarMock = ({
 					className={`${styles.mock} ${styles.mockTwo}`}
 					onClick={handleSearch}>
 					<img src={pinIcon}></img>
-					<span>Lokalizacja</span>
+					<span>{city || "Lokalizacja"}</span>
 				</div>
 			</div>
 

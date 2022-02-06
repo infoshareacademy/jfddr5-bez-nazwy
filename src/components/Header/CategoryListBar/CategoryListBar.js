@@ -1,6 +1,5 @@
 import { useContext } from "react";
 import s from "./CategoryListBar.module.css";
-import FilteredBusinessList from "../../CategoryList/FilteredBusinessList";
 import { businessListContext } from "../../../contexts/BusinessListContext";
 import { Link } from "react-router-dom";
 const CategoryListBar = ({ category, setCategory }) => {

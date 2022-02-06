@@ -8,7 +8,7 @@ import { auth, getBusinessList } from "./utils/db";
 import { businessListContext } from "./contexts/BusinessListContext";
 import CategoryListBar from "./components/Header/CategoryListBar/CategoryListBar";
 import Header from "./components/Header/Header";
-import FilteredBusinessList from "./components/CategoryList/FilteredBusinessList";
+import FilterPaths from "./components/CategoryList/FilterPaths";
 
 function App() {
 	const [currentUser, setCurrentUser] = useState(null);
@@ -38,6 +38,7 @@ function App() {
 							currentUser={currentUser}
 							setCategory={setCategory}
 							setCity={setCity}
+							city={city}
 						/>
 					}
 				/>
@@ -64,7 +65,7 @@ function App() {
 					path="/profile"
 					element={<Header currentUser={currentUser} />}></Route>
 			</Routes>
-			<FilteredBusinessList city={city} category={category} />
+			<FilterPaths city={city} category={category} />
 		</businessListContext.Provider>
 	);
 }

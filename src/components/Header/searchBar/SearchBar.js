@@ -45,16 +45,16 @@ export const SearchBar = ({
 				(category) => searchValue === category,
 			);
 			const categoryPath = pathNormalize(category);
-			setCategory(category);
+			setCategory(() => category);
 			navigate(`/${categoryPath}`);
 			onClose();
 		}
 		//city
 		if (cityList.some((city) => cityValue === city)) {
 			const city = cityList.find((city) => cityValue === city);
-			console.log(city);
+
 			const cityPath = pathNormalize(city);
-			console.log(city);
+
 			setCity(() => city);
 			navigate(`/${cityPath}`);
 			onClose();

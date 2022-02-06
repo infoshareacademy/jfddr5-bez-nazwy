@@ -1,7 +1,7 @@
 import { useState } from "react";
 import Header from "../components/Header/Header";
 
-const HomeView = ({ setProduct, product, setCategory, setCity }) => {
+const HomeView = ({ setProduct, product, setCategory, setCity, city }) => {
 	return (
 		<div>
 			<Header
@@ -9,6 +9,7 @@ const HomeView = ({ setProduct, product, setCategory, setCity }) => {
 				product={product}
 				setCategory={setCategory}
 				setCity={setCity}
+				city={city}
 			/>
 		</div>
 	);
