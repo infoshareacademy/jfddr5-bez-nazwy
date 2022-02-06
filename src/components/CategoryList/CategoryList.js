@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
 import { businessListContext } from "../../contexts/BusinessListContext";
 import { getServicesList } from "../../utils/db";
-
+import s from "./CategoryList.module.css";
 const CategoryList = ({
 	business,
 	setServicesList,
@@ -25,16 +25,25 @@ const CategoryList = ({
 					<div key={bus.businessId}>
 						{bus.businessId === business.id
 							? bus.services.map((service) => (
-									<div key={service.id}>
-										<div>{service.name}</div>
-										<div>{service.price}zł</div>
-										<button>Zarezerwuj</button>
+									<div
+										key={service.id}
+										className={s.servicesList}>
+										<div className={s.servicesListName}>
+											{service.name}
+										</div>
+										<div className={s.servicesListPrice}>
+											{service.price}zł
+										</div>
+										<button className={s.servicesButton}>
+											Zarezerwuj
+										</button>
 									</div>
 							  ))
 							: null}
 					</div>
 				))}
 			</div>
+			<hr />
 		</div>
 	);
 };

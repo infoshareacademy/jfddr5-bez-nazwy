@@ -1,0 +1,16 @@
+.servicesList {
+	display: flex;
+	justify-content: space-between;
+	align-items: baseline;
+	height: 50px;
+	width: 60%;
+}
+.servicesListName {
+	width: 400px;
+}
+.servicesListPrice {
+	width: 200px;
+}
+.servicesButton {
+	height: 30px;
+}
