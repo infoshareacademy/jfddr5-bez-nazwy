@@ -22,10 +22,10 @@ const CategoryList = ({
 			</div>
 			<div>
 				{servicesList.map((bus) => (
-					<div>
+					<div key={bus.businessId}>
 						{bus.businessId === business.id
 							? bus.services.map((service) => (
-									<div>
+									<div key={service.id}>
 										<div>{service.name}</div>
 										<div>{service.price}zł</div>
 										<button>Zarezerwuj</button>
