@@ -110,6 +110,7 @@ const getServicesList = async (callback, id) => {
 		price: doc.data().price,
 		slot: doc.data().slot,
 	}));
+
 	callback((prevValue) => [
 		...prevValue,
 		{ services: [...servicesList], businessId: id },

@@ -1,9 +1,11 @@
-import CategoryList from "../components/CategoryList/CategoryList";
+import ServicesList from "../components/CategoryList/ServicesList";
 const ProductView = ({ product, setServicesList, servicesList, business }) => {
 	return (
 		<div>
-			ProductView: {product.name}, {product.city}
-			<CategoryList
+			<h3>
+				ProductView: {product.name}, {product.city}
+			</h3>
+			<ServicesList
 				servicesList={servicesList}
 				setServicesList={setServicesList}
 				business={product}

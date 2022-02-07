@@ -2,11 +2,13 @@ import { SearchBarMock } from "./searchBar/SearchBarMock";
 import { useState } from "react";
 import { logoutUser } from "../../utils/db";
 import Modal from "./UserFormModal/UserFormModal";
+import CategoryListBar from "./CategoryListBar/CategoryListBar";
 
 const Header = ({
 	setProduct,
 	product,
 	currentUser,
+	category,
 	setCategory,
 	setCity,
 	city,
@@ -49,6 +51,7 @@ const Header = ({
 				setCity={setCity}
 				city={city}
 			/>
+			<CategoryListBar category={category} setCategory={setCategory} />
 		</>
 	);
 };

@@ -3,13 +3,12 @@ import HomeView from "./views/HomeView";
 import ProductView from "./views/ProductView";
 import ProfileView from "./views/ProfileView";
 import { useState, useEffect } from "react";
-import { auth, getBusinessList } from "./utils/db";
+import { auth, getBusinessList, getServicesList } from "./utils/db";
 import { businessListContext } from "./contexts/BusinessListContext";
 import "./App.css";
 
-import CategoryListBar from "./components/Header/CategoryListBar/CategoryListBar";
 import Header from "./components/Header/Header";
-import FilterPaths from "./components/CategoryList/FilterPaths";
+import CategoryView from "./views/CategoryView";
 
 function App() {
 	const [currentUser, setCurrentUser] = useState(null);
@@ -28,10 +27,30 @@ function App() {
 
 	useEffect(() => {
 		getBusinessList(setBusinessList);
+		return setBusinessList([]);
 	}, []);
 
+	useEffect(() => {
+		businessList.map((bus) => {
+			getServicesList(setServicesList, bus.id);
+		});
+		return setServicesList([]);
+	}, [businessList]);
+
+	useEffect(() => {
+		console.log(servicesList);
+	}, [category]);
 	return (
 		<businessListContext.Provider value={[businessList, setBusinessList]}>
+			<Header
+				product={product}
+				setProduct={setProduct}
+				setCategory={setCategory}
+				category={category}
+				city={city}
+				setCity={setCity}
+				currentUser={currentUser}
+			/>
 			<Routes>
 				{/* <Route
 					path="*"
@@ -74,29 +93,37 @@ function App() {
 						/>
 					}
 				/>
-				<Route path="/profile" element={<ProfileView />} />
-			</Routes>
-			<Routes>
 				<Route
-					path="/"
+					path="/s"
 					element={
-						<>
-							<CategoryListBar
-								category={category}
-								setCategory={setCategory}
-							/>
-						</>
+						<CategoryView
+							setServicesList={setServicesList}
+							servicesList={servicesList}
+						/>
+					}
+				/>
+				{/* <Route
+					path={`${cityPath}`}
+					element={
+						<CategoryView
+							city={city}
+							category={category}
+							setServicesList={setServicesList}
+							servicesList={servicesList}
+						/>
 					}></Route>
 				<Route
-					path="/profile"
-					element={<Header currentUser={currentUser} />}></Route>
+					path={`${categoryPath}/${cityPath}`}
+					element={
+						<CategoryView
+							city={city}
+							category={category}
+							setServicesList={setServicesList}
+							servicesList={servicesList}
+						/>
+					}></Route> */}
+				<Route path="/profile" element={<ProfileView />} />
 			</Routes>
-			<FilterPaths
-				city={city}
-				category={category}
-				setServicesList={setServicesList}
-				servicesList={servicesList}
-			/>
 		</businessListContext.Provider>
 	);
 }
