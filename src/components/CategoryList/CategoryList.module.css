@@ -1,9 +1,15 @@
+.panel {
+	display: flex;
+}
+.panelServices {
+	margin: auto 20px;
+	width: 60%;
+}
 .servicesList {
 	display: flex;
 	justify-content: space-between;
 	align-items: baseline;
 	height: 50px;
-	width: 60%;
 }
 .servicesListName {
 	width: 400px;
@@ -13,4 +19,6 @@
 }
 .servicesButton {
 	height: 30px;
+	background-color: var(--accent);
+	border-radius: 10px;
 }
