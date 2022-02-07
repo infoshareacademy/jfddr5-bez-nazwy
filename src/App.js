@@ -5,6 +5,7 @@ import ProfileView from "./views/ProfileView";
 import { useState, useEffect } from "react";
 import { auth, getBusinessList } from "./utils/db";
 import { businessListContext } from "./contexts/BusinessListContext";
+import "./App.css";
 
 import CategoryListBar from "./components/Header/CategoryListBar/CategoryListBar";
 import Header from "./components/Header/Header";

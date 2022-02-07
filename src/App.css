@@ -1,0 +1,15 @@
+:root {
+	/* header color */
+	--black: #353a39;
+	/* background color */
+	--white: #000000;
+	/* buttons, borders, accents! */
+	--accent: #a2d1aa;
+}
+
+body {
+	font-family: "Karla", "sans-serif";
+	box-sizing: border-box;
+	margin: 0;
+	padding: 0;
+}
