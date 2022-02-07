@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 import React from "react";
 import ReactDOM from "react-dom";
 import { BrowserRouter } from "react-router-dom";
@@ -6,6 +7,10 @@ import {getBusinessList} from "../../utils/db"
 
 const CategoryList = () => {
   return <div></div>;
+=======
+const CategoryList = ({ business }) => {
+	return <div>{business.name}</div>;
+>>>>>>> 707b3882d5fded4e8ef458b0e7a36d0714df4ae5
 };
 
 function ListItem(props) {

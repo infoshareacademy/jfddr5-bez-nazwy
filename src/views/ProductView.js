@@ -1,5 +1,9 @@
-const ProductView = () => {
-  return <div>ProductView</div>;
+const ProductView = ({ product }) => {
+	return (
+		<div>
+			ProductView: {product.name}, {product.city}
+		</div>
+	);
 };
 
 export default ProductView;
