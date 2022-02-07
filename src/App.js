@@ -77,7 +77,7 @@ function App() {
 				<Route path="/profile" element={<ProfileView />} />
 			</Routes>
 			<Routes>
-				<Route
+				{/* <Route
 					path="/"
 					element={
 						<>
@@ -86,7 +86,7 @@ function App() {
 								setCategory={setCategory}
 							/>
 						</>
-					}></Route>
+					}></Route> */}
 				<Route
 					path="/profile"
 					element={<Header currentUser={currentUser} />}></Route>

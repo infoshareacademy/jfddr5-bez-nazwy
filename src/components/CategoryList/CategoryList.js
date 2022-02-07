@@ -1,13 +1,9 @@
-import { useEffect, useState } from "react";
+import { useEffect } from "react";
 import { businessListContext } from "../../contexts/BusinessListContext";
 import { getServicesList } from "../../utils/db";
 import s from "./CategoryList.module.css";
-const CategoryList = ({
-	business,
-	setServicesList,
-	servicesList,
-	category,
-}) => {
+
+const CategoryList = ({ business, setServicesList, servicesList }) => {
 	useEffect(() => {
 		getServicesList(setServicesList, business.id);
 		return setServicesList([]);
