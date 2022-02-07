@@ -23,6 +23,10 @@ const HomeView = ({
 					setCity={setCity}
 					city={city}
 				/>
+				<div className={styles.callToAction}>
+					<h2>Petsy, Petsy, Petsy</h2>
+					<p>Zapewnij swojemu Pupilowi najlepszą opiekę!</p>
+				</div>
 				<SearchBarMock
 					product={product}
 					setProduct={setProduct}

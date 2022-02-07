@@ -6,10 +6,11 @@
 
 .logo {
 	font-size: 32px;
+	margin: 0;
 }
 
 .userForm > button {
-	margin: 5px;
+	margin-inline: 5px;
 	padding: 10px;
 	border: 1px solid var(--accent);
 	border-radius: 20px;

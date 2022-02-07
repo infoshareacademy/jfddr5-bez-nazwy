@@ -1,8 +1,7 @@
 .slideshow,
-.slideshow:after {
-	/* position: fixed; */
+.slideshow::after {
+	position: static;
 	width: 100%;
-	height: 100%;
 	top: 0;
 	left: 0;
 	z-index: -1;
@@ -11,13 +10,13 @@
 
 .slideshow li span {
 	width: 100%;
-	height: 100%;
+	height: 40%;
 	position: absolute;
 	top: 0;
 	left: 0;
 	background-size: cover;
 	background-repeat: no-repeat;
-	background-position: 50% 50%;
+	background-position: 50% 30%;
 	opacity: 0.1;
 	z-index: -1;
 }

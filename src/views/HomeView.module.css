@@ -1,5 +1,10 @@
 .container {
 	width: 1200px;
-	/* height: 100px; */
 	margin: 0 auto;
+}
+
+.callToAction {
+	line-height: 0.5;
+	text-align: center;
+	margin-top: 50px;
 }
