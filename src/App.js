@@ -1,10 +1,9 @@
 import { Route, Routes } from "react-router-dom";
 import HomeView from "./views/HomeView";
-import CategoryView from "./views/CategoryView";
 import ProductView from "./views/ProductView";
 import ProfileView from "./views/ProfileView";
 import { useState, useEffect } from "react";
-import { auth, getBusinessList, getServicesList } from "./utils/db";
+import { auth, getBusinessList } from "./utils/db";
 import { businessListContext } from "./contexts/BusinessListContext";
 
 import CategoryListBar from "./components/Header/CategoryListBar/CategoryListBar";
@@ -22,20 +21,16 @@ function App() {
 
 	const [product, setProduct] = useState("");
 
-	const businessListRef = useRef();
-	console.log(businessListRef);
-
 	useEffect(() => {
 		return auth.onAuthStateChanged(setCurrentUser);
 	}, []);
 
 	useEffect(() => {
 		getBusinessList(setBusinessList);
-		businessListRef.current = businessList;
 	}, []);
 
 	return (
-		<businessListContext.Provider value={businessList}>
+		<businessListContext.Provider value={[businessList, setBusinessList]}>
 			<Routes>
 				{/* <Route
 					path="*"
@@ -55,7 +50,7 @@ function App() {
 			</Routes>
 			<Routes>
 				<Route
-					path="*"
+					path="/"
 					element={
 						<HomeView
 							product={product}
@@ -67,17 +62,22 @@ function App() {
 						/>
 					}
 				/>
-				<Route path="/category" element={<CategoryView />} />
 
 				<Route
 					path={`/product/${product.id}`}
-					element={<ProductView product={product} />}
+					element={
+						<ProductView
+							product={product}
+							setServicesList={setServicesList}
+							servicesList={servicesList}
+						/>
+					}
 				/>
 				<Route path="/profile" element={<ProfileView />} />
 			</Routes>
 			<Routes>
 				<Route
-					path="*"
+					path="/"
 					element={
 						<>
 							<CategoryListBar

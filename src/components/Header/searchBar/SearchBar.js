@@ -4,6 +4,7 @@ import { businessListContext } from "../../../contexts/BusinessListContext";
 import { SearchBarList } from "./SearchBarList";
 import styles from "./SearchBar.module.css";
 import { pathNormalize } from "../../../utils/pathNormalize";
+import { useParams } from "react-router-dom";
 
 export const SearchBar = ({
 	displaySearchBar,
@@ -15,10 +16,12 @@ export const SearchBar = ({
 	const [searchValue, setSearchValue] = useState("");
 	const [cityValue, setCityValue] = useState("");
 	const navigate = useNavigate();
+	const params = useParams();
+	console.log(params);
 
 	const searchInputRef = useRef();
 	const cityInputRef = useRef();
-	const businessList = useContext(businessListContext);
+	const [businessList, setBusinessList] = useContext(businessListContext);
 
 	const nameList = Array.from(
 		new Set(businessList.map((business) => business.name)),
@@ -38,7 +41,6 @@ export const SearchBar = ({
 		);
 	};
 
-	console.log(isIncluded(nameList, searchInputRef.current.value));
 	const handleSubmit = (e) => {
 		e.preventDefault();
 		//name
@@ -62,6 +64,7 @@ export const SearchBar = ({
 		}
 		//city
 		if (cityList.some((city) => cityValue === city)) {
+			setCategory("");
 			const city = cityList.find((city) => cityValue === city);
 
 			const cityPath = pathNormalize(city);
@@ -82,7 +85,6 @@ export const SearchBar = ({
 
 			const categoryPath = pathNormalize(category);
 			const cityPath = pathNormalize(city);
-			console.log(categoryPath, cityPath);
 			setCity(city);
 			setCategory(category);
 			navigate(`/${categoryPath}/${cityPath}`);
@@ -131,7 +133,7 @@ export const SearchBar = ({
 											),
 									) && (
 										<SearchBarList
-											categoryList={categoryList}
+											nameList={nameList}
 											header="Salony"
 											searchInputRef={searchInputRef}
 											setSearchValue={setSearchValue}

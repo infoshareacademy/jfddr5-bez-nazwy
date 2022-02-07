@@ -3,7 +3,7 @@ import CategoryList from "../components/CategoryList/CategoryList";
 import { businessListContext } from "../contexts/BusinessListContext";
 
 const CategoryView = ({ city, category, setServicesList, servicesList }) => {
-	const businessList = useContext(businessListContext);
+	const [businessList, setBusinessList] = useContext(businessListContext);
 	return (
 		<div>
 			{businessList.map((business) => {

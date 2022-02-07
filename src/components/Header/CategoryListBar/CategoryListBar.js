@@ -10,8 +10,6 @@ const CategoryListBar = ({
 	setServicesList,
 	servicesList,
 }) => {
-	const businessList = useContext(businessListContext);
-
 	return (
 		<div>
 			<div className={s.categoryBar}>

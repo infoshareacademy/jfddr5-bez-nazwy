@@ -41,15 +41,14 @@ const Header = ({
 				showRegister={showRegister}
 				onClose={() => setShowLogin(false) || setShowRegister(false)}
 			/>
-			<div>
-				<SearchBarMock
-					product={product}
-					setProduct={setProduct}
-					setCategory={setCategory}
-					setCity={setCity}
-					city={city}
-				/>
-			</div>
+
+			<SearchBarMock
+				product={product}
+				setProduct={setProduct}
+				setCategory={setCategory}
+				setCity={setCity}
+				city={city}
+			/>
 		</>
 	);
 };

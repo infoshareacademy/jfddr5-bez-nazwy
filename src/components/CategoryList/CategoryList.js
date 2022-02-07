@@ -12,7 +12,6 @@ const CategoryList = ({
 		getServicesList(setServicesList, business.id);
 		return setServicesList([]);
 	}, []);
-	console.log(servicesList);
 
 	return (
 		<div>
