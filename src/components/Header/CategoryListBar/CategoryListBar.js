@@ -3,39 +3,39 @@ import { Link } from "react-router-dom";
 
 const CategoryListBar = ({ setCategory }) => {
 	return (
-		<div>
-			<div className={styles.categoryBar}>
+		<>
+			<ul className={styles.categoryBar}>
 				<Link
 					to="groomer"
 					className={styles.category}
 					onClick={() => setCategory("Groomer")}>
-					Groomer
+					<li>Groomer</li>
 				</Link>
 				<Link
 					to="weterynarz"
 					className={styles.category}
 					onClick={() => setCategory("Weterynarz")}>
-					Weterynarz
+					<li>Weterynarz</li>
 				</Link>
 				<Link
 					to="behawiorysta"
 					className={styles.category}
 					onClick={() => setCategory("Behawiorysta")}>
-					Behawiorysta
+					<li>Behawiorysta</li>
 				</Link>
 				<Link
 					to="hotel"
 					className={styles.category}
 					onClick={() => setCategory("Hotel")}>
-					Psi hotel
+					<li>Psi hotel</li>
 				</Link>
 				<Link
 					to="hodowla"
 					className={styles.category}
 					onClick={() => setCategory("Hodowla")}>
-					Hodowla
+					<li>Hodowla</li>
 				</Link>
-			</div>
+			</ul>
 
 			{/* <Routes>
 				<Route
@@ -58,7 +58,7 @@ const CategoryListBar = ({ setCategory }) => {
 						</div>
 					}></Route>
 			</Routes> */}
-		</div>
+		</>
 	);
 };
 

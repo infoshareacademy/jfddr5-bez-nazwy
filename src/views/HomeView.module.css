@@ -1,10 +1,55 @@
 .container {
-	width: 1200px;
+	max-width: 1200px;
 	margin: 0 auto;
 }
 
 .callToAction {
+	margin-top: 100px;
 	line-height: 0.5;
 	text-align: center;
-	margin-top: 50px;
+	color: var(--white);
+}
+
+.callToAction h2 {
+	font-size: 42px;
+	overflow: hidden;
+	white-space: nowrap;
+	display: block;
+	margin: 0 auto;
+	letter-spacing: 3px;
+	line-height: 1.5;
+	animation: typewriter 5s steps(18) infinite;
+	animation-fill-mode: forwards;
+}
+
+.callToAction p {
+	font-size: 22px;
+	margin-top: 10px;
+}
+
+@keyframes typewriter {
+	0% {
+		width: 0;
+	}
+	25% {
+		width: 40%;
+	}
+	48% {
+		width: 60%;
+	}
+	50% {
+		width: 80%;
+	}
+	55% {
+		width: 100%;
+	}
+	75% {
+		width: 70%;
+	}
+	85% {
+		width: 30%;
+	}
+	100% {
+		width: 0;
+	}
 }

@@ -14,7 +14,6 @@ const HomeView = ({
 }) => {
 	return (
 		<>
-			<HeroSlideshow />
 			<div className={styles.container}>
 				<Header
 					setProduct={setProduct}
@@ -38,6 +37,7 @@ const HomeView = ({
 					category={category}
 					setCategory={setCategory}
 				/>
+				<HeroSlideshow />
 			</div>
 		</>
 	);
