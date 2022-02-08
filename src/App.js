@@ -6,20 +6,15 @@ import { useState, useEffect } from "react";
 import { auth, getBusinessList } from "./utils/db";
 import { businessListContext } from "./contexts/BusinessListContext";
 import "./App.css";
-
-import CategoryListBar from "./components/Header/CategoryListBar/CategoryListBar";
 import Header from "./components/Header/Header";
 import FilterPaths from "./components/CategoryList/FilterPaths";
 
 function App() {
 	const [currentUser, setCurrentUser] = useState(null);
 	const [businessList, setBusinessList] = useState([]);
-
 	const [servicesList, setServicesList] = useState([]);
-
 	const [category, setCategory] = useState("");
 	const [city, setCity] = useState("");
-
 	const [product, setProduct] = useState("");
 
 	useEffect(() => {

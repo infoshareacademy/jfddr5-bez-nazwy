@@ -10,9 +10,11 @@
 	font-size: 18px;
 	color: var(--white);
 	text-decoration: none;
+	padding-bottom: 10px;
+	border-bottom: 3px solid transparent;
 }
 
 .category:hover {
-	text-decoration: underline;
-	color: var(--black);
+	color: var(--accent);
+	border-bottom: 3px solid var(--accent);
 }

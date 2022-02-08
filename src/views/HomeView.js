@@ -1,8 +1,9 @@
 import CategoryListBar from "../components/Header/CategoryListBar/CategoryListBar";
 import Header from "../components/Header/Header";
-import HeroSlideshow from "../components/Header/HeroSlideshow/HeroSlideshow";
 import { SearchBarMock } from "../components/Header/searchBar/SearchBarMock";
 import styles from "./HomeView.module.css";
+import CallToAction from "../components/Header/CallToAction/CallToAction";
+import HeroSlideshow from "../components/Header/HeroSlideshow/HeroSlideshow";
 
 const HomeView = ({
 	setProduct,
@@ -14,29 +15,28 @@ const HomeView = ({
 }) => {
 	return (
 		<>
-			<div className={styles.container}>
-				<Header
-					setProduct={setProduct}
-					product={product}
-					setCategory={setCategory}
-					setCity={setCity}
-					city={city}
-				/>
-				<div className={styles.callToAction}>
-					<h2>Petsy, Petsy, Petsy</h2>
-					<p>Zapewnij swojemu Pupilowi najlepszą opiekę!</p>
+			<div className={styles.slideshowWrapper}>
+				<div className={styles.contentWrapper}>
+					<Header
+						setProduct={setProduct}
+						product={product}
+						setCategory={setCategory}
+						setCity={setCity}
+						city={city}
+					/>
+					<CallToAction />
+					<SearchBarMock
+						product={product}
+						setProduct={setProduct}
+						setCategory={setCategory}
+						setCity={setCity}
+						city={city}
+					/>
+					<CategoryListBar
+						category={category}
+						setCategory={setCategory}
+					/>
 				</div>
-				<SearchBarMock
-					product={product}
-					setProduct={setProduct}
-					setCategory={setCategory}
-					setCity={setCity}
-					city={city}
-				/>
-				<CategoryListBar
-					category={category}
-					setCategory={setCategory}
-				/>
 				<HeroSlideshow />
 			</div>
 		</>

@@ -4,38 +4,38 @@ import { Link } from "react-router-dom";
 const CategoryListBar = ({ setCategory }) => {
 	return (
 		<>
-			<ul className={styles.categoryBar}>
+			<div className={styles.categoryBar}>
 				<Link
 					to="groomer"
 					className={styles.category}
 					onClick={() => setCategory("Groomer")}>
-					<li>Groomer</li>
+					Groomer
 				</Link>
 				<Link
 					to="weterynarz"
 					className={styles.category}
 					onClick={() => setCategory("Weterynarz")}>
-					<li>Weterynarz</li>
+					Weterynarz
 				</Link>
 				<Link
 					to="behawiorysta"
 					className={styles.category}
 					onClick={() => setCategory("Behawiorysta")}>
-					<li>Behawiorysta</li>
+					Behawiorysta
 				</Link>
 				<Link
 					to="hotel"
 					className={styles.category}
 					onClick={() => setCategory("Hotel")}>
-					<li>Psi hotel</li>
+					Psi hotel
 				</Link>
 				<Link
 					to="hodowla"
 					className={styles.category}
 					onClick={() => setCategory("Hodowla")}>
-					<li>Hodowla</li>
+					Hodowla
 				</Link>
-			</ul>
+			</div>
 
 			{/* <Routes>
 				<Route

@@ -1,9 +1,7 @@
-import styles from "./HeroSlideshow.module.css";
-
 const HeroSlideshow = () => {
 	return (
 		<>
-			<ul className={styles.slideshow}>
+			<ul>
 				<li>
 					<span></span>
 				</li>
