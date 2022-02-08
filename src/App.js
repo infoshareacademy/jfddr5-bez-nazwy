@@ -111,6 +111,7 @@ function App() {
 							<CategoryView
 								setServicesList={setServicesList}
 								servicesList={servicesList}
+								setProduct={setProduct}
 							/>
 						}
 					/>

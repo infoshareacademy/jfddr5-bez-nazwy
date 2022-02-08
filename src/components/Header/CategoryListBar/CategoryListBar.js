@@ -1,40 +1,44 @@
+import { useContext, useEffect, useState } from "react";
+import {
+	createSearchParams,
+	useNavigate,
+	useSearchParams,
+} from "react-router-dom";
+import { businessListContext } from "../../../contexts/BusinessListContext";
+import { pathNormalize } from "../../../utils/pathNormalize";
 import styles from "./CategoryListBar.module.css";
-import { Link } from "react-router-dom";
 
 const CategoryListBar = ({ setCategory }) => {
+	const [businessList] = useContext(businessListContext);
+
+	const navigate = useNavigate();
+	const categoryList = Array.from(
+		new Set(businessList.map((business) => business.category)),
+	);
+
+	const handleCategory = (category) => {
+		setCategory(category);
+		navigate({
+			pathname: "/s",
+			search: `?${createSearchParams({
+				category: pathNormalize(category),
+			})}`,
+		});
+	};
+
 	return (
 		<>
 			<ul className={styles.categoryBar}>
-				<Link
-					to="groomer"
-					className={styles.category}
-					onClick={() => setCategory("Groomer")}>
-					<li>Groomer</li>
-				</Link>
-				<Link
-					to="weterynarz"
-					className={styles.category}
-					onClick={() => setCategory("Weterynarz")}>
-					<li>Weterynarz</li>
-				</Link>
-				<Link
-					to="behawiorysta"
-					className={styles.category}
-					onClick={() => setCategory("Behawiorysta")}>
-					<li>Behawiorysta</li>
-				</Link>
-				<Link
-					to="hotel"
-					className={styles.category}
-					onClick={() => setCategory("Hotel")}>
-					<li>Psi hotel</li>
-				</Link>
-				<Link
-					to="hodowla"
-					className={styles.category}
-					onClick={() => setCategory("Hodowla")}>
-					<li>Hodowla</li>
-				</Link>
+				{categoryList?.map((category) => {
+					return (
+						<li
+							key={category}
+							className={styles.category}
+							onClick={() => handleCategory(category)}>
+							{category}
+						</li>
+					);
+				})}
 			</ul>
 
 			{/* <Routes>
