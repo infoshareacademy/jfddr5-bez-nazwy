@@ -27,14 +27,14 @@ function App() {
 
 	useEffect(() => {
 		getBusinessList(setBusinessList);
-		return setBusinessList([]);
+		return () => setBusinessList([]);
 	}, []);
 
 	useEffect(() => {
 		businessList.map((bus) => {
 			getServicesList(setServicesList, bus.id);
 		});
-		return setServicesList([]);
+		return () => setServicesList([]);
 	}, [businessList]);
 
 	useEffect(() => {
@@ -93,6 +93,7 @@ function App() {
 						/>
 					}
 				/>
+
 				<Route
 					path="/s"
 					element={
