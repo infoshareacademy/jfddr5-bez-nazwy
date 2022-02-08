@@ -12,7 +12,7 @@
 	white-space: nowrap;
 	margin: 0 auto;
 	line-height: 1.5;
-	animation: typewriter 6s steps(100) infinite;
+	animation: typewriter 6s steps(1000) infinite;
 }
 
 @keyframes typewriter {
@@ -28,12 +28,18 @@
 }
 
 .cta h2 span:before {
-	content: "psów";
-	animation: animate 6s infinite;
+	content: "";
+	animation: change 12s infinite;
 }
 
-@keyframes animate {
-	50% {
+@keyframes change {
+	0% {
+		content: "psów";
+	}
+	25% {
+		content: "psów";
+	}
+	100% {
 		content: "kotów";
 	}
 }

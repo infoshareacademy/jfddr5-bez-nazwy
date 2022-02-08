@@ -6,6 +6,7 @@ import CallToAction from "../components/Header/CallToAction/CallToAction";
 import HeroSlideshow from "../components/Header/HeroSlideshow/HeroSlideshow";
 
 const HomeView = ({
+	currentUser,
 	setProduct,
 	category,
 	product,
@@ -23,6 +24,7 @@ const HomeView = ({
 						setCategory={setCategory}
 						setCity={setCity}
 						city={city}
+						currentUser={currentUser}
 					/>
 					<CallToAction />
 					<SearchBarMock

@@ -99,6 +99,7 @@ const getBusinessList = async (callback) => {
 	}));
 	callback(businessList);
 };
+
 const getServicesList = async (callback, id) => {
 	const servicesSnapshot = await getDocs(
 		collection(db, `business/${id}/services`),
