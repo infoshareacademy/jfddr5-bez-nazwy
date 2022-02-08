@@ -5,6 +5,7 @@ import ProfileView from "./views/ProfileView";
 import { useState, useEffect } from "react";
 import { auth, getBusinessList, getServicesList } from "./utils/db";
 import { businessListContext } from "./contexts/BusinessListContext";
+import { currentUserContext } from "./contexts/CurrentUserContext";
 import "./App.css";
 import CategoryView from "./views/CategoryView";
 
@@ -16,6 +17,8 @@ function App() {
 	const [city, setCity] = useState("");
 	const [product, setProduct] = useState("");
 
+	const [showLogin, setShowLogin] = useState(false);
+
 	useEffect(() => {
 		return auth.onAuthStateChanged(setCurrentUser);
 	}, []);
@@ -26,7 +29,8 @@ function App() {
 	}, []);
 
 	useEffect(() => {
-		businessList.map((bus) => {
+		setServicesList([]);
+		businessList.forEach((bus) => {
 			getServicesList(setServicesList, bus.id);
 		});
 		return () => setServicesList([]);
@@ -38,8 +42,9 @@ function App() {
 
 	return (
 		<businessListContext.Provider value={[businessList, setBusinessList]}>
-			<Routes>
-				{/* <Route
+			<currentUserContext.Provider value={[currentUser, setCurrentUser]}>
+				<Routes>
+					{/* <Route
 					path="*"
 					element={
 						<>
@@ -54,41 +59,69 @@ function App() {
 				<Route
 					path="/profile"
 					element={<Header currentUser={currentUser} />}></Route> */}
-			</Routes>
-			<Routes>
-				<Route
-					path="/"
-					element={
-						<HomeView
-							product={product}
-							setProduct={setProduct}
-							setCategory={setCategory}
-							setCity={setCity}
-							city={city}
-						/>
-					}
-				/>
-				<Route
-					path={`/product/${product.id}`}
-					element={
-						<ProductView
-							product={product}
-							setServicesList={setServicesList}
-							servicesList={servicesList}
-						/>
-					}
-				/>
-				<Route
-					path="/s"
+				</Routes>
+				<Routes>
+					<Route
+						path="/"
+						element={
+							<HomeView
+								product={product}
+								setProduct={setProduct}
+								setCategory={setCategory}
+								setCity={setCity}
+								city={city}
+								showLogin={showLogin}
+								setShowLogin={setShowLogin}
+							/>
+						}
+					/>
+
+					<Route
+						path={`/product/${product.id}`}
+						element={
+							<ProductView
+								product={product}
+								setServicesList={setServicesList}
+								servicesList={servicesList}
+								showLogin={showLogin}
+								setShowLogin={setShowLogin}
+							/>
+						}
+					/>
+
+					<Route
+						path="/s"
+						element={
+							<CategoryView
+								setServicesList={setServicesList}
+								servicesList={servicesList}
+								setProduct={setProduct}
+							/>
+						}
+					/>
+					{/* <Route
+					path={`${cityPath}`}
 					element={
 						<CategoryView
+							city={city}
+							category={category}
 							setServicesList={setServicesList}
 							servicesList={servicesList}
 						/>
-					}
-				/>
-				<Route path="/profile" element={<ProfileView />} />
-			</Routes>
+					}></Route>
+				<Route
+					path={`${categoryPath}/${cityPath}`}
+					element={
+						<CategoryView
+							city={city}
+							category={category}
+							setServicesList={setServicesList}
+							servicesList={servicesList}
+						/>
+					}></Route> */}
+					<Route path="/profile" element={<ProfileView />} />
+				</Routes>
+			</currentUserContext.Provider>
 		</businessListContext.Provider>
 	);
 }

@@ -1,18 +1,24 @@
 import Service from "./Service";
 // import s from "./CategoryList.module.css";
 
-const ServicesList = ({ business, servicesList }) => {
+const ServicesList = ({ business, servicesList, setShowLogin, showLogin }) => {
 	return (
 		<>
-			{servicesList?.map((bus) => (
-				<div key={bus.businessId}>
-					{bus.businessId === business.id
-						? bus.services.map((service) => (
-								<Service service={service} />
-						  ))
-						: null}
-				</div>
-			))}
+			{servicesList?.map((bus) =>
+				bus.businessId === business.id ? (
+					<div key={business.id}>
+						{bus.services.map((service) => (
+							<Service
+								key={service.id}
+								service={service}
+								business={business}
+								showLogin={showLogin}
+								setShowLogin={setShowLogin}
+							/>
+						))}
+					</div>
+				) : null,
+			)}
 		</>
 	);
 };

@@ -13,6 +13,8 @@ const HomeView = ({
 	setCategory,
 	setCity,
 	city,
+	showLogin,
+	setShowLogin,
 }) => {
 	return (
 		<>
@@ -25,6 +27,8 @@ const HomeView = ({
 						setCity={setCity}
 						city={city}
 						currentUser={currentUser}
+						showLogin={showLogin}
+						setShowLogin={setShowLogin}
 					/>
 					<CallToAction />
 					<SearchBarMock

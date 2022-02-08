@@ -1,13 +1,12 @@
-import { useState } from "react";
+import { useState, useContext } from "react";
 import { logoutUser } from "../../utils/db";
 import Modal from "./UserFormModal/UserFormModal";
+import { currentUserContext } from "../../contexts/CurrentUserContext";
 import styles from "./Header.module.css";
 
-const Header = ({ currentUser }) => {
-
-	const [showLogin, setShowLogin] = useState(false);
+const Header = ({ showLogin, setShowLogin }) => {
 	const [showRegister, setShowRegister] = useState(false);
-
+	const [currentUser] = useContext(currentUserContext);
 	const handleLogout = (e) => {
 		e.preventDefault();
 		logoutUser();

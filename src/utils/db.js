@@ -5,6 +5,11 @@ import {
 	doc,
 	collection,
 	getDocs,
+	updateDoc,
+	addDoc,
+	arrayUnion,
+	getDoc,
+	deleteDoc,
 } from "firebase/firestore";
 import {
 	getAuth,
@@ -102,6 +107,7 @@ const getBusinessList = async (callback) => {
 };
 
 const getServicesList = async (callback, id) => {
+	console.log("bla");
 	const servicesSnapshot = await getDocs(
 		collection(db, `business/${id}/services`),
 	);
@@ -118,6 +124,95 @@ const getServicesList = async (callback, id) => {
 	]);
 };
 
+const setCalendarForService = async (
+	businessId,
+	serviceId,
+	dateId,
+	date,
+	user,
+) => {
+	await setDoc(
+		doc(
+			db,
+			`business/${businessId}/services/${serviceId}/calendar`,
+			dateId,
+		),
+		{
+			date: date,
+			usersReservations: arrayUnion({
+				user,
+				time: new Date().toLocaleString(),
+			}),
+		},
+		{ merge: true },
+	);
+};
+
+const setServiceForUser = async (
+	reservationId,
+	date,
+	businessId,
+	businessName,
+	serviceId,
+	serviceName,
+) => {
+	await setDoc(
+		doc(db, "users", auth.currentUser.uid, "reservations", reservationId),
+		{
+			date: date,
+			business: {
+				id: businessId,
+				name: businessName,
+			},
+			service: {
+				id: serviceId,
+				name: serviceName,
+			},
+		},
+	);
+};
+
+const getReservedSlots = async (businessId, serviceId, callback, dateId) => {
+	const reservationsPerDaySnapshot = await getDocs(
+		collection(db, `business/${businessId}/services/${serviceId}/calendar`),
+	);
+
+	const reservationsPerDay = reservationsPerDaySnapshot.docs.map((doc) => ({
+		id: doc.id,
+		usersReservations: doc.data().usersReservations,
+		date: doc.data().date,
+	}));
+	const slotItem = reservationsPerDay.find(
+		(slot) => slot.id === dateId.toLocaleString("pl-PL"),
+	);
+	callback(() => (slotItem ? slotItem.usersReservations.length : 0));
+};
+
+const getServiceForUser = async (callback) => {
+	const userReservationDocuments = await getDocs(
+		collection(db, "users", auth.currentUser.uid, "reservations"),
+	);
+	const userReservationsList = userReservationDocuments.docs.map((doc) => ({
+		id: doc.id,
+		date: doc.data().date,
+		businessName: doc.data().business.name,
+		serviceName: doc.data().service.name,
+	}));
+	console.log(userReservationsList);
+	callback(userReservationsList);
+};
+const deleteServiceForUser = async (docId) => {
+	const cos = await deleteDoc(
+		doc(
+			db,
+			"users",
+			auth.currentUser.uid,
+			"reservations",
+			docId.toString(),
+		),
+	);
+	// callback(cos);
+};
 export {
 	db,
 	auth,
@@ -126,4 +221,9 @@ export {
 	logoutUser,
 	getBusinessList,
 	getServicesList,
+	setCalendarForService,
+	setServiceForUser,
+	getReservedSlots,
+	getServiceForUser,
+	deleteServiceForUser,
 };

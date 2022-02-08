@@ -1,18 +1,29 @@
 import ServicesList from "../components/CategoryList/ServicesList";
 import s from "./ProductView.module.css";
-const ProductView = ({ product, setServicesList, servicesList, business }) => {
+const ProductView = ({
+	product,
+	setServicesList,
+	servicesList,
+	business,
+	setShowLogin,
+	showLogin,
+}) => {
 	return (
 		<div className={s.content}>
 			<div className={s.leftSide}>
 				<img src={product.photo} width="100%" />
+				<h1>{product.name}</h1>
 				<h3>
-					ProductView: {product.name}, {product.city}
+					{product.city}, {product.contact.street}
 				</h3>
+
 				<ServicesList
 					servicesList={servicesList}
 					setServicesList={setServicesList}
 					business={product}
 					key={product.id}
+					showLogin={showLogin}
+					setShowLogin={setShowLogin}
 				/>
 			</div>
 			<div className={s.rightSide}>
