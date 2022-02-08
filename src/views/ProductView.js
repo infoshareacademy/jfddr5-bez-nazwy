@@ -1,6 +1,13 @@
 import ServicesList from "../components/CategoryList/ServicesList";
 import s from "./ProductView.module.css";
-const ProductView = ({ product, setServicesList, servicesList, business }) => {
+const ProductView = ({
+	product,
+	setServicesList,
+	servicesList,
+	business,
+	setShowLogin,
+	showLogin,
+}) => {
 	return (
 		<div className={s.content}>
 			<div className={s.leftSide}>
@@ -13,6 +20,8 @@ const ProductView = ({ product, setServicesList, servicesList, business }) => {
 					setServicesList={setServicesList}
 					business={product}
 					key={product.id}
+					showLogin={showLogin}
+					setShowLogin={setShowLogin}
 				/>
 			</div>
 			<div className={s.rightSide}>

@@ -22,6 +22,8 @@ function App() {
 
 	const [product, setProduct] = useState("");
 
+	const [showLogin, setShowLogin] = useState(false);
+
 	useEffect(() => {
 		return auth.onAuthStateChanged(setCurrentUser);
 	}, []);
@@ -55,6 +57,8 @@ function App() {
 					category={category}
 					city={city}
 					setCity={setCity}
+					showLogin={showLogin}
+					setShowLogin={setShowLogin}
 					// currentUser={currentUser}
 				/>
 				<Routes>
@@ -96,6 +100,8 @@ function App() {
 								product={product}
 								setServicesList={setServicesList}
 								servicesList={servicesList}
+								showLogin={showLogin}
+								setShowLogin={setShowLogin}
 							/>
 						}
 					/>

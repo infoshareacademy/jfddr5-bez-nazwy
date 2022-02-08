@@ -6,21 +6,22 @@ import { setCalendarForService, setServiceForUser } from "../../utils/db";
 import "react-calendar/dist/Calendar.css";
 import styles from "./CalendarModal.module.css";
 import { getReservedSlots } from "../../utils/db";
-const Service = ({ service, business }) => {
+
+const Service = ({ service, business, setShowLogin, showLogin }) => {
 	const [displayCalendar, setDisplayCalendar] = useState(false);
 	const [currentUser] = useContext(currentUserContext);
 	const [date, setDate] = useState("");
-	const [reservedSlots, setReservedSlots] = useState("0");
+	const [reservedSlots, setReservedSlots] = useState(0);
 
 	const handleDayClicked = (value) => {
 		getReservedSlots(business.id, service.id, setReservedSlots, value);
 		setDate(value);
 	};
 
-	const handleClick = () => {
+	const handleReservationClick = () => {
 		const dateNow = new Date().toLocaleString("pl-PL");
 
-		if (currentUser) {
+		if (currentUser && reservedSlots < service.slot) {
 			setCalendarForService(
 				business.id,
 				service.id,
@@ -37,8 +38,8 @@ const Service = ({ service, business }) => {
 				service.name,
 			);
 			setDisplayCalendar(false);
-		} else {
-			//
+		} else if (reservedSlots === service.slot) {
+			console.log("zajete");
 		}
 	};
 
@@ -63,17 +64,33 @@ const Service = ({ service, business }) => {
 							<Calendar onClickDay={handleDayClicked} />
 							{date && (
 								<>
-									<p>Data: {date.toString()}</p>
+									<p>Data wizyty: {date.toLocaleString()}</p>
 									<p>
 										Ilość wolnych miejsc: {reservedSlots}/
 										{service.slot}
 									</p>
 									<p>Cena: {service.price}zł</p>
-									<button onClick={handleClick}>
-										{currentUser
-											? "Zarezerwuj miejsce"
-											: "Zaloguj się"}
-									</button>
+
+									{currentUser ? (
+										<button
+											onClick={handleReservationClick}
+											disabled={
+												reservedSlots >= service.slot
+											}>
+											Zarezerwuj miejsce
+										</button>
+									) : (
+										<div>
+											<button
+												onClick={() =>
+													setShowLogin(true)
+												}>
+												Zaloguj się
+											</button>
+
+											<button>Zarejestruj się</button>
+										</div>
+									)}
 								</>
 							)}
 						</div>

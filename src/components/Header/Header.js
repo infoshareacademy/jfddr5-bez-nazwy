@@ -13,8 +13,9 @@ const Header = ({
 	setCategory,
 	setCity,
 	city,
+	showLogin,
+	setShowLogin,
 }) => {
-	const [showLogin, setShowLogin] = useState(false);
 	const [showRegister, setShowRegister] = useState(false);
 	const [currentUser] = useContext(currentUserContext);
 	const handleLogout = (e) => {
