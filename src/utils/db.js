@@ -9,6 +9,7 @@ import {
 	addDoc,
 	arrayUnion,
 	getDoc,
+	deleteDoc,
 } from "firebase/firestore";
 import {
 	getAuth,
@@ -187,6 +188,31 @@ const getReservedSlots = async (businessId, serviceId, callback, dateId) => {
 	callback(() => (slotItem ? slotItem.usersReservations.length : 0));
 };
 
+const getServiceForUser = async (callback) => {
+	const userReservationDocuments = await getDocs(
+		collection(db, "users", auth.currentUser.uid, "reservations"),
+	);
+	const userReservationsList = userReservationDocuments.docs.map((doc) => ({
+		id: doc.id,
+		date: doc.data().date,
+		businessName: doc.data().business.name,
+		serviceName: doc.data().service.name,
+	}));
+	console.log(userReservationsList);
+	callback(userReservationsList);
+};
+const deleteServiceForUser = async (docId) => {
+	const cos = await deleteDoc(
+		doc(
+			db,
+			"users",
+			auth.currentUser.uid,
+			"reservations",
+			docId.toString(),
+		),
+	);
+	// callback(cos);
+};
 export {
 	db,
 	auth,
@@ -198,4 +224,6 @@ export {
 	setCalendarForService,
 	setServiceForUser,
 	getReservedSlots,
+	getServiceForUser,
+	deleteServiceForUser,
 };

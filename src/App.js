@@ -34,7 +34,6 @@ function App() {
 	}, []);
 
 	useEffect(() => {
-		console.log(businessList);
 		setServicesList([]);
 		businessList.forEach((bus) => {
 			getServicesList(setServicesList, bus.id);
