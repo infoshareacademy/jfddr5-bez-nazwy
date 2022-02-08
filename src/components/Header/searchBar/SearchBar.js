@@ -55,7 +55,7 @@ export const SearchBar = ({
 			onClose();
 		}
 		//both
-		if (
+		else if (
 			categoryList.some((category) => searchValue === category) ||
 			cityList.some((city) => cityValue === city)
 		) {

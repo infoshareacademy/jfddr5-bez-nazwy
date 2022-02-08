@@ -1,13 +1,14 @@
 import { SearchBarMock } from "./searchBar/SearchBarMock";
-import { useState } from "react";
+import { useState, useContext } from "react";
 import { logoutUser } from "../../utils/db";
 import Modal from "./UserFormModal/UserFormModal";
 import CategoryListBar from "./CategoryListBar/CategoryListBar";
+import { currentUserContext } from "../../contexts/CurrentUserContext";
 
 const Header = ({
 	setProduct,
 	product,
-	currentUser,
+	// currentUser,
 	category,
 	setCategory,
 	setCity,
@@ -15,7 +16,7 @@ const Header = ({
 }) => {
 	const [showLogin, setShowLogin] = useState(false);
 	const [showRegister, setShowRegister] = useState(false);
-
+	const [currentUser] = useContext(currentUserContext);
 	const handleLogout = (e) => {
 		e.preventDefault();
 		logoutUser();

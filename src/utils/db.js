@@ -5,6 +5,10 @@ import {
 	doc,
 	collection,
 	getDocs,
+	updateDoc,
+	addDoc,
+	arrayUnion,
+	getDoc,
 } from "firebase/firestore";
 import {
 	getAuth,
@@ -100,7 +104,9 @@ const getBusinessList = async (callback) => {
 	}));
 	callback(businessList);
 };
+
 const getServicesList = async (callback, id) => {
+	console.log("bla");
 	const servicesSnapshot = await getDocs(
 		collection(db, `business/${id}/services`),
 	);
@@ -117,6 +123,70 @@ const getServicesList = async (callback, id) => {
 	]);
 };
 
+const setCalendarForService = async (
+	businessId,
+	serviceId,
+	dateId,
+	date,
+	user,
+) => {
+	await setDoc(
+		doc(
+			db,
+			`business/${businessId}/services/${serviceId}/calendar`,
+			dateId,
+		),
+		{
+			date: date,
+			usersReservations: arrayUnion({
+				user,
+				time: new Date().toLocaleString(),
+			}),
+		},
+		{ merge: true },
+	);
+};
+
+const setServiceForUser = async (
+	reservationId,
+	date,
+	businessId,
+	businessName,
+	serviceId,
+	serviceName,
+) => {
+	await setDoc(
+		doc(db, "users", auth.currentUser.uid, "reservations", reservationId),
+		{
+			date: date,
+			business: {
+				id: businessId,
+				name: businessName,
+			},
+			service: {
+				id: serviceId,
+				name: serviceName,
+			},
+		},
+	);
+};
+
+const getReservedSlots = async (businessId, serviceId, callback, dateId) => {
+	const reservationsPerDaySnapshot = await getDocs(
+		collection(db, `business/${businessId}/services/${serviceId}/calendar`),
+	);
+
+	const reservationsPerDay = reservationsPerDaySnapshot.docs.map((doc) => ({
+		id: doc.id,
+		usersReservations: doc.data().usersReservations,
+		date: doc.data().date,
+	}));
+	const slotItem = reservationsPerDay.find(
+		(slot) => slot.id === dateId.toLocaleString("pl-PL"),
+	);
+	callback(() => (slotItem ? slotItem.usersReservations.length : 0));
+};
+
 export {
 	db,
 	auth,
@@ -125,4 +195,7 @@ export {
 	logoutUser,
 	getBusinessList,
 	getServicesList,
+	setCalendarForService,
+	setServiceForUser,
+	getReservedSlots,
 };

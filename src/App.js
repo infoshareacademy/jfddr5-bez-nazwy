@@ -5,6 +5,7 @@ import ProfileView from "./views/ProfileView";
 import { useState, useEffect } from "react";
 import { auth, getBusinessList, getServicesList } from "./utils/db";
 import { businessListContext } from "./contexts/BusinessListContext";
+import { currentUserContext } from "./contexts/CurrentUserContext";
 import "./App.css";
 
 import Header from "./components/Header/Header";
@@ -31,7 +32,9 @@ function App() {
 	}, []);
 
 	useEffect(() => {
-		businessList.map((bus) => {
+		console.log(businessList);
+		setServicesList([]);
+		businessList.forEach((bus) => {
 			getServicesList(setServicesList, bus.id);
 		});
 		return () => setServicesList([]);
@@ -39,20 +42,23 @@ function App() {
 
 	useEffect(() => {
 		console.log(servicesList);
-	}, [category]);
+	}, [city]);
+
 	return (
-		<businessListContext.Provider value={[businessList, setBusinessList]}>
-			<Header
-				product={product}
-				setProduct={setProduct}
-				setCategory={setCategory}
-				category={category}
-				city={city}
-				setCity={setCity}
-				currentUser={currentUser}
-			/>
-			<Routes>
-				{/* <Route
+		<currentUserContext.Provider value={[currentUser, setCurrentUser]}>
+			<businessListContext.Provider
+				value={[businessList, setBusinessList]}>
+				<Header
+					product={product}
+					setProduct={setProduct}
+					setCategory={setCategory}
+					category={category}
+					city={city}
+					setCity={setCity}
+					// currentUser={currentUser}
+				/>
+				<Routes>
+					{/* <Route
 					path="*"
 					element={
 						<>
@@ -67,43 +73,43 @@ function App() {
 				<Route
 					path="/profile"
 					element={<Header currentUser={currentUser} />}></Route> */}
-			</Routes>
-			<Routes>
-				<Route
-					path="/"
-					element={
-						<HomeView
-							product={product}
-							setProduct={setProduct}
-							currentUser={currentUser}
-							setCategory={setCategory}
-							setCity={setCity}
-							city={city}
-						/>
-					}
-				/>
+				</Routes>
+				<Routes>
+					<Route
+						path="/"
+						element={
+							<HomeView
+								product={product}
+								setProduct={setProduct}
+								// currentUser={currentUser}
+								setCategory={setCategory}
+								setCity={setCity}
+								city={city}
+							/>
+						}
+					/>
 
-				<Route
-					path={`/product/${product.id}`}
-					element={
-						<ProductView
-							product={product}
-							setServicesList={setServicesList}
-							servicesList={servicesList}
-						/>
-					}
-				/>
+					<Route
+						path={`/product/${product.id}`}
+						element={
+							<ProductView
+								product={product}
+								setServicesList={setServicesList}
+								servicesList={servicesList}
+							/>
+						}
+					/>
 
-				<Route
-					path="/s"
-					element={
-						<CategoryView
-							setServicesList={setServicesList}
-							servicesList={servicesList}
-						/>
-					}
-				/>
-				{/* <Route
+					<Route
+						path="/s"
+						element={
+							<CategoryView
+								setServicesList={setServicesList}
+								servicesList={servicesList}
+							/>
+						}
+					/>
+					{/* <Route
 					path={`${cityPath}`}
 					element={
 						<CategoryView
@@ -123,9 +129,10 @@ function App() {
 							servicesList={servicesList}
 						/>
 					}></Route> */}
-				<Route path="/profile" element={<ProfileView />} />
-			</Routes>
-		</businessListContext.Provider>
+					<Route path="/profile" element={<ProfileView />} />
+				</Routes>
+			</businessListContext.Provider>
+		</currentUserContext.Provider>
 	);
 }
 
