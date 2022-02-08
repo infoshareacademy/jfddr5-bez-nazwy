@@ -4,7 +4,7 @@
 	/* background color */
 	--white: #fff;
 	/* buttons, borders, accents! */
-	--accent: #a2d1aa;
+	--accent: #83ab8a;
 }
 
 body {
@@ -12,4 +12,5 @@ body {
 	box-sizing: border-box;
 	margin: 0;
 	padding: 0;
+	vertical-align: baseline;
 }

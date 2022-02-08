@@ -6,19 +6,15 @@ import { useState, useEffect } from "react";
 import { auth, getBusinessList, getServicesList } from "./utils/db";
 import { businessListContext } from "./contexts/BusinessListContext";
 import "./App.css";
-
 import Header from "./components/Header/Header";
 import CategoryView from "./views/CategoryView";
 
 function App() {
 	const [currentUser, setCurrentUser] = useState(null);
 	const [businessList, setBusinessList] = useState([]);
-
 	const [servicesList, setServicesList] = useState([]);
-
 	const [category, setCategory] = useState("");
 	const [city, setCity] = useState("");
-
 	const [product, setProduct] = useState("");
 
 	useEffect(() => {
@@ -80,9 +76,8 @@ function App() {
 							setCity={setCity}
 							city={city}
 						/>
-					}
+					}>
 				/>
-
 				<Route
 					path={`/product/${product.id}`}
 					element={
@@ -91,9 +86,8 @@ function App() {
 							setServicesList={setServicesList}
 							servicesList={servicesList}
 						/>
-					}
+					}>
 				/>
-
 				<Route
 					path="/s"
 					element={
@@ -101,9 +95,9 @@ function App() {
 							setServicesList={setServicesList}
 							servicesList={servicesList}
 						/>
-					}
+					}>
 				/>
-				{/* <Route
+				<Route
 					path={`${cityPath}`}
 					element={
 						<CategoryView
@@ -112,7 +106,8 @@ function App() {
 							setServicesList={setServicesList}
 							servicesList={servicesList}
 						/>
-					}></Route>
+					}>
+        </Route>
 				<Route
 					path={`${categoryPath}/${cityPath}`}
 					element={
@@ -122,7 +117,8 @@ function App() {
 							setServicesList={setServicesList}
 							servicesList={servicesList}
 						/>
-					}></Route> */}
+          }>
+        </Route>
 				<Route path="/profile" element={<ProfileView />} />
 			</Routes>
 		</businessListContext.Provider>

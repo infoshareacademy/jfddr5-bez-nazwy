@@ -1,11 +1,10 @@
-import s from "./CategoryList.module.css";
+import styles from "./CategoryList.module.css";
 import ServicesList from "./ServicesList";
 
 const CategoryList = ({
 	business,
 	setServicesList,
 	servicesList,
-	category,
 }) => {
 	return (
 		<div>
@@ -13,11 +12,11 @@ const CategoryList = ({
 				<h1>{business.name} </h1>
 				<h3>{business.city}</h3>
 			</div>
-			<div className={s.panel}>
+			<div className={styles.panel}>
 				<div>
 					<img src={business.photo} width="350"></img>
 				</div>
-				<div className={s.panelServices}>
+				<div className={styles.panelServices}>
 					<ServicesList
 						setServicesList={setServicesList}
 						servicesList={servicesList}

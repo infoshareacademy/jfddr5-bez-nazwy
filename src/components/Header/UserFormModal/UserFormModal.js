@@ -80,10 +80,12 @@ const Modal = ({ showLogin, showRegister, onClose }) => {
 							onChange={(e) => setCity(e.target.value)}
 							required
 						/>
-						<button type="submit">Zarejestruj się</button>
 						{registerErrorMessage !== null && (
-							<p>{registerErrorMessage}</p>
+							<p className={styles.errorMessage}>
+								{registerErrorMessage}
+							</p>
 						)}
+						<button type="submit">Zarejestruj się</button>
 					</form>
 				)}
 				{showLogin && (
@@ -102,10 +104,12 @@ const Modal = ({ showLogin, showRegister, onClose }) => {
 							onChange={(e) => setPassword(e.target.value)}
 							required
 						/>
-						<button type="submit">Zaloguj się</button>
 						{loginErrorMessage !== null && (
-							<p>{loginErrorMessage}</p>
+							<p className={styles.errorMessage}>
+								{loginErrorMessage}
+							</p>
 						)}
+						<button type="submit">Zaloguj się</button>
 					</form>
 				)}
 			</div>

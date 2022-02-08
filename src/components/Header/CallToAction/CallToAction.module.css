@@ -1,0 +1,50 @@
+.cta {
+	margin-top: 100px;
+	line-height: 0.5;
+	text-align: center;
+	color: var(--white);
+}
+
+.cta h2 {
+	vertical-align: baseline;
+	font-size: 42px;
+	overflow: hidden;
+	white-space: nowrap;
+	margin: 0 auto;
+	line-height: 1.5;
+	animation: typewriter 6s steps(1000) infinite;
+}
+
+@keyframes typewriter {
+	0% {
+		width: 0;
+	}
+	50% {
+		width: 100%;
+	}
+	100% {
+		width: 0;
+	}
+}
+
+.cta h2 span:before {
+	content: "";
+	animation: change 12s infinite;
+}
+
+@keyframes change {
+	0% {
+		content: "psów";
+	}
+	25% {
+		content: "psów";
+	}
+	100% {
+		content: "kotów";
+	}
+}
+
+.cta p {
+	font-size: 22px;
+	margin-top: 10px;
+}
