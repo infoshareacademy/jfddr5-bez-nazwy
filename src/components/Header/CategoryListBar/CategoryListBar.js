@@ -1,49 +1,41 @@
-import { useContext } from "react";
-import s from "./CategoryListBar.module.css";
-import CategoryList from "../../CategoryList/CategoryList";
-import { businessListContext } from "../../../contexts/BusinessListContext";
-import { Link, Route, Routes } from "react-router-dom";
+import styles from "./CategoryListBar.module.css";
+import { Link } from "react-router-dom";
 
-const CategoryListBar = ({
-	category,
-	setCategory,
-	setServicesList,
-	servicesList,
-}) => {
+const CategoryListBar = ({ setCategory }) => {
 	return (
-		<div>
-			<div className={s.categoryBar}>
+		<>
+			<ul className={styles.categoryBar}>
 				<Link
 					to="groomer"
-					className={s.category}
+					className={styles.category}
 					onClick={() => setCategory("Groomer")}>
-					Groomer
+					<li>Groomer</li>
 				</Link>
 				<Link
 					to="weterynarz"
-					className={s.category}
+					className={styles.category}
 					onClick={() => setCategory("Weterynarz")}>
-					Weterynarz
+					<li>Weterynarz</li>
 				</Link>
 				<Link
 					to="behawiorysta"
-					className={s.category}
+					className={styles.category}
 					onClick={() => setCategory("Behawiorysta")}>
-					Behawiorysta
+					<li>Behawiorysta</li>
 				</Link>
 				<Link
 					to="hotel"
-					className={s.category}
+					className={styles.category}
 					onClick={() => setCategory("Hotel")}>
-					Psi hotel
+					<li>Psi hotel</li>
 				</Link>
 				<Link
 					to="hodowla"
-					className={s.category}
+					className={styles.category}
 					onClick={() => setCategory("Hodowla")}>
-					Hodowla
+					<li>Hodowla</li>
 				</Link>
-			</div>
+			</ul>
 
 			{/* <Routes>
 				<Route
@@ -66,7 +58,7 @@ const CategoryListBar = ({
 						</div>
 					}></Route>
 			</Routes> */}
-		</div>
+		</>
 	);
 };
 

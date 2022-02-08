@@ -6,6 +6,12 @@ import s from "./CategoryList.module.css";
 const Service = ({ service }) => {
 	const [displayCalendar, setDisplayCalendar] = useState(false);
 
+	const handleClickDay = (value, event) => {
+		console.log(value);
+		console.log(event);
+		console.log(service.slot);
+	};
+
 	return (
 		<>
 			<div key={service.id} className={s.servicesList}>
@@ -19,9 +25,7 @@ const Service = ({ service }) => {
 				</button>
 				{displayCalendar && (
 					<div>
-						<Calendar
-							onClickDay={(value, event) => console.log(value)}
-						/>
+						<Calendar onClickDay={handleClickDay} />
 					</div>
 				)}
 			</div>
