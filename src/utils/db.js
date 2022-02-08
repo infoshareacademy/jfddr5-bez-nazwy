@@ -96,6 +96,7 @@ const getBusinessList = async (callback) => {
 		category: doc.data().category,
 		city: doc.data().city,
 		contact: doc.data().contact,
+		photo: doc.data().photo,
 	}));
 	callback(businessList);
 };
@@ -110,6 +111,7 @@ const getServicesList = async (callback, id) => {
 		price: doc.data().price,
 		slot: doc.data().slot,
 	}));
+
 	callback((prevValue) => [
 		...prevValue,
 		{ services: [...servicesList], businessId: id },

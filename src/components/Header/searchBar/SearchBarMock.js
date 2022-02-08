@@ -39,6 +39,7 @@ export const SearchBarMock = ({
 					setCategory={setCategory}
 					setCity={setCity}
 					onClose={() => setDisplaySearchBar(false)}
+					city={city}
 				/>
 			)}
 		</div>

@@ -1,10 +1,9 @@
 import { useContext, useRef, useState } from "react";
-import { useNavigate } from "react-router-dom";
+import { createSearchParams, useNavigate } from "react-router-dom";
 import { businessListContext } from "../../../contexts/BusinessListContext";
 import { SearchBarList } from "./SearchBarList";
 import styles from "./SearchBar.module.css";
 import { pathNormalize } from "../../../utils/pathNormalize";
-import { useParams } from "react-router-dom";
 
 export const SearchBar = ({
 	displaySearchBar,
@@ -12,16 +11,16 @@ export const SearchBar = ({
 	setCategory,
 	onClose,
 	setCity,
+	city,
 }) => {
 	const [searchValue, setSearchValue] = useState("");
-	const [cityValue, setCityValue] = useState("");
+	const [cityValue, setCityValue] = useState(city);
+
 	const navigate = useNavigate();
-	const params = useParams();
-	console.log(params);
 
 	const searchInputRef = useRef();
 	const cityInputRef = useRef();
-	const [businessList, setBusinessList] = useContext(businessListContext);
+	const [businessList] = useContext(businessListContext);
 
 	const nameList = Array.from(
 		new Set(businessList.map((business) => business.name)),
@@ -35,12 +34,15 @@ export const SearchBar = ({
 		new Set(businessList.map((business) => business.city)),
 	);
 
-	const isIncluded = (array, value) => {
-		return array.some((item) =>
-			item.toLowerCase().includes(value.toLowerCase()),
+	const helper = (ref, array, length) => {
+		return (
+			document.activeElement === ref.current &&
+			ref.current.value.length >= length &&
+			array.some((item) =>
+				item.toLowerCase().includes(ref.current.value.toLowerCase()),
+			)
 		);
 	};
-
 	const handleSubmit = (e) => {
 		e.preventDefault();
 		//name
@@ -51,43 +53,44 @@ export const SearchBar = ({
 			setProduct(businessObj);
 			navigate(`/product/${businessObj.id}`);
 			onClose();
-			//category
-		}
-		if (categoryList.some((category) => searchValue === category)) {
-			const category = categoryList.find(
-				(category) => searchValue === category,
-			);
-			const categoryPath = pathNormalize(category);
-			setCategory(() => category);
-			navigate(`/${categoryPath}`);
-			onClose();
-		}
-		//city
-		if (cityList.some((city) => cityValue === city)) {
-			setCategory("");
-			const city = cityList.find((city) => cityValue === city);
-
-			const cityPath = pathNormalize(city);
-
-			setCity(() => city);
-			navigate(`/${cityPath}`);
-			onClose();
 		}
 		//both
 		if (
-			categoryList.some((category) => searchValue === category) &&
+			categoryList.some((category) => searchValue === category) ||
 			cityList.some((city) => cityValue === city)
 		) {
-			const category = categoryList.find(
-				(category) => searchValue === category,
-			);
-			const city = cityList.find((city) => cityValue === city);
+			setCategory("");
+			const category =
+				categoryList.find((category) => searchValue === category) ?? "";
+			const city = cityList.find((city) => cityValue === city) ?? "";
 
-			const categoryPath = pathNormalize(category);
-			const cityPath = pathNormalize(city);
+			const categoryPath = pathNormalize(category ?? "");
+			const cityPath = pathNormalize(city ?? "");
 			setCity(city);
 			setCategory(category);
-			navigate(`/${categoryPath}/${cityPath}`);
+			(category &&
+				city &&
+				navigate({
+					pathname: "/s",
+					search: `?${createSearchParams({
+						city: cityPath,
+						category: categoryPath,
+					})}`,
+				})) ||
+				(!city &&
+					navigate({
+						pathname: "/s",
+						search: `?${createSearchParams({
+							category: categoryPath,
+						})}`,
+					})) ||
+				(!category &&
+					navigate({
+						pathname: "/s",
+						search: `?${createSearchParams({
+							city: cityPath,
+						})}`,
+					}));
 			onClose();
 		}
 	};
@@ -122,59 +125,32 @@ export const SearchBar = ({
 						{(document.activeElement === searchInputRef.current ||
 							cityInputRef.current) && (
 							<div>
-								{document.activeElement ===
-									searchInputRef.current &&
-									searchInputRef.current.value.length >= 3 &&
-									businessList.some((business) =>
-										business.name
-											.toLowerCase()
-											.includes(
-												searchInputRef.current.value.toLowerCase(),
-											),
-									) && (
-										<SearchBarList
-											nameList={nameList}
-											header="Salony"
-											searchInputRef={searchInputRef}
-											setSearchValue={setSearchValue}
-										/>
-									)}
+								{helper(searchInputRef, nameList, 3) && (
+									<SearchBarList
+										nameList={nameList}
+										header="Salony"
+										searchInputRef={searchInputRef}
+										setSearchValue={setSearchValue}
+									/>
+								)}
 
-								{document.activeElement ===
-									searchInputRef.current &&
-									searchInputRef.current.value.length >= 3 &&
-									categoryList.some((category) =>
-										category
-											.toLowerCase()
-											.includes(
-												searchInputRef.current.value.toLowerCase(),
-											),
-									) && (
-										<SearchBarList
-											categoryList={categoryList}
-											header="Usługi"
-											searchInputRef={searchInputRef}
-											setSearchValue={setSearchValue}
-										/>
-									)}
+								{helper(searchInputRef, categoryList, 3) && (
+									<SearchBarList
+										categoryList={categoryList}
+										header="Usługi"
+										searchInputRef={searchInputRef}
+										setSearchValue={setSearchValue}
+									/>
+								)}
 
-								{document.activeElement ===
-									cityInputRef.current &&
-									cityInputRef.current.value.length >= 1 &&
-									cityList.some((city) =>
-										city
-											.toLowerCase()
-											.includes(
-												cityInputRef.current.value.toLowerCase(),
-											),
-									) && (
-										<SearchBarList
-											cityList={cityList}
-											header="Miasta"
-											cityInputRef={cityInputRef}
-											setCityValue={setCityValue}
-										/>
-									)}
+								{helper(cityInputRef, cityList, 1) && (
+									<SearchBarList
+										cityList={cityList}
+										header="Miasta"
+										cityInputRef={cityInputRef}
+										setCityValue={setCityValue}
+									/>
+								)}
 							</div>
 						)}
 					</div>

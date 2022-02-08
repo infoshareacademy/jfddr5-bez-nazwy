@@ -1,0 +1,9 @@
+.leftSide {
+	background-color: var(--white);
+}
+.rightSide {
+	width: 900px;
+}
+.content {
+	display: flex;
+}

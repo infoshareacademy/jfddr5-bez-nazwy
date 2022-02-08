@@ -4,6 +4,7 @@ import Modal from "./UserFormModal/UserFormModal";
 import styles from "./Header.module.css";
 
 const Header = ({ currentUser }) => {
+
 	const [showLogin, setShowLogin] = useState(false);
 	const [showRegister, setShowRegister] = useState(false);
 
