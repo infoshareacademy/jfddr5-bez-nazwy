@@ -6,7 +6,7 @@ const ServicesList = ({ business, servicesList, setShowLogin, showLogin }) => {
 		<>
 			{servicesList?.map((bus) =>
 				bus.businessId === business.id ? (
-					<div>
+					<div key={business.id}>
 						{bus.services.map((service) => (
 							<Service
 								key={service.id}

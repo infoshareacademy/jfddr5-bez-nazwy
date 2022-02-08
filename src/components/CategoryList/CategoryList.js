@@ -11,8 +11,11 @@ const CategoryList = ({
 		<div>
 			<div>
 				<h1>{business.name} </h1>
-				<h3>{business.city}</h3>
+				<h3>
+					{business.city}, {business.contact.street}
+				</h3>
 			</div>
+
 			<div className={s.panel}>
 				<div>
 					<img src={business.photo} width="350"></img>
@@ -22,6 +25,7 @@ const CategoryList = ({
 						setServicesList={setServicesList}
 						servicesList={servicesList}
 						business={business}
+						key={business.id}
 					/>
 				</div>
 			</div>

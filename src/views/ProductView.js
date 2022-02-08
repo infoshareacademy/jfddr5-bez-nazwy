@@ -12,9 +12,11 @@ const ProductView = ({
 		<div className={s.content}>
 			<div className={s.leftSide}>
 				<img src={product.photo} width="100%" />
+				<h1>{product.name}</h1>
 				<h3>
-					ProductView: {product.name}, {product.city}
+					{product.city}, {product.contact.street}
 				</h3>
+
 				<ServicesList
 					servicesList={servicesList}
 					setServicesList={setServicesList}
