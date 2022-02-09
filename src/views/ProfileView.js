@@ -7,23 +7,35 @@ const ProfileView = () => {
 	useEffect(() => {
 		getServiceForUser(setServiceForUser);
 	}, []);
-
+	console.log(serviceForUser);
 	return (
-		<div>
+		<div className={s.profileView}>
 			ProfileView{" "}
 			<div>
-				<h2>Lista rezerwacji:</h2>
+				<h2 className={s.title}>Lista rezerwacji:</h2>
 				{serviceForUser.map((reservation) => (
-					<div key={reservation.date} className={s.reservationField}>
-						<div>{reservation.businessName}</div>
-						<div>{reservation.serviceName}</div>
-						<div>{reservation.date.toString()}</div>
-						<button
-							onClick={() =>
-								deleteServiceForUser(reservation.date)
-							}>
-							Usuń rezerwację
-						</button>
+					<div className={s.reservationRow}>
+						<div
+							key={reservation.date}
+							className={s.reservationField}>
+							<div className={s.businessName}>
+								{reservation.businessName}
+							</div>
+							<div className={s.serviceName}>
+								{reservation.serviceName}
+							</div>
+							<div className={s.reservationDate}>
+								{reservation.date.toString()}
+							</div>
+							<button
+								className={s.button}
+								onClick={() =>
+									deleteServiceForUser(reservation.date)
+								}>
+								Usuń rezerwację
+							</button>
+						</div>
+						<div className={s.line} />
 					</div>
 				))}
 			</div>
