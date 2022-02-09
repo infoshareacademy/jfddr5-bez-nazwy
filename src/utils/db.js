@@ -106,7 +106,6 @@ const getBusinessList = async (callback) => {
 };
 
 const getServicesList = async (callback, id) => {
-	console.log("bla");
 	const servicesSnapshot = await getDocs(
 		collection(db, `business/${id}/services`),
 	);
@@ -132,12 +131,11 @@ const getRating = async (callback, id) => {
 		value: doc.data().value,
 		comment: doc.data().comment,
 	}));
-
-
 	callback((prevValue) => [
 		...prevValue,
 		{ rating: [...ratingList], businessId: id },
 	]);
+};
 
 const setCalendarForService = async (
 	businessId,
@@ -227,7 +225,6 @@ const deleteServiceForUser = async (docId) => {
 		),
 	);
 	// callback(cos);
-
 };
 export {
 	db,
@@ -237,13 +234,10 @@ export {
 	logoutUser,
 	getBusinessList,
 	getServicesList,
-
 	getRating,
-
 	setCalendarForService,
 	setServiceForUser,
 	getReservedSlots,
 	getServiceForUser,
 	deleteServiceForUser,
-
 };

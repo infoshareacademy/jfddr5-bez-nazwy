@@ -16,7 +16,7 @@ function App() {
 	const [servicesList, setServicesList] = useState([]);
 
 	const [ratingList, setRatingList] = useState([]);
-  
+
 	const [category, setCategory] = useState("");
 	const [city, setCity] = useState("");
 	const [product, setProduct] = useState("");
@@ -34,25 +34,16 @@ function App() {
 	}, []);
 
 	useEffect(() => {
-		businessList.map((bus) => {
-			getRating(setRatingList, bus.id);
-		});
-		console.log(ratingList);
-		return () => setRatingList([]);
-	}, [businessList]);
-
-	useEffect(() => {
-		businessList.map((bus) => {
 		setServicesList([]);
 		businessList.forEach((bus) => {
 			getServicesList(setServicesList, bus.id);
+			getRating(setRatingList, bus.id);
 		});
-		return () => setServicesList([]);
-	}, [businessList]);
 
-	useEffect(() => {
-		console.log(ratingList);
-	}, [category]);
+		return () => {
+			return setServicesList([]), setRatingList([]);
+		};
+	}, [businessList]);
 
 	return (
 		<businessListContext.Provider value={[businessList, setBusinessList]}>
@@ -80,7 +71,7 @@ function App() {
 						}
 					/>
 
-					<Route
+					{/* <Route
 						path={`/product/${product.id}`}
 						element={
 							<ProductView
@@ -92,20 +83,20 @@ function App() {
 								setShowRegister={setShowRegister}
 							/>
 						}
-					/>
+					/> */}
 
-				<Route
-					path={`/product/${product.id}`}
-					element={
-						<ProductView
-							product={product}
-							setServicesList={setServicesList}
-							servicesList={servicesList}
-							ratingList={ratingList}
-							setRatingList={setRatingList}
-						/>
-					}
-				/>
+					<Route
+						path={`/product/${product.id}`}
+						element={
+							<ProductView
+								product={product}
+								setServicesList={setServicesList}
+								servicesList={servicesList}
+								ratingList={ratingList}
+								setRatingList={setRatingList}
+							/>
+						}
+					/>
 					<Route
 						path="/s"
 						element={
@@ -116,7 +107,6 @@ function App() {
 							/>
 						}
 					/>
-
 
 					{currentUser && (
 						<Route path="/profile" element={<ProfileView />} />

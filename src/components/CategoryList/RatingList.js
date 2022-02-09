@@ -4,7 +4,6 @@ import Rating from "./Rating";
 
 const RatingList = ({ business, ratingList }) => {
 	const [sort, setSort] = useState("default");
-	console.log(ratingList);
 	const sortingOpinion = (a) => {
 		setSort(a);
 	};
