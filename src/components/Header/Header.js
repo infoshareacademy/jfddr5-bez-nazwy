@@ -3,10 +3,12 @@ import { logoutUser } from "../../utils/db";
 import { currentUserContext } from "../../contexts/CurrentUserContext";
 import styles from "./Header.module.css";
 import { modalDisplayContext } from "../../contexts/ModalDisplayContext";
+import { useNavigate } from "react-router-dom";
 
 const Header = ({ setShowLogin, setShowRegister }) => {
 	const [currentUser] = useContext(currentUserContext);
 	const [displayModal, setDisplayModal] = useContext(modalDisplayContext);
+	const navigate = useNavigate();
 	const handleLogout = (e) => {
 		e.preventDefault();
 		logoutUser();
@@ -37,7 +39,9 @@ const Header = ({ setShowLogin, setShowRegister }) => {
 					</div>
 				) : (
 					<div>
-						<p>Cześć, {currentUser.email}!</p>
+						<p onClick={() => navigate("/profile")}>
+							Cześć, {currentUser.email}!
+						</p>
 						<button onClick={handleLogout}>Wyloguj się</button>
 					</div>
 				)}
