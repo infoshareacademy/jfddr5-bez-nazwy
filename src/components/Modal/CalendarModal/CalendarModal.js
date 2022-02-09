@@ -12,9 +12,9 @@ import {
 } from "../../../utils/db";
 import styles from "./CalendarModal.module.css";
 
-const CalendarModal = ({ setShowLogin, setShowRegister }) => {
+const CalendarModal = ({ setShowLogin, setShowRegister, date, setDate }) => {
 	const [currentUser] = useContext(currentUserContext);
-	const [date, setDate] = useState("");
+
 	const [reservedSlots, setReservedSlots] = useState(0);
 	const [displayModal, setDisplayModal] = useContext(modalDisplayContext);
 	const [activeService] = useContext(serviceItemContext);
@@ -36,25 +36,8 @@ const CalendarModal = ({ setShowLogin, setShowRegister }) => {
 	};
 
 	const handleReservationClick = () => {
-		const dateNow = new Date().toLocaleString("pl-PL");
-
 		if (currentUser && reservedSlots < activeService.slot) {
-			setCalendarForService(
-				activeBusiness.id,
-				activeService.id,
-				date.toLocaleString("pl-PL"),
-				date,
-				currentUser.uid,
-			);
-			setServiceForUser(
-				dateNow,
-				date,
-				activeBusiness.id,
-				activeBusiness.name,
-				activeService.id,
-				activeService.name,
-			);
-			setDisplayModal("");
+			setDisplayModal("reservation-confirm");
 		} else if (reservedSlots === activeService.slot) {
 			console.log("zajete");
 		}
@@ -64,37 +47,53 @@ const CalendarModal = ({ setShowLogin, setShowRegister }) => {
 		<div
 			className={styles.calendarModalContent}
 			onClick={(e) => e.stopPropagation()}>
-			<Calendar onClickDay={handleDayClicked} />
-			{date && (
-				<>
-					<p>Data wizyty: {date.toLocaleString()}</p>
-					<p>
-						Ilość wolnych miejsc: {reservedSlots}/
-						{activeService.slot}
-					</p>
-					<p>Cena: {activeService.price}zł</p>
+			<h2>Wybierz dzień</h2>
+			<Calendar
+				onClickDay={handleDayClicked}
+				className={styles.calendar}
+				tileClassName={styles.calendarTile}
+			/>
 
-					{currentUser ? (
+			<div className={styles.reservationDetails}>
+				<p>
+					Data wizyty:
+					<span>{date ? ` ${date.toLocaleString()}` : ""}</span>
+				</p>
+				<p>
+					Ilość wolnych miejsc:
+					<span>
+						{date ? ` ${reservedSlots}/${activeService.slot}` : ""}
+					</span>
+				</p>
+				<p>
+					Cena: <span>{activeService.price}zł</span>
+				</p>
+
+				{currentUser ? (
+					<button
+						className={styles.reservationButton}
+						onClick={handleReservationClick}
+						disabled={reservedSlots >= activeService.slot}>
+						{reservedSlots < activeService.slot
+							? "Zarezerwuj miejsce"
+							: "Brak wolnych miejsc"}
+					</button>
+				) : (
+					<div>
 						<button
-							onClick={handleReservationClick}
-							disabled={reservedSlots >= activeService.slot}>
-							Zarezerwuj miejsce
+							className={styles.loginButton}
+							onClick={() => handleUserForm(setShowLogin)}>
+							Zaloguj się
 						</button>
-					) : (
-						<div>
-							<button
-								onClick={() => handleUserForm(setShowLogin)}>
-								Zaloguj się
-							</button>
 
-							<button
-								onClick={() => handleUserForm(setShowRegister)}>
-								Zarejestruj się
-							</button>
-						</div>
-					)}
-				</>
-			)}
+						<button
+							className={styles.loginButton}
+							onClick={() => handleUserForm(setShowRegister)}>
+							Zarejestruj się
+						</button>
+					</div>
+				)}
+			</div>
 		</div>
 	);
 };

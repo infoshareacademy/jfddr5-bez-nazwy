@@ -1,8 +1,52 @@
 .calendarModalContent {
-	width: 550px;
+	width: 450px;
 	padding: 10px;
+	min-height: 300px;
 	margin: auto auto;
 	background-color: rgb(255, 255, 255);
+	border-radius: 5px;
+	box-shadow: 0px 0px 10px 2px #33333380;
+	display: flex;
+	flex-direction: column;
+	justify-content: center;
+	align-items: center;
+}
+
+.calendarModalContent h2 {
+	padding: 5px 10px;
+}
+
+.calendar {
+	border: 0px;
+	margin: 10px;
+	box-shadow: 0px 0px 5px 2px #33333310;
 	border-radius: 10px;
-	border: 1px solid black;
+	padding: 10px;
+}
+
+.calendarTile:enabled:focus {
+	background: var(--accent);
+}
+
+.reservationDetails {
+	align-self: center;
+}
+
+.reservationDetails p {
+	padding-left: 20px;
+}
+
+.reservationDetails p span {
+	font-weight: 800;
+	color: var(--accent);
+}
+
+.reservationButton {
+	width: 330px;
+	margin-bottom: 20px;
+}
+
+.loginButton {
+	width: fit-content;
+	margin: 20px;
 }
