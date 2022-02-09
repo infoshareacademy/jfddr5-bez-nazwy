@@ -1,13 +1,17 @@
 import ServicesList from "../components/CategoryList/ServicesList";
 import s from "./ProductView.module.css";
+import RatingList from "../components/CategoryList/RatingList";
+
 const ProductView = ({
 	product,
 	setServicesList,
 	servicesList,
+	ratingList,
 	business,
 	setShowLogin,
 	setShowRegister,
 	showLogin,
+
 }) => {
 	return (
 		<div className={s.content}>
@@ -44,8 +48,16 @@ const ProductView = ({
 					<p>Niedziela: </p>
 					<p>Nr tel: {product.contact.phone}</p>
 				</div>
+
 				<div>
 					<p>E-mail: {product.contact.email}</p>
+				</div>
+				<div>
+					<RatingList
+						ratingList={ratingList}
+						business={product}
+						key={product.id}
+					/>
 				</div>
 			</div>
 		</div>

@@ -1,5 +1,4 @@
 import Service from "./Service";
-// import s from "./CategoryList.module.css";
 
 const ServicesList = ({
 	business,

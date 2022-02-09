@@ -3,7 +3,7 @@ import HomeView from "./views/HomeView";
 import ProductView from "./views/ProductView";
 import ProfileView from "./views/ProfileView";
 import { useState, useEffect } from "react";
-import { auth, getBusinessList, getServicesList } from "./utils/db";
+import { auth, getBusinessList, getServicesList, getRating } from "./utils/db";
 import { businessListContext } from "./contexts/BusinessListContext";
 import { currentUserContext } from "./contexts/CurrentUserContext";
 import "./App.css";
@@ -14,6 +14,9 @@ function App() {
 	const [currentUser, setCurrentUser] = useState(null);
 	const [businessList, setBusinessList] = useState([]);
 	const [servicesList, setServicesList] = useState([]);
+
+	const [ratingList, setRatingList] = useState([]);
+  
 	const [category, setCategory] = useState("");
 	const [city, setCity] = useState("");
 	const [product, setProduct] = useState("");
@@ -31,6 +34,15 @@ function App() {
 	}, []);
 
 	useEffect(() => {
+		businessList.map((bus) => {
+			getRating(setRatingList, bus.id);
+		});
+		console.log(ratingList);
+		return () => setRatingList([]);
+	}, [businessList]);
+
+	useEffect(() => {
+		businessList.map((bus) => {
 		setServicesList([]);
 		businessList.forEach((bus) => {
 			getServicesList(setServicesList, bus.id);
@@ -39,7 +51,7 @@ function App() {
 	}, [businessList]);
 
 	useEffect(() => {
-		console.log(servicesList);
+		console.log(ratingList);
 	}, [category]);
 
 	return (
@@ -82,6 +94,18 @@ function App() {
 						}
 					/>
 
+				<Route
+					path={`/product/${product.id}`}
+					element={
+						<ProductView
+							product={product}
+							setServicesList={setServicesList}
+							servicesList={servicesList}
+							ratingList={ratingList}
+							setRatingList={setRatingList}
+						/>
+					}
+				/>
 					<Route
 						path="/s"
 						element={
@@ -92,6 +116,7 @@ function App() {
 							/>
 						}
 					/>
+
 
 					{currentUser && (
 						<Route path="/profile" element={<ProfileView />} />

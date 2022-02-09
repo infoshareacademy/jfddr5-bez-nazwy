@@ -16,7 +16,6 @@ import {
 	createUserWithEmailAndPassword,
 	signInWithEmailAndPassword,
 	signOut,
-	updateProfile,
 } from "firebase/auth";
 
 const firebaseConfig = {
@@ -123,6 +122,22 @@ const getServicesList = async (callback, id) => {
 		{ services: [...servicesList], businessId: id },
 	]);
 };
+const getRating = async (callback, id) => {
+	const ratingSnapshot = await getDocs(
+		collection(db, `business/${id}/rating`),
+	);
+	const ratingList = ratingSnapshot.docs.map((doc) => ({
+		id: doc.id,
+		user: doc.data().user,
+		value: doc.data().value,
+		comment: doc.data().comment,
+	}));
+
+
+	callback((prevValue) => [
+		...prevValue,
+		{ rating: [...ratingList], businessId: id },
+	]);
 
 const setCalendarForService = async (
 	businessId,
@@ -212,6 +227,7 @@ const deleteServiceForUser = async (docId) => {
 		),
 	);
 	// callback(cos);
+
 };
 export {
 	db,
@@ -221,9 +237,13 @@ export {
 	logoutUser,
 	getBusinessList,
 	getServicesList,
+
+	getRating,
+
 	setCalendarForService,
 	setServiceForUser,
 	getReservedSlots,
 	getServiceForUser,
 	deleteServiceForUser,
+
 };

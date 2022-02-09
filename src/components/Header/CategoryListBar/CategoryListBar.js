@@ -1,6 +1,10 @@
 import { useContext } from "react";
 import { createSearchParams, useNavigate } from "react-router-dom";
 import { businessListContext } from "../../../contexts/BusinessListContext";
+
+//import { raitingContext } from "../../../contexts/RatingContext";
+
+
 import { pathNormalize } from "../../../utils/pathNormalize";
 import styles from "./CategoryListBar.module.css";
 
@@ -21,6 +25,7 @@ const CategoryListBar = ({ setCategory }) => {
 			})}`,
 		});
 	};
+
 
 	return (
 		<>
