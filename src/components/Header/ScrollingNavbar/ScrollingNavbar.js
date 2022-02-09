@@ -1,6 +1,6 @@
-import Header from "./Header";
+import Header from "../Header";
 import styles from "./ScrollingNavbar.module.css";
-import { SearchBarMock } from "./SearchBar/SearchBarMock";
+import { SearchBarMock } from "../SearchBar/SearchBarMock";
 
 const ScrollingNavbar = ({
 	product,

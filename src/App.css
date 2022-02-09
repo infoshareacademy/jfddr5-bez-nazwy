@@ -15,6 +15,11 @@
 	--userFormButtonBorder: #83ab8a;
 	--userFormButtonHover: #fff;
 	--userFormButtonAnimation: #83ab8a;
+
+	--categoryBarColor: #fff;
+	--categoryBarBackground: none;
+	--categoryBarBorder: transparent;
+	--categoryBarHover: #83ab8a;
 }
 
 body {

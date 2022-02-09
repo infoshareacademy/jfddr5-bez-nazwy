@@ -4,7 +4,7 @@ import { SearchBarMock } from "../components/Header/SearchBar/SearchBarMock";
 import styles from "./HomeView.module.css";
 import CallToAction from "../components/Header/CallToAction/CallToAction";
 import HeroSlideshow from "../components/Header/HeroSlideshow/HeroSlideshow";
-import ScrollingNavbar from "../components/Header/ScrollingNavbar";
+import ScrollingNavbar from "../components/Header/ScrollingNavbar/ScrollingNavbar";
 
 const HomeView = ({
 	currentUser,
