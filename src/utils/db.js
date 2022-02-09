@@ -34,3 +34,41 @@ export const getBusinessList = async(callback)=>{
 } 
 
 
+const getBusinessList = async (callback) => {
+	const businessSnapshot = await getDocs(collection(db, "business"));
+	const businessList = businessSnapshot.docs.map((doc) => ({
+		id: doc.id,
+		name: doc.data().name,
+		category: doc.data().category,
+		city: doc.data().city,
+		contact: doc.data().contact,
+		photo: doc.data().photo,
+	}));
+	callback(businessList);
+};
+const getServicesList = async (callback, id) => {
+	const servicesSnapshot = await getDocs(
+		collection(db, `business/${id}/services`),
+	);
+	const servicesList = servicesSnapshot.docs.map((doc) => ({
+		id: doc.id,
+		name: doc.data().name,
+		price: doc.data().price,
+		slot: doc.data().slot,
+	}));
+
+	callback((prevValue) => [
+		...prevValue,
+		{ services: [...servicesList], businessId: id },
+	]);
+};
+
+export {
+	db,
+	auth,
+	registerUser,
+	loginUser,
+	logoutUser,
+	getBusinessList,
+	getServicesList,
+};
