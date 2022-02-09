@@ -6,7 +6,7 @@ import RatingList from "../components/CategoryList/RatingList";
 
 const ProductView = ({ servicesList, ratingList }) => {
 	const [activeBusiness] = useContext(businessItemContext);
-
+	console.log(activeBusiness);
 	return (
 		<div className={s.content}>
 			<div className={s.leftSide}>
@@ -23,18 +23,19 @@ const ProductView = ({ servicesList, ratingList }) => {
 			</div>
 			<div className={s.rightSide}>
 				<div>
-					<h4>O nas:</h4> {/* dodać product.info do bazy */}
+					<h4>O nas:</h4> {activeBusiness.info}
+					{/* dodać product.info do bazy */}
 				</div>
 				<div>
 					<h4>Kontakt i godziny otwarcia: </h4>
 					{/* dodać godziny otwarcia */}
-					<p>Poniedziałek: </p>
-					<p>Wtorek: </p>
-					<p>Środa: </p>
-					<p>Czwartek: </p>
-					<p>Piątek: </p>
-					<p>Sobota: </p>
-					<p>Niedziela: </p>
+					<p>Poniedziałek: 9:00 - 18:00</p>
+					<p>Wtorek: 9:00 - 18:00</p>
+					<p>Środa: 9:00 - 18:00</p>
+					<p>Czwartek: 9:00 - 18:00</p>
+					<p>Piątek: 9:00 - 18:00</p>
+					<p>Sobota: 9:00 - 18:00</p>
+					<p>Niedziela: 9:00 - 18:00</p>
 					<p>Nr tel: {activeBusiness.contact.phone}</p>
 				</div>
 
