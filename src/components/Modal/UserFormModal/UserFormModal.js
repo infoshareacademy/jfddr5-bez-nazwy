@@ -1,9 +1,11 @@
-import React, { useState } from "react";
+import React, { useContext, useState } from "react";
 import ReactDOM from "react-dom";
+import { modalDisplayContext } from "../../../contexts/ModalDisplayContext";
 import { loginUser, registerUser } from "../../../utils/db";
 import styles from "./UserFormModal.module.css";
 
-const Modal = ({ showLogin, showRegister, onClose }) => {
+const UserFormModal = ({ showLogin, showRegister }) => {
+	const [displayModal, setDisplayModal] = useContext(modalDisplayContext);
 	const [username, setUsername] = useState("");
 	const [email, setEmail] = useState("");
 	const [password, setPassword] = useState("");
@@ -21,7 +23,7 @@ const Modal = ({ showLogin, showRegister, onClose }) => {
 		);
 		setRegisterErrorMessage(returnedMessage);
 		if (returnedMessage === undefined) {
-			onClose();
+			setDisplayModal("");
 			setUsername("");
 			setEmail("");
 			setPassword("");
@@ -34,17 +36,14 @@ const Modal = ({ showLogin, showRegister, onClose }) => {
 		const returnedMessage = await loginUser(email, password);
 		setLoginErrorMessage(returnedMessage);
 		if (returnedMessage === undefined) {
-			onClose();
+			setDisplayModal("");
 			setEmail("");
 			setPassword("");
 		}
 	};
 
-	if (!showLogin && !showRegister) {
-		return null;
-	}
-	return ReactDOM.createPortal(
-		<div className={styles.modal} onClick={onClose}>
+	return (
+		<>
 			<div
 				className={styles.modalContent}
 				onClick={(e) => e.stopPropagation()}>
@@ -88,6 +87,7 @@ const Modal = ({ showLogin, showRegister, onClose }) => {
 						<button type="submit">Zarejestruj się</button>
 					</form>
 				)}
+
 				{showLogin && (
 					<form className={styles.modalForm} onSubmit={handleLogin}>
 						<input
@@ -113,9 +113,8 @@ const Modal = ({ showLogin, showRegister, onClose }) => {
 					</form>
 				)}
 			</div>
-		</div>,
-		document.getElementById("root"),
+		</>
 	);
 };
 
-export default Modal;
+export default UserFormModal;

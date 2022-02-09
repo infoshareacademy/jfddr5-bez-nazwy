@@ -1,28 +1,20 @@
+import { useContext } from "react";
+import { businessItemContext } from "../../contexts/BusinessItemContext";
 import Service from "./Service";
 // import s from "./CategoryList.module.css";
 
-const ServicesList = ({
-	business,
-	servicesList,
-	setShowLogin,
-	showLogin,
-	setShowRegister,
-}) => {
+const ServicesList = ({ servicesList }) => {
+	const [activeBusiness] = useContext(businessItemContext);
 	return (
 		<>
 			{servicesList?.map((bus) =>
-				bus.businessId === business.id ? (
-					<div key={business.id}>
-						{bus.services.map((service) => (
-							<Service
-								key={service.id}
-								service={service}
-								business={business}
-								showLogin={showLogin}
-								setShowLogin={setShowLogin}
-								setShowRegister={setShowRegister}
-							/>
-						))}
+				bus.businessId === activeBusiness.id ? (
+					<div key={activeBusiness.id}>
+						{bus.services.map((service) => {
+							return (
+								<Service key={service.id} service={service} />
+							);
+						})}
 					</div>
 				) : null,
 			)}

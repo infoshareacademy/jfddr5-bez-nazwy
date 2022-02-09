@@ -1,4 +1,3 @@
-import { deleteDoc, doc } from "firebase/firestore";
 import { useEffect, useState } from "react";
 import { getServiceForUser, deleteServiceForUser, auth, db } from "../utils/db";
 import s from "./ProfileView.module.css";
@@ -7,8 +6,8 @@ const ProfileView = () => {
 
 	useEffect(() => {
 		getServiceForUser(setServiceForUser);
-		console.log(serviceForUser);
 	}, []);
+
 	return (
 		<div>
 			ProfileView{" "}
