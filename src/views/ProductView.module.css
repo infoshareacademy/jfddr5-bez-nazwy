@@ -1,9 +1,86 @@
-.leftSide {
-	background-color: var(--white);
-}
-.rightSide {
-	width: 900px;
-}
 .content {
 	display: flex;
+
+	justify-content: center;
+	padding: 10px;
+	margin: 100px auto;
+	max-width: 1300px;
+}
+
+.section {
+	background-color: var(--white);
+	border-radius: 10px;
+	padding: 10px;
+	margin-right: 20px;
+	width: 67%;
+}
+
+.photo img {
+	border-radius: 10px;
+	width: 100%;
+	box-shadow: 0px 0px 10px 2px #33333320;
+}
+
+.header {
+	border-bottom: 1px solid var(--accent);
+	padding-top: 20px;
+}
+
+.header h1 {
+	font-weight: 400;
+	font-size: 35px;
+	line-height: 0.1em;
+}
+
+.header h3 {
+	font-weight: 300;
+	font-size: 14px;
+}
+
+h2 {
+	border-bottom: 1px solid var(--accent);
+	padding-bottom: 5px;
+	padding-right: 15px;
+	font-weight: 500;
+	width: fit-content;
+}
+
+.info {
+	/* border: 1px solid var(--accent); */
+	border-radius: 8px;
+	font-size: 16px;
+	height: fit-content;
+	/* box-shadow: 0px 0px 4px 2px #33333310; */
+	margin: 10px;
+	padding: 20px;
+	padding-top: 0;
+	margin-top: 0;
+}
+.info > div,
+.info > p {
+	padding: 5px 15px;
+}
+
+.info h4 {
+	font-size: 22px;
+	font-weight: 300;
+	border-bottom: 1px solid var(--accent);
+	margin: 0;
+	padding: 7px 0px;
+	text-align: center;
+}
+
+.infoHours {
+	font-size: 16px;
+}
+
+.infoHours p {
+	display: flex;
+	justify-content: space-between;
+	align-items: center;
+}
+
+.infoHours p span {
+	font-weight: 600;
+	font-size: 15px;
 }

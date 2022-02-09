@@ -5,6 +5,8 @@
 	--white: #fff;
 	/* buttons, borders, accents! */
 	--accent: #83ab8a;
+
+	--background-accent: #f1f1f1;
 }
 
 body {
