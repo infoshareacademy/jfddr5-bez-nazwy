@@ -1,7 +1,13 @@
 import Service from "./Service";
 // import s from "./CategoryList.module.css";
 
-const ServicesList = ({ business, servicesList, setShowLogin, showLogin }) => {
+const ServicesList = ({
+	business,
+	servicesList,
+	setShowLogin,
+	showLogin,
+	setShowRegister,
+}) => {
 	return (
 		<>
 			{servicesList?.map((bus) =>
@@ -14,6 +20,7 @@ const ServicesList = ({ business, servicesList, setShowLogin, showLogin }) => {
 								business={business}
 								showLogin={showLogin}
 								setShowLogin={setShowLogin}
+								setShowRegister={setShowRegister}
 							/>
 						))}
 					</div>

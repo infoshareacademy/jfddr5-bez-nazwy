@@ -8,6 +8,7 @@ import { businessListContext } from "./contexts/BusinessListContext";
 import { currentUserContext } from "./contexts/CurrentUserContext";
 import "./App.css";
 import CategoryView from "./views/CategoryView";
+import Modal from "./components/Header/UserFormModal/UserFormModal";
 
 function App() {
 	const [currentUser, setCurrentUser] = useState(null);
@@ -18,6 +19,7 @@ function App() {
 	const [product, setProduct] = useState("");
 
 	const [showLogin, setShowLogin] = useState(false);
+	const [showRegister, setShowRegister] = useState(false);
 
 	useEffect(() => {
 		return auth.onAuthStateChanged(setCurrentUser);
@@ -43,23 +45,13 @@ function App() {
 	return (
 		<businessListContext.Provider value={[businessList, setBusinessList]}>
 			<currentUserContext.Provider value={[currentUser, setCurrentUser]}>
-				<Routes>
-					{/* <Route
-					path="*"
-					element={
-						<>
-							<CategoryListBar
-								category={category}
-								setCategory={setCategory}
-								setServicesList={setServicesList}
-								servicesList={servicesList}
-							/>
-						</>
-					}></Route>
-				<Route
-					path="/profile"
-					element={<Header currentUser={currentUser} />}></Route> */}
-				</Routes>
+				<Modal
+					showLogin={showLogin}
+					showRegister={showRegister}
+					onClose={() =>
+						setShowLogin(false) || setShowRegister(false)
+					}
+				/>
 				<Routes>
 					<Route
 						path="/"
@@ -85,6 +77,7 @@ function App() {
 								servicesList={servicesList}
 								showLogin={showLogin}
 								setShowLogin={setShowLogin}
+								setShowRegister={setShowRegister}
 							/>
 						}
 					/>
@@ -99,27 +92,10 @@ function App() {
 							/>
 						}
 					/>
-					{/* <Route
-					path={`${cityPath}`}
-					element={
-						<CategoryView
-							city={city}
-							category={category}
-							setServicesList={setServicesList}
-							servicesList={servicesList}
-						/>
-					}></Route>
-				<Route
-					path={`${categoryPath}/${cityPath}`}
-					element={
-						<CategoryView
-							city={city}
-							category={category}
-							setServicesList={setServicesList}
-							servicesList={servicesList}
-						/>
-					}></Route> */}
-					<Route path="/profile" element={<ProfileView />} />
+
+					{currentUser && (
+						<Route path="/profile" element={<ProfileView />} />
+					)}
 				</Routes>
 			</currentUserContext.Provider>
 		</businessListContext.Provider>

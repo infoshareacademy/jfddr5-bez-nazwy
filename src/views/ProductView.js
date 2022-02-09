@@ -6,6 +6,7 @@ const ProductView = ({
 	servicesList,
 	business,
 	setShowLogin,
+	setShowRegister,
 	showLogin,
 }) => {
 	return (
@@ -24,6 +25,7 @@ const ProductView = ({
 					key={product.id}
 					showLogin={showLogin}
 					setShowLogin={setShowLogin}
+					setShowRegister={setShowRegister}
 				/>
 			</div>
 			<div className={s.rightSide}>

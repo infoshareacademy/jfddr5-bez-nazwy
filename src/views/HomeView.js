@@ -1,6 +1,6 @@
 import CategoryListBar from "../components/Header/CategoryListBar/CategoryListBar";
 import Header from "../components/Header/Header";
-import { SearchBarMock } from "../components/Header/searchBar/SearchBarMock";
+import { SearchBarMock } from "../components/Header/SearchBar/SearchBarMock";
 import styles from "./HomeView.module.css";
 import CallToAction from "../components/Header/CallToAction/CallToAction";
 import HeroSlideshow from "../components/Header/HeroSlideshow/HeroSlideshow";

@@ -7,7 +7,7 @@ import "react-calendar/dist/Calendar.css";
 import styles from "./CalendarModal.module.css";
 import { getReservedSlots } from "../../utils/db";
 
-const Service = ({ service, business, setShowLogin, showLogin }) => {
+const Service = ({ service, business, setShowLogin, setShowRegister }) => {
 	const [displayCalendar, setDisplayCalendar] = useState(false);
 	const [currentUser] = useContext(currentUserContext);
 	const [date, setDate] = useState("");
@@ -80,6 +80,7 @@ const Service = ({ service, business, setShowLogin, showLogin }) => {
 											Zarezerwuj miejsce
 										</button>
 									) : (
+										//NIE DZIAŁA SHOW LOGIN, POGADAC O TYM JUTRO ASAP RANO!!!!
 										<div>
 											<button
 												onClick={() =>
@@ -88,7 +89,12 @@ const Service = ({ service, business, setShowLogin, showLogin }) => {
 												Zaloguj się
 											</button>
 
-											<button>Zarejestruj się</button>
+											<button
+												onClick={() =>
+													setShowRegister(true)
+												}>
+												Zarejestruj się
+											</button>
 										</div>
 									)}
 								</>

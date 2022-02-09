@@ -8,7 +8,7 @@ const ProfileView = () => {
 	useEffect(() => {
 		getServiceForUser(setServiceForUser);
 		console.log(serviceForUser);
-	}, [deleteServiceForUser]);
+	}, []);
 	return (
 		<div>
 			ProfileView{" "}
@@ -18,7 +18,7 @@ const ProfileView = () => {
 					<div key={reservation.date} className={s.reservationField}>
 						<div>{reservation.businessName}</div>
 						<div>{reservation.serviceName}</div>
-						{/* <div>{reservation.date.toString()}</div> */}
+						<div>{reservation.date.toString()}</div>
 						<button
 							onClick={() =>
 								deleteServiceForUser(reservation.date)
