@@ -14,26 +14,28 @@ const CategoryList = ({ business, servicesList }) => {
 	};
 
 	return (
-		<div>
-			<div onClick={() => handleClick(business)}>
+		<div className={styles.categoryList}>
+			<div
+				onClick={() => handleClick(business)}
+				className={styles.businessData}>
 				<h1>{business.name} </h1>
 				<h3>
 					{business.city}, {business.contact.street}
 				</h3>
 			</div>
 			<div className={styles.panel}>
-				<div>
-					<img src={business.photo} width="350"></img>
-				</div>
-				<div className={styles.panelServices}>
-					<ServicesList
-						servicesList={servicesList}
-						key={business.id}
-						business={business}
-					/>
-				</div>
+				<img
+					className={styles.photo}
+					src={business.photo}
+					width="350"
+					height="250"></img>
+				<ServicesList
+					servicesList={servicesList}
+					key={business.id}
+					business={business}
+				/>
 			</div>
-			<hr />
+			<div className={styles.line}></div>
 		</div>
 	);
 };

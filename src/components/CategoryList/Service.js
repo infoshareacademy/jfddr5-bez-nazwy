@@ -16,12 +16,13 @@ const Service = ({ service }) => {
 			<div key={service.id} className={s.servicesList}>
 				<div className={s.servicesListName}>{service.name}</div>
 				<div className={s.servicesListPrice}>{service.price}zł</div>
-				<div className={s.servicesListPrice}>{service.slot}</div>
-				<button
-					className={s.servicesButton}
-					onClick={handleServiceButton}>
-					Zarezerwuj
-				</button>
+				<div>
+					<button
+						className={s.servicesButton}
+						onClick={handleServiceButton}>
+						Zarezerwuj
+					</button>
+				</div>
 			</div>
 		</>
 	);
