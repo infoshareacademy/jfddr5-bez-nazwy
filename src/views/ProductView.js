@@ -1,6 +1,13 @@
 import ServicesList from "../components/CategoryList/ServicesList";
 import s from "./ProductView.module.css";
-const ProductView = ({ product, setServicesList, servicesList, business }) => {
+import RatingList from "../components/CategoryList/RatingList";
+
+const ProductView = ({
+	product,
+	setServicesList,
+	servicesList,
+	ratingList,
+}) => {
 	return (
 		<div className={s.content}>
 			<div className={s.leftSide}>
@@ -31,16 +38,16 @@ const ProductView = ({ product, setServicesList, servicesList, business }) => {
 					<p>Niedziela: </p>
 					<p>Nr tel: {product.contact.phone}</p>
 				</div>
-				<div>
-				{/* <Rating
-					getRatingt={getRatingt}
-					setRating={setRating}
-					business={product}
-					key={product.id}
-				/> */}
-				</div>
+
 				<div>
 					<p>E-mail: {product.contact.email}</p>
+				</div>
+				<div>
+					<RatingList
+						ratingList={ratingList}
+						business={product}
+						key={product.id}
+					/>
 				</div>
 			</div>
 		</div>

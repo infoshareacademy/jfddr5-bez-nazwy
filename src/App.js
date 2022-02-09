@@ -3,10 +3,9 @@ import HomeView from "./views/HomeView";
 import ProductView from "./views/ProductView";
 import ProfileView from "./views/ProfileView";
 import { useState, useEffect } from "react";
-import { auth, getBusinessList, getServicesList, getRating} from "./utils/db";
+import { auth, getBusinessList, getServicesList, getRating } from "./utils/db";
 import { businessListContext } from "./contexts/BusinessListContext";
 import "./App.css";
-
 
 import Header from "./components/Header/Header";
 import CategoryView from "./views/CategoryView";
@@ -16,7 +15,7 @@ function App() {
 	const [businessList, setBusinessList] = useState([]);
 
 	const [servicesList, setServicesList] = useState([]);
-	const [ratingList,setRatingList] = useState([]);
+	const [ratingList, setRatingList] = useState([]);
 	const [category, setCategory] = useState("");
 	const [city, setCity] = useState("");
 
@@ -30,7 +29,7 @@ function App() {
 		getBusinessList(setBusinessList);
 		return () => setBusinessList([]);
 	}, []);
-	
+
 	useEffect(() => {
 		businessList.map((bus) => {
 			getRating(setRatingList, bus.id);
@@ -99,6 +98,8 @@ function App() {
 							product={product}
 							setServicesList={setServicesList}
 							servicesList={servicesList}
+							ratingList={ratingList}
+							setRatingList={setRatingList}
 						/>
 					}
 				/>
@@ -135,7 +136,6 @@ function App() {
 				<Route path="/profile" element={<ProfileView />} />
 			</Routes>
 		</businessListContext.Provider>
-	//	<Filtering/>
 	);
 }
 

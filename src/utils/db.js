@@ -11,7 +11,6 @@ import {
 	createUserWithEmailAndPassword,
 	signInWithEmailAndPassword,
 	signOut,
-	updateProfile,
 } from "firebase/auth";
 
 const firebaseConfig = {
@@ -116,7 +115,7 @@ const getServicesList = async (callback, id) => {
 		{ services: [...servicesList], businessId: id },
 	]);
 };
-const getRating= async (callback, id) => {
+const getRating = async (callback, id) => {
 	const ratingSnapshot = await getDocs(
 		collection(db, `business/${id}/rating`),
 	);
