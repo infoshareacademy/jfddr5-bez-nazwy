@@ -6,7 +6,7 @@ import RatingList from "../components/CategoryList/RatingList";
 
 const ProductView = ({ servicesList, ratingList }) => {
 	const [activeBusiness] = useContext(businessItemContext);
-
+	console.log(activeBusiness);
 	return (
 		<div className={styles.content}>
 			<div className={styles.section}>

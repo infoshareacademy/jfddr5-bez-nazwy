@@ -101,6 +101,7 @@ const getBusinessList = async (callback) => {
 		city: doc.data().city,
 		contact: doc.data().contact,
 		photo: doc.data().photo,
+		info: doc.data().info,
 	}));
 	callback(businessList);
 };
