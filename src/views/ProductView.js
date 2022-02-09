@@ -32,6 +32,14 @@ const ProductView = ({ product, setServicesList, servicesList, business }) => {
 					<p>Nr tel: {product.contact.phone}</p>
 				</div>
 				<div>
+				{/* <Rating
+					getRatingt={getRatingt}
+					setRating={setRating}
+					business={product}
+					key={product.id}
+				/> */}
+				</div>
+				<div>
 					<p>E-mail: {product.contact.email}</p>
 				</div>
 			</div>

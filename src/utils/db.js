@@ -116,7 +116,22 @@ const getServicesList = async (callback, id) => {
 		{ services: [...servicesList], businessId: id },
 	]);
 };
+const getRating= async (callback, id) => {
+	const ratingSnapshot = await getDocs(
+		collection(db, `business/${id}/rating`),
+	);
+	const ratingList = ratingSnapshot.docs.map((doc) => ({
+		id: doc.id,
+		user: doc.data().user,
+		value: doc.data().value,
+		comment: doc.data().comment,
+	}));
 
+	callback((prevValue) => [
+		...prevValue,
+		{ rating: [...ratingList], businessId: id },
+	]);
+};
 export {
 	db,
 	auth,
@@ -125,4 +140,5 @@ export {
 	logoutUser,
 	getBusinessList,
 	getServicesList,
+	getRating,
 };

@@ -2,6 +2,7 @@ import { useContext } from "react";
 import s from "./CategoryListBar.module.css";
 import CategoryList from "../../CategoryList/CategoryList";
 import { businessListContext } from "../../../contexts/BusinessListContext";
+//import { raitingContext } from "../../../contexts/RatingContext";
 import { Link, Route, Routes } from "react-router-dom";
 
 const CategoryListBar = ({
