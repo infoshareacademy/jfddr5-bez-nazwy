@@ -6,13 +6,17 @@
 }
 
 .cta h2 {
-	vertical-align: baseline;
 	font-size: 42px;
 	overflow: hidden;
 	white-space: nowrap;
 	margin: 0 auto;
 	line-height: 1.5;
 	animation: typewriter 6s steps(1000) infinite;
+}
+
+.cta h2 span:before {
+	content: "";
+	animation: change 12s infinite;
 }
 
 @keyframes typewriter {
@@ -25,11 +29,6 @@
 	100% {
 		width: 0;
 	}
-}
-
-.cta h2 span:before {
-	content: "";
-	animation: change 12s infinite;
 }
 
 @keyframes change {

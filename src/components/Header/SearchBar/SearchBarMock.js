@@ -20,13 +20,13 @@ export const SearchBarMock = ({
 		<div>
 			<div className={styles.wrapper}>
 				<div className={styles.mock} onClick={handleSearch}>
-					<img src={searchIcon}></img>
+					<img src={searchIcon} alt="search icon"></img>
 					<span>Znajdź i zarezerwuj usługę</span>
 				</div>
 				<div
 					className={`${styles.mock} ${styles.mockTwo}`}
 					onClick={handleSearch}>
-					<img src={pinIcon}></img>
+					<img src={pinIcon} alt="map pin icon"></img>
 					<span>{city || "Lokalizacja"}</span>
 				</div>
 			</div>

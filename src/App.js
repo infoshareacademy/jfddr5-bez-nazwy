@@ -17,7 +17,6 @@ function App() {
 	const [category, setCategory] = useState("");
 	const [city, setCity] = useState("");
 	const [product, setProduct] = useState("");
-
 	const [showLogin, setShowLogin] = useState(false);
 	const [showRegister, setShowRegister] = useState(false);
 
@@ -64,6 +63,8 @@ function App() {
 								city={city}
 								showLogin={showLogin}
 								setShowLogin={setShowLogin}
+								showRegister={showRegister}
+								setShowRegister={setShowRegister}
 							/>
 						}
 					/>
@@ -77,6 +78,7 @@ function App() {
 								servicesList={servicesList}
 								showLogin={showLogin}
 								setShowLogin={setShowLogin}
+								showRegister={showRegister}
 								setShowRegister={setShowRegister}
 							/>
 						}

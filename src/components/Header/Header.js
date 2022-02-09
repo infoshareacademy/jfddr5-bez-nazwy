@@ -1,12 +1,17 @@
-import { useState, useContext } from "react";
+import { useContext } from "react";
 import { logoutUser } from "../../utils/db";
-import Modal from "./UserFormModal/UserFormModal";
 import { currentUserContext } from "../../contexts/CurrentUserContext";
 import styles from "./Header.module.css";
 
-const Header = ({ showLogin, setShowLogin }) => {
-	const [showRegister, setShowRegister] = useState(false);
+const Header = ({
+	showLogin,
+	setShowLogin,
+	showRegister,
+	setShowRegister,
+	custom,
+}) => {
 	const [currentUser] = useContext(currentUserContext);
+
 	const handleLogout = (e) => {
 		e.preventDefault();
 		logoutUser();
@@ -35,13 +40,6 @@ const Header = ({ showLogin, setShowLogin }) => {
 						<button onClick={handleLogout}>Wyloguj się</button>
 					</div>
 				)}
-				<Modal
-					showLogin={showLogin}
-					showRegister={showRegister}
-					onClose={() =>
-						setShowLogin(false) || setShowRegister(false)
-					}
-				/>
 			</nav>
 		</>
 	);
