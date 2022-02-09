@@ -58,6 +58,7 @@ h2 {
 	padding: 20px;
 	padding-top: 0;
 	margin-top: 0;
+	max-width: 370px;
 }
 .info > div,
 .info > p {
