@@ -1,17 +1,21 @@
 .categoryBar {
 	display: flex;
-	justify-content: center;
-	align-items: center;
-	height: 50px;
-	width: 100%;
-	background-color: black;
+	flex-direction: row;
+	justify-content: space-around;
+	list-style: none;
+	margin-top: 100px;
 }
+
 .category {
-	display: flex;
-	justify-content: center;
-	align-items: center;
-	width: 100%;
-	height: 100%;
-	color: whitesmoke;
-	padding: 0 20px;
+	font-size: 18px;
+	color: var(--white);
+	text-decoration: none;
+	padding-bottom: 10px;
+	border-bottom: 3px solid transparent;
+	cursor: pointer;
+}
+
+.category:hover {
+	color: var(--accent);
+	border-bottom: 3px solid var(--accent);
 }

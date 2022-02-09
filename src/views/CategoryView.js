@@ -4,7 +4,7 @@ import CategoryList from "../components/CategoryList/CategoryList";
 import { businessListContext } from "../contexts/BusinessListContext";
 import { pathNormalize } from "../utils/pathNormalize";
 
-const CategoryView = ({ setServicesList, servicesList }) => {
+const CategoryView = ({ setServicesList, servicesList, setProduct }) => {
 	const [businessList] = useContext(businessListContext);
 	const [searchParams] = useSearchParams();
 
@@ -28,6 +28,7 @@ const CategoryView = ({ setServicesList, servicesList }) => {
 						business={business}
 						setServicesList={setServicesList}
 						servicesList={servicesList}
+						setProduct={setProduct}
 					/>
 				))}
 		</div>

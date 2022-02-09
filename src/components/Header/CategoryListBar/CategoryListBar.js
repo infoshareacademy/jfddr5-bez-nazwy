@@ -1,50 +1,46 @@
 import { useContext } from "react";
-import s from "./CategoryListBar.module.css";
-import CategoryList from "../../CategoryList/CategoryList";
+import { createSearchParams, useNavigate } from "react-router-dom";
 import { businessListContext } from "../../../contexts/BusinessListContext";
-//import { raitingContext } from "../../../contexts/RatingContext";
-import { Link, Route, Routes } from "react-router-dom";
 
-const CategoryListBar = ({
-	category,
-	setCategory,
-	setServicesList,
-	servicesList,
-}) => {
+//import { raitingContext } from "../../../contexts/RatingContext";
+
+
+import { pathNormalize } from "../../../utils/pathNormalize";
+import styles from "./CategoryListBar.module.css";
+
+const CategoryListBar = ({ setCategory }) => {
+	const [businessList] = useContext(businessListContext);
+
+	const navigate = useNavigate();
+	const categoryList = Array.from(
+		new Set(businessList.map((business) => business.category)),
+	);
+
+	const handleCategory = (category) => {
+		setCategory(category);
+		navigate({
+			pathname: "/s",
+			search: `?${createSearchParams({
+				category: pathNormalize(category),
+			})}`,
+		});
+	};
+
+
 	return (
-		<div>
-			<div className={s.categoryBar}>
-				<Link
-					to="groomer"
-					className={s.category}
-					onClick={() => setCategory("Groomer")}>
-					Groomer
-				</Link>
-				<Link
-					to="weterynarz"
-					className={s.category}
-					onClick={() => setCategory("Weterynarz")}>
-					Weterynarz
-				</Link>
-				<Link
-					to="behawiorysta"
-					className={s.category}
-					onClick={() => setCategory("Behawiorysta")}>
-					Behawiorysta
-				</Link>
-				<Link
-					to="hotel"
-					className={s.category}
-					onClick={() => setCategory("Hotel")}>
-					Psi hotel
-				</Link>
-				<Link
-					to="hodowla"
-					className={s.category}
-					onClick={() => setCategory("Hodowla")}>
-					Hodowla
-				</Link>
-			</div>
+		<>
+			<ul className={styles.categoryBar}>
+				{categoryList?.map((category) => {
+					return (
+						<li
+							key={category}
+							className={styles.category}
+							onClick={() => handleCategory(category)}>
+							{category}
+						</li>
+					);
+				})}
+			</ul>
 
 			{/* <Routes>
 				<Route
@@ -67,7 +63,7 @@ const CategoryListBar = ({
 						</div>
 					}></Route>
 			</Routes> */}
-		</div>
+		</>
 	);
 };
 

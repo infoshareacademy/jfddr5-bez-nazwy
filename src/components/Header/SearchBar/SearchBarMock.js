@@ -1,5 +1,5 @@
-import searchIcon from "./img/search.png";
-import pinIcon from "./img/pin.png";
+import searchIcon from "./images/search.png";
+import pinIcon from "./images/pin.png";
 import styles from "./SearchBar.module.css";
 import { SearchBar } from "./SearchBar";
 import { useState } from "react";

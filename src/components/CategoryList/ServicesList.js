@@ -1,17 +1,30 @@
 import Service from "./Service";
 
-const ServicesList = ({ business, servicesList }) => {
+const ServicesList = ({
+	business,
+	servicesList,
+	setShowLogin,
+	showLogin,
+	setShowRegister,
+}) => {
 	return (
 		<>
-			{servicesList?.map((bus) => (
-				<div key={bus.businessId}>
-					{bus.businessId === business.id
-						? bus.services.map((service) => (
-								<Service service={service} />
-						  ))
-						: null}
-				</div>
-			))}
+			{servicesList?.map((bus) =>
+				bus.businessId === business.id ? (
+					<div key={business.id}>
+						{bus.services.map((service) => (
+							<Service
+								key={service.id}
+								service={service}
+								business={business}
+								showLogin={showLogin}
+								setShowLogin={setShowLogin}
+								setShowRegister={setShowRegister}
+							/>
+						))}
+					</div>
+				) : null,
+			)}
 		</>
 	);
 };
