@@ -1,9 +1,10 @@
-import { useState, useEffect } from "react";
-import ProductView from "../../views/ProductView";
+import { useState, useEffect, useContext } from "react";
+import { businessItemContext } from "../../contexts/BusinessItemContext";
 import Rating from "./Rating";
 
-const RatingList = ({ business, ratingList }) => {
+const RatingList = ({ ratingList }) => {
 	const [sort, setSort] = useState("default");
+	const [activeBusiness] = useContext(businessItemContext);
 	const sortingOpinion = (a) => {
 		setSort(a);
 	};
@@ -33,7 +34,7 @@ const RatingList = ({ business, ratingList }) => {
 
 			{ratingList?.map((bus) => (
 				<div key={bus.businessId}>
-					{bus.businessId === business.id
+					{bus.businessId === activeBusiness.id
 						? bus.rating
 								.sort(sorting)
 								.map((rating) => (

@@ -18,6 +18,13 @@ const CategoryListBar = ({ setCategory }) => {
 
 	const handleCategory = (category) => {
 		setCategory(category);
+		// {city && navigate({
+		// 	pathname: "/s",
+		// 	search: `?${createSearchParams({
+		// 		category: pathNormalize(category),
+		// 		city: city,
+		// 	})}`,
+		// });}
 		navigate({
 			pathname: "/s",
 			search: `?${createSearchParams({
@@ -41,28 +48,6 @@ const CategoryListBar = ({ setCategory }) => {
 					);
 				})}
 			</ul>
-
-			{/* <Routes>
-				<Route
-					path={category}
-					element={
-						<div>
-							{businessList.map((business) => {
-								if (business.category === category) {
-									return (
-										<CategoryList
-											key={business.id}
-											business={business}
-											setServicesList={setServicesList}
-											servicesList={servicesList}
-											category={category}
-										/>
-									);
-								}
-							})}
-						</div>
-					}></Route>
-			</Routes> */}
 		</>
 	);
 };

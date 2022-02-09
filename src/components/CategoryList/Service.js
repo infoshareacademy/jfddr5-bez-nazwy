@@ -1,48 +1,16 @@
-import { useState, useContext } from "react";
-import Calendar from "react-calendar";
-import { currentUserContext } from "../../contexts/CurrentUserContext";
+import { useContext } from "react";
 import s from "./CategoryList.module.css";
-import { setCalendarForService, setServiceForUser } from "../../utils/db";
-import "react-calendar/dist/Calendar.css";
-import styles from "./CalendarModal.module.css";
-import { getReservedSlots } from "../../utils/db";
+import { modalDisplayContext } from "../../contexts/ModalDisplayContext";
+import { serviceItemContext } from "../../contexts/ServiceItemContext";
 
-const Service = ({ service, business, setShowLogin, setShowRegister }) => {
-	const [displayCalendar, setDisplayCalendar] = useState(false);
-	const [currentUser] = useContext(currentUserContext);
-	const [date, setDate] = useState("");
-	const [reservedSlots, setReservedSlots] = useState(0);
+const Service = ({ service }) => {
+	const [displayModal, setDisplayModal] = useContext(modalDisplayContext);
+	const [activeService, setActiveService] = useContext(serviceItemContext);
 
-	const handleDayClicked = (value) => {
-		getReservedSlots(business.id, service.id, setReservedSlots, value);
-		setDate(value);
+	const handleServiceButton = () => {
+		setActiveService(service);
+		setDisplayModal("calendar");
 	};
-
-	const handleReservationClick = () => {
-		const dateNow = new Date().toLocaleString("pl-PL");
-
-		if (currentUser && reservedSlots < service.slot) {
-			setCalendarForService(
-				business.id,
-				service.id,
-				date.toLocaleString("pl-PL"),
-				date,
-				currentUser.uid,
-			);
-			setServiceForUser(
-				dateNow,
-				date,
-				business.id,
-				business.name,
-				service.id,
-				service.name,
-			);
-			setDisplayCalendar(false);
-		} else if (reservedSlots === service.slot) {
-			console.log("zajete");
-		}
-	};
-
 	return (
 		<>
 			<div key={service.id} className={s.servicesList}>
@@ -51,57 +19,9 @@ const Service = ({ service, business, setShowLogin, setShowRegister }) => {
 				<div className={s.servicesListPrice}>{service.slot}</div>
 				<button
 					className={s.servicesButton}
-					onClick={() => setDisplayCalendar(!displayCalendar)}>
+					onClick={handleServiceButton}>
 					Zarezerwuj
 				</button>
-				{displayCalendar && (
-					<div
-						className={styles.calendarModal}
-						onClick={() => setDisplayCalendar(false)}>
-						<div
-							className={styles.calendarModalContent}
-							onClick={(e) => e.stopPropagation()}>
-							<Calendar onClickDay={handleDayClicked} />
-							{date && (
-								<>
-									<p>Data wizyty: {date.toLocaleString()}</p>
-									<p>
-										Ilość wolnych miejsc: {reservedSlots}/
-										{service.slot}
-									</p>
-									<p>Cena: {service.price}zł</p>
-
-									{currentUser ? (
-										<button
-											onClick={handleReservationClick}
-											disabled={
-												reservedSlots >= service.slot
-											}>
-											Zarezerwuj miejsce
-										</button>
-									) : (
-										//NIE DZIAŁA SHOW LOGIN, POGADAC O TYM JUTRO ASAP RANO!!!!
-										<div>
-											<button
-												onClick={() =>
-													setShowLogin(true)
-												}>
-												Zaloguj się
-											</button>
-
-											<button
-												onClick={() =>
-													setShowRegister(true)
-												}>
-												Zarejestruj się
-											</button>
-										</div>
-									)}
-								</>
-							)}
-						</div>
-					</div>
-				)}
 			</div>
 		</>
 	);

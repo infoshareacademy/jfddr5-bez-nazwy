@@ -1,35 +1,24 @@
+import { useContext } from "react";
 import ServicesList from "../components/CategoryList/ServicesList";
+import { businessItemContext } from "../contexts/BusinessItemContext";
 import s from "./ProductView.module.css";
 import RatingList from "../components/CategoryList/RatingList";
 
-const ProductView = ({
-	product,
-	setServicesList,
-	servicesList,
-	ratingList,
-	business,
-	setShowLogin,
-	setShowRegister,
-	showLogin,
+const ProductView = ({ servicesList, ratingList }) => {
+	const [activeBusiness] = useContext(businessItemContext);
 
-}) => {
 	return (
 		<div className={s.content}>
 			<div className={s.leftSide}>
-				<img src={product.photo} width="100%" />
-				<h1>{product.name}</h1>
+				<img src={activeBusiness.photo} width="100%" />
+				<h1>{activeBusiness.name}</h1>
 				<h3>
-					{product.city}, {product.contact.street}
+					{activeBusiness.city}, {activeBusiness.contact.street}
 				</h3>
 
 				<ServicesList
 					servicesList={servicesList}
-					setServicesList={setServicesList}
-					business={product}
-					key={product.id}
-					showLogin={showLogin}
-					setShowLogin={setShowLogin}
-					setShowRegister={setShowRegister}
+					business={activeBusiness}
 				/>
 			</div>
 			<div className={s.rightSide}>
@@ -46,17 +35,16 @@ const ProductView = ({
 					<p>Piątek: </p>
 					<p>Sobota: </p>
 					<p>Niedziela: </p>
-					<p>Nr tel: {product.contact.phone}</p>
+					<p>Nr tel: {activeBusiness.contact.phone}</p>
 				</div>
 
 				<div>
-					<p>E-mail: {product.contact.email}</p>
+					<p>E-mail: {activeBusiness.contact.email}</p>
 				</div>
 				<div>
 					<RatingList
 						ratingList={ratingList}
-						business={product}
-						key={product.id}
+						key={activeBusiness.id}
 					/>
 				</div>
 			</div>

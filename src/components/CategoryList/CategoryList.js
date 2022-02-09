@@ -1,16 +1,15 @@
 import styles from "./CategoryList.module.css";
 import { useNavigate } from "react-router-dom";
 import ServicesList from "./ServicesList";
+import { useContext } from "react";
+import { businessItemContext } from "../../contexts/BusinessItemContext";
 
-const CategoryList = ({
-	business,
-	setServicesList,
-	servicesList,
-	setProduct,
-}) => {
+const CategoryList = ({ business, servicesList }) => {
+	const [activeBusiness, setActiveBusiness] = useContext(businessItemContext);
+
 	const navigate = useNavigate();
 	const handleClick = (business) => {
-		setProduct(business);
+		setActiveBusiness(business);
 		navigate(`/product/${business.id}`);
 	};
 
@@ -28,10 +27,9 @@ const CategoryList = ({
 				</div>
 				<div className={styles.panelServices}>
 					<ServicesList
-						setServicesList={setServicesList}
 						servicesList={servicesList}
-						business={business}
 						key={business.id}
+						business={business}
 					/>
 				</div>
 			</div>

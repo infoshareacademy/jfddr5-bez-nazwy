@@ -1,15 +1,21 @@
-import { useState, useContext } from "react";
+import { useContext } from "react";
 import { logoutUser } from "../../utils/db";
-import Modal from "./UserFormModal/UserFormModal";
 import { currentUserContext } from "../../contexts/CurrentUserContext";
 import styles from "./Header.module.css";
+import { modalDisplayContext } from "../../contexts/ModalDisplayContext";
 
-const Header = ({ showLogin, setShowLogin }) => {
-	const [showRegister, setShowRegister] = useState(false);
+const Header = ({ setShowLogin, setShowRegister }) => {
 	const [currentUser] = useContext(currentUserContext);
+	const [displayModal, setDisplayModal] = useContext(modalDisplayContext);
 	const handleLogout = (e) => {
 		e.preventDefault();
 		logoutUser();
+	};
+
+	const handleUserForm = (callback) => {
+		console.log(displayModal);
+		setDisplayModal("user-form");
+		callback(true);
 	};
 
 	return (
@@ -20,12 +26,12 @@ const Header = ({ showLogin, setShowLogin }) => {
 					<div className={styles.userForm}>
 						<button
 							className={styles.loginButton}
-							onClick={() => setShowLogin(!showLogin)}>
+							onClick={() => handleUserForm(setShowLogin)}>
 							Logowanie
 						</button>
 						<button
 							className={styles.registerButton}
-							onClick={() => setShowRegister(!showRegister)}>
+							onClick={() => handleUserForm(setShowRegister)}>
 							Rejestracja
 						</button>
 					</div>
@@ -35,13 +41,6 @@ const Header = ({ showLogin, setShowLogin }) => {
 						<button onClick={handleLogout}>Wyloguj się</button>
 					</div>
 				)}
-				<Modal
-					showLogin={showLogin}
-					showRegister={showRegister}
-					onClose={() =>
-						setShowLogin(false) || setShowRegister(false)
-					}
-				/>
 			</nav>
 		</>
 	);

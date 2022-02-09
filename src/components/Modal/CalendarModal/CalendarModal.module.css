@@ -1,0 +1,8 @@
+.calendarModalContent {
+	width: 550px;
+	padding: 10px;
+	margin: auto auto;
+	background-color: rgb(255, 255, 255);
+	border-radius: 10px;
+	border: 1px solid black;
+}
