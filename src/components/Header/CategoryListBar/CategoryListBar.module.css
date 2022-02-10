@@ -3,12 +3,12 @@
 	flex-direction: row;
 	justify-content: space-around;
 	list-style: none;
-	margin-top: 100px;
+	margin-top: var(--categoryBarMargin);
 	background-color: var(--categoryBarBackground);
 }
 
 .category {
-	font-size: 18px;
+	font-size: var(--categoryBarFontSize);
 	color: var(--categoryBarColor);
 	text-decoration: none;
 	padding-bottom: 10px;

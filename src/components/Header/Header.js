@@ -39,11 +39,17 @@ const Header = ({ setShowLogin, setShowRegister }) => {
 						</button>
 					</div>
 				) : (
-					<div>
-						<p onClick={() => navigate("/profile")}>
-							Cześć, {currentUser.email}!
-						</p>
-						<button onClick={handleLogout}>Wyloguj się</button>
+					<div className={styles.userForm}>
+						<button
+							className={styles.profileButton}
+							onClick={() => navigate("/profile")}>
+							Profil
+						</button>
+						<button
+							className={styles.logoutButton}
+							onClick={handleLogout}>
+							Wyloguj się
+						</button>
 					</div>
 				)}
 			</nav>
