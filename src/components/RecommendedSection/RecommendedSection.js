@@ -77,6 +77,21 @@ const RecommendedSection = () => {
 						<p className={styles.galleryItemAddress}>Warszawa</p>
 					</div>
 				</div>
+				<div className={styles.galleryItem}>
+					<div className={styles.galleryItemRating}>
+						<h4 className={styles.galleryItemRatingHeader}>5</h4>
+						<p className={styles.galleryItemRatingText}>
+							12 opinii
+						</p>
+					</div>
+					<img
+						className={styles.galleryItemImage}
+						src={sampleImage}></img>
+					<div className={styles.galleryItemBanner}>
+						<h3 className={styles.galleryItemTitle}>Top Cat</h3>
+						<p className={styles.galleryItemAddress}>Warszawa</p>
+					</div>
+				</div>
 			</Flickity>
 		</div>
 	);
