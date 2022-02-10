@@ -1,10 +1,25 @@
 :root {
-	/* header color */
 	--black: #353a39;
-	/* background color */
 	--white: #fff;
-	/* buttons, borders, accents! */
 	--accent: #83ab8a;
+
+	--searchBarColor: #353a39;
+	--searchBarBackground: #fff;
+	--searchBarBorder: #83ab8a;
+
+	--headerLogoColor: #fff;
+	--headerLogoUnderline: #83ab8a;
+
+	--userFormButtonColor: #353a39;
+	--userFormButtonBackground: #fff;
+	--userFormButtonBorder: #83ab8a;
+	--userFormButtonHover: #fff;
+	--userFormButtonAnimation: #83ab8a;
+
+	--categoryBarColor: #fff;
+	--categoryBarBackground: none;
+	--categoryBarBorder: transparent;
+	--categoryBarHover: #83ab8a;
 }
 
 body {
