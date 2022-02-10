@@ -1,11 +1,15 @@
+.wrapper {
+	height: 10000px;
+}
+
 .slideshowWrapper {
 	width: 100%;
-	position: absolute;
+	position: relative;
 	top: 0;
 	left: 0;
-	z-index: -1;
 	background-color: var(--black);
 	border-bottom: 3px solid var(--accent);
+	z-index: 1000;
 }
 
 .slideshowWrapper ul {
@@ -22,7 +26,7 @@
 	background-size: cover;
 	background-repeat: no-repeat;
 	background-position: 50% 40%;
-	z-index: -1;
+	z-index: 0;
 	animation: imageAnimation 36s infinite;
 	border-bottom: 5px solid (--accent);
 }
@@ -59,6 +63,8 @@
 .contentWrapper {
 	max-width: 1200px;
 	margin: 0 auto;
+	position: relative;
+	z-index: 1;
 }
 
 @keyframes imageAnimation {

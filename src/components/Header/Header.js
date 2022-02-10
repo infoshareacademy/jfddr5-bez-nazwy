@@ -9,6 +9,7 @@ const Header = ({ setShowLogin, setShowRegister }) => {
 	const [currentUser] = useContext(currentUserContext);
 	const [displayModal, setDisplayModal] = useContext(modalDisplayContext);
 	const navigate = useNavigate();
+
 	const handleLogout = (e) => {
 		e.preventDefault();
 		logoutUser();

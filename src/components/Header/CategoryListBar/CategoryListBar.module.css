@@ -4,18 +4,19 @@
 	justify-content: space-around;
 	list-style: none;
 	margin-top: 100px;
+	background-color: var(--categoryBarBackground);
 }
 
 .category {
 	font-size: 18px;
-	color: var(--white);
+	color: var(--categoryBarColor);
 	text-decoration: none;
 	padding-bottom: 10px;
-	border-bottom: 3px solid transparent;
+	border-bottom: 3px solid var(--categoryBarBorder);
 	cursor: pointer;
 }
 
 .category:hover {
-	color: var(--accent);
-	border-bottom: 3px solid var(--accent);
+	color: var(--categoryBarHover);
+	border-bottom: 3px solid var(--categoryBarHover);
 }
