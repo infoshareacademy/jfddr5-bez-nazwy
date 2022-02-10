@@ -1,0 +1,61 @@
+{
+	"documents": [
+		{
+			"id": "B6ayzntQDBP17pN58Uea",
+			"city": "Wrocław",
+			"contact": {
+				"address": {
+					"geoPointValue": {
+						"latitude": 16.980170405838578,
+						"longitude": 51.122162591446511
+					}
+				},
+				"phone": "+48 (71)66 483 76 49 ",
+				"mail": "zoo-vet@gmail.com"
+			},
+
+			"category": "Weterynarz",
+			"name": "ZOOVet"
+		},
+		{
+			"id": "BBiTk6MmkC49GbRGm7H9",
+
+			"city": "Gdańsk",
+			"contact": {
+				"address": {
+					"geoPointValue": {
+						"latitude": 54.392719,
+						"longitude": 18.60856
+					}
+				},
+				"phone": "+ 48 420 355 657",
+
+				"email": "cat.education@gmail.com"
+			},
+
+			"name": "eduCATion",
+			"category": "Behawiorysta"
+		},
+
+		{
+			"id": "CXD8eLEvxlZ0afaxqpik",
+
+			"name": "Biały Kruk",
+
+			"contact": {
+				"email": "hotel.dla.psow.bialykruk@onet.pl",
+				"address": {
+					"geoPointValue": {
+						"latitude": 52.212774136913652,
+						"longitude": 20.976299676767894
+					}
+				},
+				"phone": "+22 78 996 29 89"
+			},
+
+			"category": "Hotel",
+
+			"city": "Warszawa"
+		}
+	]
+}

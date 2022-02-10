@@ -93,7 +93,13 @@ const logoutUser = () => {
 };
 
 const getBusinessList = async (callback) => {
-	const businessSnapshot = await getDocs(collection(db, "business"));
+	const businessSnapshot = await getDocs(collection(db, "business"))
+		// .catch((res) => console.log(res))
+		.catch(() =>
+			fetch("http://localhost:3000/sampleData.json")
+				.then((res) => res.json())
+				.then((docs) => callback(docs.documents)),
+		);
 	const businessList = businessSnapshot.docs.map((doc) => ({
 		id: doc.id,
 		name: doc.data().name,
@@ -110,6 +116,7 @@ const getServicesList = async (callback, id) => {
 	const servicesSnapshot = await getDocs(
 		collection(db, `business/${id}/services`),
 	);
+
 	const servicesList = servicesSnapshot.docs.map((doc) => ({
 		id: doc.id,
 		name: doc.data().name,
