@@ -5,7 +5,6 @@
 	list-style: none;
 	margin-top: var(--categoryBarMargin);
 	margin-bottom: 6px;
-	background-color: var(--categoryBarBackground);
 }
 
 .category {
