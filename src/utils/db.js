@@ -10,6 +10,7 @@ import {
 	arrayUnion,
 	getDoc,
 	deleteDoc,
+	arrayRemove,
 } from "firebase/firestore";
 import {
 	getAuth,
@@ -155,7 +156,7 @@ const setCalendarForService = async (
 			date: date,
 			usersReservations: arrayUnion({
 				user,
-				time: new Date().toLocaleString(),
+				time: new Date().toLocaleString("pl-PL"),
 			}),
 		},
 		{ merge: true },
@@ -205,27 +206,6 @@ const getReservedSlots = async (businessId, serviceId, callback, dateId) => {
 	callback(() => (slotItem ? slotItem.usersReservations : []));
 };
 
-const getUsersReservations = async (
-	businessId,
-	serviceId,
-	callback,
-	dateId,
-) => {
-	const reservationsPerDaySnapshot = await getDocs(
-		collection(db, `business/${businessId}/services/${serviceId}/calendar`),
-	);
-	const reservationsPerDay = reservationsPerDaySnapshot.docs.map((doc) => ({
-		id: doc.id,
-		usersReservations: doc.data().usersReservations,
-		date: doc.data().date,
-	}));
-	console.log(reservationsPerDay);
-	const slotItem = reservationsPerDay.find(
-		(slot) => slot.id === dateId.toLocaleString("pl-PL"),
-	);
-	callback(() => (slotItem ? slotItem.usersReservations : []));
-};
-
 const getServiceForUser = async (callback) => {
 	const userReservationDocuments = await getDocs(
 		collection(db, "users", auth.currentUser.uid, "reservations"),
@@ -238,7 +218,6 @@ const getServiceForUser = async (callback) => {
 		serviceName: doc.data().service.name,
 		serviceId: doc.data().service.id,
 	}));
-	console.log(userReservationsList);
 	callback(userReservationsList);
 };
 const deleteServiceForUser = async (docId, callback) => {
@@ -252,11 +231,8 @@ const updateCalendarForService = async (
 	businessId,
 	serviceId,
 	dateId,
-	usersList,
-	id,
+	item,
 ) => {
-	console.log(usersList);
-
 	await updateDoc(
 		doc(
 			db,
@@ -264,11 +240,7 @@ const updateCalendarForService = async (
 			dateId,
 		),
 		{
-			usersReservations: usersList.filter((reservation) => {
-				console.log(id, reservation.time);
-				return id !== reservation.time;
-				///zaciagnac tutaj wszystko i przefiltrowac???
-			}),
+			usersReservations: arrayRemove(item),
 		},
 	);
 };
@@ -288,5 +260,4 @@ export {
 	getServiceForUser,
 	deleteServiceForUser,
 	updateCalendarForService,
-	getUsersReservations,
 };

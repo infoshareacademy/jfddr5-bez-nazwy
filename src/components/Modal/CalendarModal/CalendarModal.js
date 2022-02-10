@@ -34,9 +34,6 @@ const CalendarModal = ({
 		setDate(value);
 	};
 
-	useEffect(() => {
-		console.log(usersReservations);
-	}, [date]);
 	const handleUserForm = (callback) => {
 		setDisplayModal("user-form");
 		callback(true);
