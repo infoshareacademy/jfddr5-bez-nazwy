@@ -267,6 +267,7 @@ const updateCalendarForService = async (
 			usersReservations: usersList.filter((reservation) => {
 				console.log(id, reservation.time);
 				return id !== reservation.time;
+				///zaciagnac tutaj wszystko i przefiltrowac???
 			}),
 		},
 	);
