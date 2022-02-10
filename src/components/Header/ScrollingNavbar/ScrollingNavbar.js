@@ -32,7 +32,7 @@ const ScrollingNavbar = ({
 						setShowRegister={setShowRegister}
 					/>
 				</div>
-				<div class={styles.scrollbarSearch}>
+				<div className={styles.scrollbarSearch}>
 					<SearchBarMock
 						product={product}
 						setProduct={setProduct}

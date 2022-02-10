@@ -1,0 +1,47 @@
+.contentWrapper {
+	max-width: 1230px;
+	margin: 0 auto;
+	overflow: hidden;
+}
+
+.recommendedHeader {
+	font-size: 30px;
+}
+
+.galleryWrapper:focus {
+	outline: none;
+}
+
+.galleryWrapper button {
+	width: 40px;
+	border: none;
+}
+
+.galleryWrapper button:active {
+	transform: translateX(3px);
+}
+
+.galleryWrapper ol {
+	list-style: none;
+}
+
+.galleryWrapper button:first-of-type {
+	margin-left: 575px;
+}
+
+.gallery {
+	display: flex;
+	flex-direction: row;
+	justify-content: flex-start;
+	gap: 10px;
+}
+
+.galleryItem {
+	padding-inline: 5px;
+}
+
+.galleryItemImage {
+	max-width: 400px;
+	max-height: 400px;
+	border-radius: 20px;
+}

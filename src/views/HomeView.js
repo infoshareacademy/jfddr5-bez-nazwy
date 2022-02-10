@@ -5,6 +5,7 @@ import styles from "./HomeView.module.css";
 import CallToAction from "../components/Header/CallToAction/CallToAction";
 import HeroSlideshow from "../components/Header/HeroSlideshow/HeroSlideshow";
 import ScrollingNavbar from "../components/Header/ScrollingNavbar/ScrollingNavbar";
+import RecommendedSection from "../components/RecommendedSection/RecommendedSection";
 
 const HomeView = ({
 	currentUser,
@@ -63,6 +64,7 @@ const HomeView = ({
 					</div>
 					<HeroSlideshow />
 				</div>
+				<RecommendedSection />
 			</div>
 		</>
 	);
