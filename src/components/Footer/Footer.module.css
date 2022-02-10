@@ -15,11 +15,10 @@
 	margin: 20px 0px 20px 0px;
 }
 
-.box {
+.brand{
 	display: flex;
-	flex-direction: row;
+	flex-direction: column;
 }
-
 .mark {
 	font-size: 35px;
 	margin: 0px 0px 60px 80px;
@@ -52,21 +51,26 @@
 	line-height: 30px;
 }
 
+.contact {
+	font-size: 18px;
+	text-decoration: underline;
+	margin-bottom: 5px;
+}
+
 .right {
 	display: flex;
 	justify-content: flex-end;
 	margin: 20px 50px 20px 0px;
 }
 
+.creators {
+	display: flex;
+	flex-direction: column;
+}
 .created {
 	text-decoration: underline;
 	font-size: 18px;
 	margin: 10px 0px 40px 340px;
-}
-
-.creators {
-	display: flex;
-	flex-direction: column;
 }
 
 .github {
@@ -82,10 +86,4 @@ img {
 	width: 40px;
 	filter: invert(100%);
 	margin-right: 30px;
-}
-
-.contact {
-	font-size: 18px;
-	text-decoration: underline;
-	margin-bottom: 5px;
 }

@@ -7,14 +7,10 @@ const Footer = () => {
 			<div style={{ height: "1000px" }}></div>
 			<div className={styles.container}>
 				<div className={styles.left}>
-					<div>
-						<div className={styles.box}>
-							<div className={styles.mark}>petsy</div>
-							<div className={styles.belt}></div>
-						</div>
+					<div className={styles.brand}>
+						<div className={styles.mark}>petsy</div>
 						<div className={styles.rights}>
-							<a href=""></a>@ 2022 petsy Inc. Wszystkie prawa
-							zastrzeżone
+							@ 2022 petsy Inc. Wszystkie prawa zastrzeżone
 						</div>
 					</div>
 					<div className={styles.info}>
