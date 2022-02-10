@@ -27,7 +27,6 @@ const ProfileView = () => {
 	};
 	return (
 		<div className={s.profileView}>
-			ProfileView{" "}
 			<div>
 				<h2 className={s.title}>Lista rezerwacji:</h2>
 				{serviceForUser.map((reservation) => {
@@ -45,7 +44,7 @@ const ProfileView = () => {
 									{reservation.serviceName}
 								</div>
 								<div className={s.reservationDate}>
-									{reservation.date.toString()}
+									{reservation.date.toString().slice(0, 10)}
 								</div>
 								<button
 									className={s.button}
