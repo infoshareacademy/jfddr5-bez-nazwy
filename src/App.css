@@ -1,16 +1,16 @@
 :root {
-	--black: #353a39;
+	--black: #1f2222;
 	--white: #fff;
 	--accent: #83ab8a;
 
-	--searchBarColor: #353a39;
+	--searchBarColor: #1f2222;
 	--searchBarBackground: #fff;
 	--searchBarBorder: #83ab8a;
 
 	--headerLogoColor: #fff;
 	--headerLogoUnderline: #83ab8a;
 
-	--userFormButtonColor: #353a39;
+	--userFormButtonColor: #1f2222;
 	--userFormButtonBackground: #fff;
 	--userFormButtonBorder: #83ab8a;
 	--userFormButtonHover: #fff;

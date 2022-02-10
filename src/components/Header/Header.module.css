@@ -8,6 +8,7 @@
 	position: relative;
 	color: var(--headerLogoColor);
 	font-size: 36px;
+	margin: 20px 0px;
 	cursor: pointer;
 	z-index: 1;
 	text-shadow: 2px 0px 0px #83ab8a;

@@ -1,3 +1,7 @@
+.wrapper {
+	height: 10000px;
+}
+
 .slideshowWrapper {
 	width: 100%;
 	position: relative;
