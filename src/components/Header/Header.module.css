@@ -6,10 +6,12 @@
 
 .logo {
 	position: relative;
-	color: var(--white);
+	color: var(--headerLogoColor);
 	font-size: 36px;
+	margin: 20px 0px;
 	cursor: pointer;
 	z-index: 1;
+	text-shadow: 2px 0px 0px #83ab8a;
 }
 
 .logo::before {
@@ -20,18 +22,19 @@
 	width: 100px;
 	height: 8px;
 	transform: skew(-20deg) translateX(-50%);
-	background: var(--accent);
+	background: var(--headerLogoUnderline);
 	z-index: -1;
 }
 
 .userForm > button {
+	width: 110px;
 	position: relative;
 	margin-inline: 5px;
 	padding: 10px;
 	font: inherit;
-	color: var(--black);
-	background-color: var(--white);
-	border: 2px solid var(--accent);
+	color: var(--userFormButtonColor);
+	background-color: var(--userFormButtonBackground);
+	border: 2px solid var(--userFormButtonBorder);
 	border-radius: 10px;
 	overflow: hidden;
 	z-index: 1;
@@ -39,7 +42,7 @@
 }
 
 .userForm > button:hover {
-	color: var(--white);
+	color: var(--userFormButtonHover);
 }
 
 .userForm > button::before {
@@ -49,7 +52,7 @@
 	left: 0;
 	width: 100%;
 	height: 100%;
-	background-color: var(--accent);
+	background-color: var(--userFormButtonAnimation);
 	transition: all 0.5s;
 	z-index: -1;
 	transform: translateX(-100%);

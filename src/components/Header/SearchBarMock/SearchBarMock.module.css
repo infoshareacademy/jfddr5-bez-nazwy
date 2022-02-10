@@ -9,20 +9,21 @@
 	padding: 5px;
 	display: flex;
 	width: 250px;
-	border: 2px solid var(--accent);
-	border-right: 1px solid var(--accent);
+	height: 28px;
+	border: 2px solid var(--searchBarBorder);
+	border-right: 1px solid var(--searchBarBorder);
 	border-radius: 10px 0px 0px 10px;
 	display: flex;
 	align-items: center;
 	cursor: pointer;
-	color: var(--black);
-	background-color: var(--white);
+	color: var(--searchBarColor);
+	background-color: var(--searchBarBackground);
 	font-size: 14px;
 	box-shadow: inset 0px 0px 4px 2px #33333310;
 }
 
 .mockTwo {
-	border-left: 1px solid var(--accent);
+	border-left: 1px solid var(--searchBarBorder);
 	border-radius: 0px 10px 10px 0px;
 }
 

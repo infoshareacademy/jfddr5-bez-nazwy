@@ -37,6 +37,8 @@ function App() {
 	const [showLogin, setShowLogin] = useState(false);
 	const [showRegister, setShowRegister] = useState(false);
 
+	const [usersReservations, setUsersReservations] = useState([]);
+
 	//USE EFFECTS - FETCHING DATA
 	useEffect(() => {
 		return auth.onAuthStateChanged(setCurrentUser);
@@ -60,7 +62,7 @@ function App() {
 	}, [businessList]);
 
 	useEffect(() => {
-		console.log(servicesList);
+		// console.log(servicesList);
 	}, [category]);
 
 	return (
@@ -81,6 +83,8 @@ function App() {
 								setCategory={setCategory}
 								setCity={setCity}
 								city={city}
+								usersReservations={usersReservations}
+								setUsersReservations={setUsersReservations}
 							/>
 							<Routes>
 								<Route
@@ -119,7 +123,16 @@ function App() {
 								{currentUser && (
 									<Route
 										path="/profile"
-										element={<ProfileView />}
+										element={
+											<ProfileView
+												usersReservations={
+													usersReservations
+												}
+												setUsersReservations={
+													setUsersReservations
+												}
+											/>
+										}
 									/>
 								)}
 							</Routes>

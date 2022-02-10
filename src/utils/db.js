@@ -10,6 +10,7 @@ import {
 	arrayUnion,
 	getDoc,
 	deleteDoc,
+	arrayRemove,
 } from "firebase/firestore";
 import {
 	getAuth,
@@ -93,7 +94,12 @@ const logoutUser = () => {
 };
 
 const getBusinessList = async (callback) => {
-	const businessSnapshot = await getDocs(collection(db, "business"));
+	const businessSnapshot = await getDocs(collection(db, "business")).catch(
+		() =>
+			fetch("http://localhost:3000/sampleData.json")
+				.then((res) => res.json())
+				.then((docs) => callback(docs.documents)),
+	);
 	const businessList = businessSnapshot.docs.map((doc) => ({
 		id: doc.id,
 		name: doc.data().name,
@@ -109,7 +115,19 @@ const getBusinessList = async (callback) => {
 const getServicesList = async (callback, id) => {
 	const servicesSnapshot = await getDocs(
 		collection(db, `business/${id}/services`),
+	).catch(() =>
+		fetch("http://localhost:3000/sampleData.json")
+			.then((res) => res.json())
+			.then((docs) =>
+				callback([
+					{
+						services: docs.collections.services,
+						businessId: docs.collections.id,
+					},
+				]),
+			),
 	);
+
 	const servicesList = servicesSnapshot.docs.map((doc) => ({
 		id: doc.id,
 		name: doc.data().name,
@@ -122,9 +140,21 @@ const getServicesList = async (callback, id) => {
 		{ services: [...servicesList], businessId: id },
 	]);
 };
+
 const getRating = async (callback, id) => {
 	const ratingSnapshot = await getDocs(
 		collection(db, `business/${id}/rating`),
+	).catch(() =>
+		fetch("http://localhost:3000/sampleData.json")
+			.then((res) => res.json())
+			.then((docs) =>
+				callback([
+					{
+						rating: docs.collections.rating,
+						businessId: docs.collections.id,
+					},
+				]),
+			),
 	);
 	const ratingList = ratingSnapshot.docs.map((doc) => ({
 		id: doc.id,
@@ -155,7 +185,7 @@ const setCalendarForService = async (
 			date: date,
 			usersReservations: arrayUnion({
 				user,
-				time: new Date().toLocaleString(),
+				time: new Date().toLocaleString("pl-PL"),
 			}),
 		},
 		{ merge: true },
@@ -169,6 +199,7 @@ const setServiceForUser = async (
 	businessName,
 	serviceId,
 	serviceName,
+	dateNow,
 ) => {
 	await setDoc(
 		doc(db, "users", auth.currentUser.uid, "reservations", reservationId),
@@ -182,6 +213,7 @@ const setServiceForUser = async (
 				id: serviceId,
 				name: serviceName,
 			},
+			id: dateNow,
 		},
 	);
 };
@@ -196,10 +228,11 @@ const getReservedSlots = async (businessId, serviceId, callback, dateId) => {
 		usersReservations: doc.data().usersReservations,
 		date: doc.data().date,
 	}));
+
 	const slotItem = reservationsPerDay.find(
 		(slot) => slot.id === dateId.toLocaleString("pl-PL"),
 	);
-	callback(() => (slotItem ? slotItem.usersReservations.length : 0));
+	callback(() => (slotItem ? slotItem.usersReservations : []));
 };
 
 const getServiceForUser = async (callback) => {
@@ -210,23 +243,37 @@ const getServiceForUser = async (callback) => {
 		id: doc.id,
 		date: doc.data().date,
 		businessName: doc.data().business.name,
+		businessId: doc.data().business.id,
 		serviceName: doc.data().service.name,
+		serviceId: doc.data().service.id,
 	}));
-	console.log(userReservationsList);
 	callback(userReservationsList);
 };
-const deleteServiceForUser = async (docId) => {
-	const cos = await deleteDoc(
+const deleteServiceForUser = async (docId, callback) => {
+	await deleteDoc(
+		doc(db, "users", auth.currentUser.uid, "reservations", docId),
+	);
+	getServiceForUser(callback);
+};
+
+const updateCalendarForService = async (
+	businessId,
+	serviceId,
+	dateId,
+	item,
+) => {
+	await updateDoc(
 		doc(
 			db,
-			"users",
-			auth.currentUser.uid,
-			"reservations",
-			docId.toString(),
+			`business/${businessId}/services/${serviceId}/calendar`,
+			dateId,
 		),
+		{
+			usersReservations: arrayRemove(item),
+		},
 	);
-	// callback(cos);
 };
+
 export {
 	db,
 	auth,
@@ -241,4 +288,5 @@ export {
 	getReservedSlots,
 	getServiceForUser,
 	deleteServiceForUser,
+	updateCalendarForService,
 };
