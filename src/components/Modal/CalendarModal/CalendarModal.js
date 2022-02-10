@@ -62,7 +62,7 @@ const CalendarModal = ({
 
 			setDisplayModal("");
 		} else if (usersReservations.length === activeService.slot) {
-			console.log("zajete");
+			// console.log("zajete");
 		}
 	};
 	return (

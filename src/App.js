@@ -61,7 +61,7 @@ function App() {
 	}, [businessList]);
 
 	useEffect(() => {
-		console.log(servicesList);
+		// console.log(servicesList);
 	}, [category]);
 
 	return (
