@@ -1,0 +1,83 @@
+.container {
+	display: flex;
+	flex-direction: row;
+	width: auto;
+	height: auto;
+	background-color: var(--black);
+	justify-content: space-between;
+	font: inherit;
+	color: var(--white);
+	line-height: 30px;
+
+}
+
+.left {
+	display: flex;
+	flex-direction: row;
+	margin: 20px 0px 20px 0px;
+}
+
+.box {
+	display: flex;
+	flex-direction: row;
+}
+
+.mark {
+	cursor: pointer;
+	font-size: 35px;
+	margin: 10px 30px 50px 10px;
+	font-weight: 800;
+}
+
+.rights {
+	font-size: small;
+	margin-left: 10px;
+}
+
+.info {
+	display: flex;
+	flex-direction: column;
+	margin-left: 50px;
+}
+
+.right {
+	display: flex;
+	justify-content: flex-end;
+	margin: 20px 20px 20px 0px;
+}
+
+.created {
+	margin-left: 43%;
+	text-decoration: underline;
+	font-size: 18px;
+	margin: 20px 0px 10px 0px;
+}
+
+.creators {
+	display: flex;
+	flex-direction: column;
+}
+
+.github {
+	display: flex;
+	flex-direction: row;
+}
+
+.author {
+	margin: 9px 0px 0px 20px;
+}
+
+img {
+	width: 40px;
+}
+
+.contact {
+	font-size: 18px;
+	text-decoration: underline;
+}
+
+.aboutus {
+	margin-top: 13px;
+	text-decoration: underline;
+	cursor: pointer;
+}

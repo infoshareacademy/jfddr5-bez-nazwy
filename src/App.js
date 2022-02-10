@@ -12,6 +12,7 @@ import Modal from "./components/Modal/Modal";
 import { modalDisplayContext } from "./contexts/ModalDisplayContext";
 import { serviceItemContext } from "./contexts/ServiceItemContext";
 import { businessItemContext } from "./contexts/BusinessItemContext";
+import Footer from "./components/Footer/Footer";
 
 function App() {
 	//USE STATES
@@ -122,6 +123,7 @@ function App() {
 									/>
 								)}
 							</Routes>
+							<Footer />
 						</modalDisplayContext.Provider>
 					</businessItemContext.Provider>
 				</serviceItemContext.Provider>
