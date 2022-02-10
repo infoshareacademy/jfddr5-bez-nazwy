@@ -20,6 +20,8 @@
 	--categoryBarBackground: none;
 	--categoryBarBorder: transparent;
 	--categoryBarHover: #83ab8a;
+	--categoryBarFontSize: 18px;
+	--categoryBarMargin: 100px;
 }
 
 body {

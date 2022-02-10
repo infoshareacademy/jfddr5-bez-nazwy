@@ -9,6 +9,7 @@
 	padding: 5px;
 	display: flex;
 	width: 250px;
+	height: 28px;
 	border: 2px solid var(--searchBarBorder);
 	border-right: 1px solid var(--searchBarBorder);
 	border-radius: 10px 0px 0px 10px;

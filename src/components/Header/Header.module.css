@@ -26,6 +26,7 @@
 }
 
 .userForm > button {
+	width: 110px;
 	position: relative;
 	margin-inline: 5px;
 	padding: 10px;
