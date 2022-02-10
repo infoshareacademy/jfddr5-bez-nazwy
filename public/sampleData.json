@@ -55,7 +55,8 @@
 
 			"category": "Hotel",
 
-			"city": "Warszawa"
+			"city": "Warszawa",
+			"about": "Jedyny taki hotel dla psów w Warszawie! Serdecznie zapraszamy. :)"
 		}
 	],
 	"collections": {
@@ -100,7 +101,7 @@
 			{
 				"user": "zachwycony",
 				"value": 5,
-				"comment": "Baza danych się zepsuła, ale nic nie jest za darmo :)"
+				"comment": "Baza danych się zepsuła?? Nic nie jest za darmo :)"
 			}
 		]
 	}

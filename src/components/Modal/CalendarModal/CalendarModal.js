@@ -49,15 +49,25 @@ const CalendarModal = ({ setShowLogin, setShowRegister, date, setDate }) => {
 			onClick={(e) => e.stopPropagation()}>
 			<h2>Wybierz dzień</h2>
 			<Calendar
+				tileDisabled={({ activeStartDate, date, view }) => {
+					return (
+						date.getDay() === 0 ||
+						date.getDay() === 6 ||
+						date <= Date.now()
+					);
+				}}
 				onClickDay={handleDayClicked}
 				className={styles.calendar}
 				tileClassName={styles.calendarTile}
+				locale="pl-PL"
 			/>
 
 			<div className={styles.reservationDetails}>
 				<p>
 					Data wizyty:
-					<span>{date ? ` ${date.toLocaleString()}` : ""}</span>
+					<span>
+						{date ? ` ${date.toLocaleString("pl-PL")}` : ""}
+					</span>
 				</p>
 				<p>
 					Ilość wolnych miejsc:

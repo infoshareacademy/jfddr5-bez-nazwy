@@ -13,15 +13,30 @@
 }
 
 .calendarModalContent h2 {
+	border-bottom: 2px solid var(--accent);
+	padding-bottom: 5px;
+	padding-right: 15px;
+	font-weight: 500;
+	width: fit-content;
 	padding: 5px 10px;
 }
 
 .calendar {
 	border: 0px;
 	margin: 10px;
-	box-shadow: 0px 0px 5px 2px #33333310;
+	box-shadow: 0px 0px 5px 2px #33333320;
 	border-radius: 10px;
 	padding: 10px;
+	width: 370px;
+}
+
+.calendarTile {
+	border-radius: 0;
+}
+
+.calendarTile:disabled {
+	opacity: 0.3;
+	background-color: white;
 }
 
 .calendarTile:enabled:focus {
@@ -44,9 +59,55 @@
 .reservationButton {
 	width: 330px;
 	margin-bottom: 20px;
+	position: relative;
+	/* margin-inline: 5px; */
+	padding: 10px;
+	/* margin-right: 30px; */
+	font: inherit;
+	color: var(--black);
+	background-color: var(--white);
+	border: 2px solid var(--accent);
+	border-radius: 10px;
+	overflow: hidden;
+	z-index: 1;
+	cursor: pointer;
 }
 
 .loginButton {
 	width: fit-content;
+	position: relative;
+	/* margin-inline: 5px; */
+	padding: 10px;
+	/* margin-right: 30px; */
+	font: inherit;
+	color: var(--black);
+	background-color: var(--white);
+	border: 2px solid var(--accent);
+	border-radius: 10px;
+	overflow: hidden;
+	z-index: 1;
+	cursor: pointer;
 	margin: 20px;
+}
+
+.loginButton:hover,
+.reservationButton:hover {
+	color: var(--white);
+}
+.loginButton::before,
+.reservationButton::before {
+	content: "";
+	position: absolute;
+	top: 0;
+	left: 0;
+	width: 100%;
+	height: 100%;
+	background-color: var(--accent);
+	transition: all 0.5s;
+	z-index: -1;
+	transform: translateX(-100%);
+}
+.loginButton:hover::before,
+.reservationButton:hover::before {
+	transform: translateX(0);
 }

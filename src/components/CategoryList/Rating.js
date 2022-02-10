@@ -11,13 +11,21 @@ const Rating = ({ rating }) => {
 				<h3>{rating.user}</h3>
 				<div className={styles.starsContainer}>
 					<div className={styles.starWrapper}>
-						{stars.map(() => (
-							<img src={star} className={styles.star} />
+						{stars.map((item) => (
+							<img
+								key={item}
+								src={star}
+								className={styles.star}
+							/>
 						))}
 					</div>
 					<div className={styles.ratedStars}>
-						{ratingArray.map(() => (
-							<img src={star} className={styles.star} />
+						{ratingArray.map((item) => (
+							<img
+								key={item}
+								src={star}
+								className={styles.star}
+							/>
 						))}
 					</div>
 				</div>
