@@ -27,7 +27,6 @@ const ProfileView = () => {
 	};
 	return (
 		<div className={s.profileView}>
-			ProfileView{" "}
 			<div>
 				<h2 className={s.title}>Lista rezerwacji:</h2>
 				{serviceForUser.map((reservation) => {
