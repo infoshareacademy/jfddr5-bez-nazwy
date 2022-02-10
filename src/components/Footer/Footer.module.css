@@ -6,9 +6,7 @@
 	background-color: var(--black);
 	justify-content: space-between;
 	font: inherit;
-	color: var(--white);
-	line-height: 30px;
-
+	color: var(--headerLogoColor);
 }
 
 .left {
@@ -23,34 +21,47 @@
 }
 
 .mark {
-	cursor: pointer;
 	font-size: 35px;
-	margin: 10px 30px 50px 10px;
+	margin: 0px 0px 60px 80px;
 	font-weight: 800;
+	position: relative;
+	z-index: 1;
+}
+
+.mark::before {
+	content: "";
+	position: absolute;
+	width: 100px;
+	height: 8px;
+	background: var(--headerLogoUnderline);
+	transform: skew(-20deg) translateX(-50%);
+	left: 45px;
+	bottom: 6px;
+	z-index: -1;
 }
 
 .rights {
 	font-size: small;
-	margin-left: 10px;
+	margin-left: 80px;
 }
 
 .info {
 	display: flex;
 	flex-direction: column;
-	margin-left: 50px;
+	margin-left: 80px;
+	line-height: 30px;
 }
 
 .right {
 	display: flex;
 	justify-content: flex-end;
-	margin: 20px 20px 20px 0px;
+	margin: 20px 50px 20px 0px;
 }
 
 .created {
-	margin-left: 43%;
 	text-decoration: underline;
 	font-size: 18px;
-	margin: 20px 0px 10px 0px;
+	margin: 10px 0px 40px 340px;
 }
 
 .creators {
@@ -64,20 +75,17 @@
 }
 
 .author {
-	margin: 9px 0px 0px 20px;
+	margin: 0px 10px 0px 20px;
 }
 
 img {
 	width: 40px;
+	filter: invert(100%);
+	margin-right: 30px;
 }
 
 .contact {
 	font-size: 18px;
 	text-decoration: underline;
-}
-
-.aboutus {
-	margin-top: 13px;
-	text-decoration: underline;
-	cursor: pointer;
+	margin-bottom: 5px;
 }
