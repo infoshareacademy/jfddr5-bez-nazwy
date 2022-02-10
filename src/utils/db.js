@@ -94,7 +94,12 @@ const logoutUser = () => {
 };
 
 const getBusinessList = async (callback) => {
-	const businessSnapshot = await getDocs(collection(db, "business"));
+	const businessSnapshot = await getDocs(collection(db, "business")).catch(
+		() =>
+			fetch("http://localhost:3000/sampleData.json")
+				.then((res) => res.json())
+				.then((docs) => callback(docs.documents)),
+	);
 	const businessList = businessSnapshot.docs.map((doc) => ({
 		id: doc.id,
 		name: doc.data().name,
@@ -110,7 +115,19 @@ const getBusinessList = async (callback) => {
 const getServicesList = async (callback, id) => {
 	const servicesSnapshot = await getDocs(
 		collection(db, `business/${id}/services`),
+	).catch(() =>
+		fetch("http://localhost:3000/sampleData.json")
+			.then((res) => res.json())
+			.then((docs) =>
+				callback([
+					{
+						services: docs.collections.services,
+						businessId: docs.collections.id,
+					},
+				]),
+			),
 	);
+
 	const servicesList = servicesSnapshot.docs.map((doc) => ({
 		id: doc.id,
 		name: doc.data().name,
@@ -123,9 +140,21 @@ const getServicesList = async (callback, id) => {
 		{ services: [...servicesList], businessId: id },
 	]);
 };
+
 const getRating = async (callback, id) => {
 	const ratingSnapshot = await getDocs(
 		collection(db, `business/${id}/rating`),
+	).catch(() =>
+		fetch("http://localhost:3000/sampleData.json")
+			.then((res) => res.json())
+			.then((docs) =>
+				callback([
+					{
+						rating: docs.collections.rating,
+						businessId: docs.collections.id,
+					},
+				]),
+			),
 	);
 	const ratingList = ratingSnapshot.docs.map((doc) => ({
 		id: doc.id,
