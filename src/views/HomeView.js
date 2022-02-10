@@ -1,6 +1,6 @@
 import CategoryListBar from "../components/Header/CategoryListBar/CategoryListBar";
 import Header from "../components/Header/Header";
-import { SearchBarMock } from "../components/Header/SearchBar/SearchBarMock";
+import { SearchBarMock } from "../components/Header/SearchBarMock/SearchBarMock";
 import styles from "./HomeView.module.css";
 import CallToAction from "../components/Header/CallToAction/CallToAction";
 import HeroSlideshow from "../components/Header/HeroSlideshow/HeroSlideshow";
@@ -8,12 +8,12 @@ import ScrollingNavbar from "../components/Header/ScrollingNavbar/ScrollingNavba
 
 const HomeView = ({
 	currentUser,
+	product,
 	setProduct,
 	category,
-	product,
 	setCategory,
-	setCity,
 	city,
+	setCity,
 	showLogin,
 	setShowLogin,
 	showRegister,

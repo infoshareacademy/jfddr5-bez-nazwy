@@ -4,17 +4,14 @@ import { businessListContext } from "../../../contexts/BusinessListContext";
 import { SearchBarList } from "./SearchBarList";
 import styles from "./SearchBar.module.css";
 import { pathNormalize } from "../../../utils/pathNormalize";
+import { modalDisplayContext } from "../../../contexts/ModalDisplayContext";
+import { businessItemContext } from "../../../contexts/BusinessItemContext";
 
-export const SearchBar = ({
-	displaySearchBar,
-	setProduct,
-	setCategory,
-	onClose,
-	setCity,
-	city,
-}) => {
+export const SearchBar = ({ setProduct, setCategory, setCity, city }) => {
 	const [searchValue, setSearchValue] = useState("");
 	const [cityValue, setCityValue] = useState(city);
+	const [displayModal, setDisplayModal] = useContext(modalDisplayContext);
+	const [activeBusiness, setActiveBusiness] = useContext(businessItemContext);
 
 	const navigate = useNavigate();
 
@@ -50,9 +47,9 @@ export const SearchBar = ({
 			const businessObj = businessList.find(
 				(business) => searchValue === business.name,
 			);
-			setProduct(businessObj);
+			setActiveBusiness(businessObj);
 			navigate(`/product/${businessObj.id}`);
-			onClose();
+			setDisplayModal("");
 		}
 		//both
 		else if (
@@ -91,72 +88,64 @@ export const SearchBar = ({
 							city: cityPath,
 						})}`,
 					}));
-			onClose();
+			setDisplayModal("");
 		}
 	};
 
-	if (!displaySearchBar) {
-		return;
-	}
-
 	return (
-		<div className={styles.searchBarModal} onClick={onClose}>
-			<div
-				className={styles.searchBarModalContent}
-				onClick={(e) => e.stopPropagation()}>
-				<form
-					onSubmit={handleSubmit}
-					className={styles.searchBarModalForm}>
-					<div className={styles.searchBarModalInputs}>
-						<input
-							type="text"
-							placeholder="Czego szukasz?"
-							value={searchValue}
-							onChange={(e) => setSearchValue(e.target.value)}
-							ref={searchInputRef}></input>
-						<input
-							type="text"
-							placeholder="Gdzie jesteś?"
-							value={cityValue}
-							onChange={(e) => setCityValue(e.target.value)}
-							ref={cityInputRef}></input>
-					</div>
-					<div className={styles.searchBarModalList}>
-						{(document.activeElement === searchInputRef.current ||
-							cityInputRef.current) && (
-							<div>
-								{helper(searchInputRef, nameList, 3) && (
-									<SearchBarList
-										nameList={nameList}
-										header="Salony"
-										searchInputRef={searchInputRef}
-										setSearchValue={setSearchValue}
-									/>
-								)}
+		<div
+			className={styles.searchBarModalContent}
+			onClick={(e) => e.stopPropagation()}>
+			<form onSubmit={handleSubmit} className={styles.searchBarModalForm}>
+				<div className={styles.searchBarModalInputs}>
+					<input
+						type="text"
+						placeholder="Czego szukasz?"
+						value={searchValue}
+						onChange={(e) => setSearchValue(e.target.value)}
+						ref={searchInputRef}></input>
+					<input
+						type="text"
+						placeholder="Gdzie jesteś?"
+						value={cityValue}
+						onChange={(e) => setCityValue(e.target.value)}
+						ref={cityInputRef}></input>
+				</div>
+				<div className={styles.searchBarModalList}>
+					{(document.activeElement === searchInputRef.current ||
+						cityInputRef.current) && (
+						<div>
+							{helper(searchInputRef, nameList, 3) && (
+								<SearchBarList
+									nameList={nameList}
+									header="Salony"
+									searchInputRef={searchInputRef}
+									setSearchValue={setSearchValue}
+								/>
+							)}
 
-								{helper(searchInputRef, categoryList, 3) && (
-									<SearchBarList
-										categoryList={categoryList}
-										header="Usługi"
-										searchInputRef={searchInputRef}
-										setSearchValue={setSearchValue}
-									/>
-								)}
+							{helper(searchInputRef, categoryList, 3) && (
+								<SearchBarList
+									categoryList={categoryList}
+									header="Usługi"
+									searchInputRef={searchInputRef}
+									setSearchValue={setSearchValue}
+								/>
+							)}
 
-								{helper(cityInputRef, cityList, 1) && (
-									<SearchBarList
-										cityList={cityList}
-										header="Miasta"
-										cityInputRef={cityInputRef}
-										setCityValue={setCityValue}
-									/>
-								)}
-							</div>
-						)}
-					</div>
-					<button type="submit">Szukaj</button>
-				</form>
-			</div>
+							{helper(cityInputRef, cityList, 1) && (
+								<SearchBarList
+									cityList={cityList}
+									header="Miasta"
+									cityInputRef={cityInputRef}
+									setCityValue={setCityValue}
+								/>
+							)}
+						</div>
+					)}
+				</div>
+				<button type="submit">Szukaj</button>
+			</form>
 		</div>
 	);
 };

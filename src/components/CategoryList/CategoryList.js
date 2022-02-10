@@ -1,41 +1,41 @@
 import styles from "./CategoryList.module.css";
 import { useNavigate } from "react-router-dom";
 import ServicesList from "./ServicesList";
+import { useContext } from "react";
+import { businessItemContext } from "../../contexts/BusinessItemContext";
 
-const CategoryList = ({
-	business,
-	setServicesList,
-	servicesList,
-	setProduct,
-}) => {
+const CategoryList = ({ business, servicesList }) => {
+	const [activeBusiness, setActiveBusiness] = useContext(businessItemContext);
+
 	const navigate = useNavigate();
 	const handleClick = (business) => {
-		setProduct(business);
+		setActiveBusiness(business);
 		navigate(`/product/${business.id}`);
 	};
 
 	return (
-		<div>
-			<div onClick={() => handleClick(business)}>
+		<div className={styles.categoryList}>
+			<div
+				onClick={() => handleClick(business)}
+				className={styles.businessData}>
 				<h1>{business.name} </h1>
 				<h3>
 					{business.city}, {business.contact.street}
 				</h3>
 			</div>
 			<div className={styles.panel}>
-				<div>
-					<img src={business.photo} width="350"></img>
-				</div>
-				<div className={styles.panelServices}>
-					<ServicesList
-						setServicesList={setServicesList}
-						servicesList={servicesList}
-						business={business}
-						key={business.id}
-					/>
-				</div>
+				<img
+					className={styles.photo}
+					src={business.photo}
+					width="350"
+					height="250"></img>
+				<ServicesList
+					servicesList={servicesList}
+					key={business.id}
+					business={business}
+				/>
 			</div>
-			<hr />
+			<div className={styles.line}></div>
 		</div>
 	);
 };

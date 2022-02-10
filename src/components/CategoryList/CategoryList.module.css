@@ -1,24 +1,93 @@
-.panel {
+.categoryList {
+	margin: auto 250px;
 	display: flex;
+	flex-direction: column;
+	justify-content: center;
+}
+.panel {
+	width: 100%;
+	display: flex;
+	justify-content: flex-start;
+	align-items: center;
+	margin: auto 20px;
+}
+.businessData {
+	color: var(--accent);
+	font-size: 1.2em;
+	margin: auto 20px;
+	min-width: 400px;
+}
+.businessData:hover {
+	opacity: 0.7;
+	cursor: pointer;
 }
 .panelServices {
-	margin: auto 20px;
-	width: 60%;
+	display: flex;
+	flex-direction: column;
+	justify-content: center;
+
+	width: 100%;
 }
 .servicesList {
 	display: flex;
 	justify-content: space-between;
-	align-items: baseline;
-	height: 50px;
+	align-items: center;
+	height: 60px;
+	font-size: 20px;
+}
+.photo {
+	border-radius: 10px;
+	cursor: pointer;
+	width: 350px;
+}
+.photo:hover {
+	opacity: 0.7;
 }
 .servicesListName {
-	width: 400px;
+	padding-left: 50px;
+	min-width: 250px;
 }
 .servicesListPrice {
-	width: 200px;
+	text-align: flex-start;
+	min-width: 100px;
 }
+
 .servicesButton {
-	height: 30px;
-	background-color: var(--accent);
+	position: relative;
+	margin-inline: 5px;
+	padding: 10px;
+	margin-right: 30px;
+	font: inherit;
+	color: var(--black);
+	background-color: var(--white);
+	border: 2px solid var(--accent);
 	border-radius: 10px;
+	overflow: hidden;
+	z-index: 1;
+	cursor: pointer;
+}
+
+.servicesButton:hover {
+	color: var(--white);
+}
+.servicesButton::before {
+	content: "";
+	position: absolute;
+	top: 0;
+	left: 0;
+	width: 100%;
+	height: 100%;
+	background-color: var(--accent);
+	transition: all 0.5s;
+	z-index: -1;
+	transform: translateX(-100%);
+}
+.servicesButton:hover::before {
+	transform: translateX(0);
+}
+.line {
+	height: 1px;
+	width: 100%;
+	margin-top: 20px;
+	background-color: var(--accent);
 }
