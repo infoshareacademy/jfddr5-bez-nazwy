@@ -1,4 +1,4 @@
-import { useContext, useState } from "react";
+import { useContext, useEffect, useState } from "react";
 import Calendar from "react-calendar";
 import "react-calendar/dist/Calendar.css";
 import { businessItemContext } from "../../../contexts/BusinessItemContext";
@@ -12,10 +12,14 @@ import {
 } from "../../../utils/db";
 import styles from "./CalendarModal.module.css";
 
-const CalendarModal = ({ setShowLogin, setShowRegister }) => {
+const CalendarModal = ({
+	setShowLogin,
+	setShowRegister,
+	usersReservations,
+	setUsersReservations,
+}) => {
 	const [currentUser] = useContext(currentUserContext);
 	const [date, setDate] = useState("");
-	const [reservedSlots, setReservedSlots] = useState(0);
 	const [displayModal, setDisplayModal] = useContext(modalDisplayContext);
 	const [activeService] = useContext(serviceItemContext);
 	const [activeBusiness] = useContext(businessItemContext);
@@ -24,7 +28,7 @@ const CalendarModal = ({ setShowLogin, setShowRegister }) => {
 		getReservedSlots(
 			activeBusiness.id,
 			activeService.id,
-			setReservedSlots,
+			setUsersReservations,
 			value,
 		);
 		setDate(value);
@@ -38,7 +42,7 @@ const CalendarModal = ({ setShowLogin, setShowRegister }) => {
 	const handleReservationClick = () => {
 		const dateNow = new Date().toLocaleString("pl-PL");
 
-		if (currentUser && reservedSlots < activeService.slot) {
+		if (currentUser && usersReservations.length < activeService.slot) {
 			setCalendarForService(
 				activeBusiness.id,
 				activeService.id,
@@ -48,15 +52,17 @@ const CalendarModal = ({ setShowLogin, setShowRegister }) => {
 			);
 			setServiceForUser(
 				dateNow,
-				date,
+				date.toLocaleString("pl-PL"),
 				activeBusiness.id,
 				activeBusiness.name,
 				activeService.id,
 				activeService.name,
+				dateNow,
 			);
+
 			setDisplayModal("");
-		} else if (reservedSlots === activeService.slot) {
-			console.log("zajete");
+		} else if (usersReservations.length === activeService.slot) {
+			// console.log("zajete");
 		}
 	};
 	return (
@@ -69,7 +75,7 @@ const CalendarModal = ({ setShowLogin, setShowRegister }) => {
 				<>
 					<p>Data wizyty: {date.toLocaleString()}</p>
 					<p>
-						Ilość wolnych miejsc: {reservedSlots}/
+						Ilość wolnych miejsc: {usersReservations.length}/
 						{activeService.slot}
 					</p>
 					<p>Cena: {activeService.price}zł</p>
@@ -77,7 +83,9 @@ const CalendarModal = ({ setShowLogin, setShowRegister }) => {
 					{currentUser ? (
 						<button
 							onClick={handleReservationClick}
-							disabled={reservedSlots >= activeService.slot}>
+							disabled={
+								usersReservations.length >= activeService.slot
+							}>
 							Zarezerwuj miejsce
 						</button>
 					) : (

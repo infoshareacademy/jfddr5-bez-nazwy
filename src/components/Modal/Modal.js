@@ -13,6 +13,8 @@ const Modal = ({
 	setCategory,
 	setCity,
 	city,
+	usersReservations,
+	setUsersReservations,
 }) => {
 	const [displayModal, setDisplayModal] = useContext(modalDisplayContext);
 
@@ -43,6 +45,8 @@ const Modal = ({
 				<CalendarModal
 					setShowLogin={setShowLogin}
 					setShowRegister={setShowRegister}
+					usersReservations={usersReservations}
+					setUsersReservations={setUsersReservations}
 				/>
 			)}
 		</div>

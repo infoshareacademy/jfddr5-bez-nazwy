@@ -16,7 +16,6 @@ const Header = ({ setShowLogin, setShowRegister }) => {
 	};
 
 	const handleUserForm = (callback) => {
-		console.log(displayModal);
 		setDisplayModal("user-form");
 		callback(true);
 	};
