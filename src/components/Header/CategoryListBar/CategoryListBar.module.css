@@ -4,6 +4,7 @@
 	justify-content: space-around;
 	list-style: none;
 	margin-top: var(--categoryBarMargin);
+	margin-bottom: 6px;
 	background-color: var(--categoryBarBackground);
 }
 

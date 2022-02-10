@@ -41,7 +41,7 @@ const ScrollingNavbar = ({
 						city={city}
 					/>
 				</div>
-				{/* <CategoryListBarDark /> */}
+				<CategoryListBarDark />
 			</div>
 		</div>
 	);
