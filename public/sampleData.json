@@ -57,5 +57,51 @@
 
 			"city": "Warszawa"
 		}
-	]
+	],
+	"collections": {
+		"id": "CXD8eLEvxlZ0afaxqpik",
+		"services": [
+			{
+				"id": "randomID1",
+				"name": "czesanie psa",
+				"price": 300,
+				"slot": 5
+			},
+			{
+				"id": "randomID2",
+				"name": "czesanie kota",
+				"price": 300,
+				"slot": 5
+			},
+			{
+				"id": "randomID3",
+				"name": "kąpanie psa",
+				"price": 200,
+				"slot": 4
+			},
+			{
+				"id": "randomID4",
+				"name": "kąpanie kota",
+				"price": 200,
+				"slot": 4
+			}
+		],
+		"rating": [
+			{
+				"user": "zdenerwowana",
+				"value": 1,
+				"comment": "Baza danych się zepsuła, firebase to ***"
+			},
+			{
+				"user": "dontgiveup",
+				"value": 3,
+				"comment": "Baza danych się zepsuła, ale może jutro będzie działać"
+			},
+			{
+				"user": "zachwycony",
+				"value": 5,
+				"comment": "Baza danych się zepsuła, ale nic nie jest za darmo :)"
+			}
+		]
+	}
 }
