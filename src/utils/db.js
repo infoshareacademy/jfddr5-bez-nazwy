@@ -169,6 +169,7 @@ const setServiceForUser = async (
 	businessName,
 	serviceId,
 	serviceName,
+	dateNow,
 ) => {
 	await setDoc(
 		doc(db, "users", auth.currentUser.uid, "reservations", reservationId),
@@ -182,6 +183,7 @@ const setServiceForUser = async (
 				id: serviceId,
 				name: serviceName,
 			},
+			id: dateNow,
 		},
 	);
 };
@@ -196,10 +198,32 @@ const getReservedSlots = async (businessId, serviceId, callback, dateId) => {
 		usersReservations: doc.data().usersReservations,
 		date: doc.data().date,
 	}));
+
 	const slotItem = reservationsPerDay.find(
 		(slot) => slot.id === dateId.toLocaleString("pl-PL"),
 	);
-	callback(() => (slotItem ? slotItem.usersReservations.length : 0));
+	callback(() => (slotItem ? slotItem.usersReservations : []));
+};
+
+const getUsersReservations = async (
+	businessId,
+	serviceId,
+	callback,
+	dateId,
+) => {
+	const reservationsPerDaySnapshot = await getDocs(
+		collection(db, `business/${businessId}/services/${serviceId}/calendar`),
+	);
+	const reservationsPerDay = reservationsPerDaySnapshot.docs.map((doc) => ({
+		id: doc.id,
+		usersReservations: doc.data().usersReservations,
+		date: doc.data().date,
+	}));
+	console.log(reservationsPerDay);
+	const slotItem = reservationsPerDay.find(
+		(slot) => slot.id === dateId.toLocaleString("pl-PL"),
+	);
+	callback(() => (slotItem ? slotItem.usersReservations : []));
 };
 
 const getServiceForUser = async (callback) => {
@@ -210,23 +234,44 @@ const getServiceForUser = async (callback) => {
 		id: doc.id,
 		date: doc.data().date,
 		businessName: doc.data().business.name,
+		businessId: doc.data().business.id,
 		serviceName: doc.data().service.name,
+		serviceId: doc.data().service.id,
 	}));
 	console.log(userReservationsList);
 	callback(userReservationsList);
 };
-const deleteServiceForUser = async (docId) => {
-	const cos = await deleteDoc(
+const deleteServiceForUser = async (docId, callback) => {
+	await deleteDoc(
+		doc(db, "users", auth.currentUser.uid, "reservations", docId),
+	);
+	getServiceForUser(callback);
+};
+
+const updateCalendarForService = async (
+	businessId,
+	serviceId,
+	dateId,
+	usersList,
+	id,
+) => {
+	console.log(usersList);
+
+	await updateDoc(
 		doc(
 			db,
-			"users",
-			auth.currentUser.uid,
-			"reservations",
-			docId.toString(),
+			`business/${businessId}/services/${serviceId}/calendar`,
+			dateId,
 		),
+		{
+			usersReservations: usersList.filter((reservation) => {
+				console.log(id, reservation.time);
+				return id !== reservation.time;
+			}),
+		},
 	);
-	// callback(cos);
 };
+
 export {
 	db,
 	auth,
@@ -241,4 +286,6 @@ export {
 	getReservedSlots,
 	getServiceForUser,
 	deleteServiceForUser,
+	updateCalendarForService,
+	getUsersReservations,
 };
