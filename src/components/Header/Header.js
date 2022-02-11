@@ -23,7 +23,9 @@ const Header = ({ setShowLogin, setShowRegister }) => {
 	return (
 		<>
 			<nav className={styles.navbar}>
-				<h1 className={styles.logo}>petsy</h1>
+				<h1 onClick={() => navigate("/")} className={styles.logo}>
+					petsy
+				</h1>
 				{!currentUser ? (
 					<div className={styles.userForm}>
 						<button

@@ -1,10 +1,10 @@
 import CategoryListBar from "../CategoryListBar/CategoryListBar";
 import styles from "./CategoryListBarDark.module.css";
 
-const CategoryListBarDark = () => {
+const CategoryListBarDark = ({ setCategory }) => {
 	return (
 		<div className={styles.categoryListBarDark}>
-			<CategoryListBar />
+			<CategoryListBar setCategory={setCategory} />
 		</div>
 	);
 };
