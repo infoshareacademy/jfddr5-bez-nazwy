@@ -6,24 +6,24 @@ import pets2 from "./views/images/pets2.jpg";
 const PageElements = () => {
 	return (
 		<div className={s.divStyle}>
-			<div className={s.textBox}>
-				<div>
-					<h2>Umów swojego Futrzaka na wizytę</h2>
+			<div className={s.rowBox}>
+				<div className={s.textBox}>
+					<h2>Umów swojego Futrzaka na wizytę!</h2>
 					<p>
-						Chcesz umówić swojego pupila do groomera,hodowcy,
-						weterynarza,behawiorysty lub hotelu dla zwierząt w
-						swojej okolicy?Szukasz miejsca, w tórym twoja pociecha
+						Chcesz umówić swojego pupila do groomera, hodowcy,
+						weterynarza, behawiorysty lub hotelu dla zwierząt w
+						swojej okolicy? Szukasz miejsca, w którym twoja pociecha
 						otrzyma najlepszą opiekę pod słońcem? Petsy to darmowa
 						aplikacja do rezerwacji, dzięki swojej łatwości w
-						obsłudze ,bez poroblemu znajdziesz dogodny termin dla
-						siebeie i swojego pupila. Bez wychodzenia z domu albo
+						obsłudze, bez poroblemu znajdziesz dogodny termin dla
+						siebie i swojego pupila. Bez wychodzenia z domu albo
 						sięgania po telefon-na petsy zarezerwujesz wygodny dla
-						was termin o każdej porze bezwzględu na miejsce.
-						<strong>
-							Odkrywaj nowe usługi dla swoich Milusińskich i
-							umawiaj ich na wizyty z petsy{" "}
-						</strong>
+						was termin o każdej porze bez względu na miejsce.
 					</p>
+					<strong>
+						Odkrywaj nowe usługi dla swoich Milusińskich i umawiaj
+						ich na wizyty z Petsy!{" "}
+					</strong>
 				</div>
 				<div>
 					<img
@@ -34,7 +34,7 @@ const PageElements = () => {
 				</div>
 			</div>
 
-			<div className={s.textBox}>
+			<div className={s.rowBox}>
 				<div>
 					<img
 						src={pets2}
@@ -42,19 +42,19 @@ const PageElements = () => {
 						className={s.imgStyle}
 					/>
 				</div>
-				<div>
+				<div className={s.textBox}>
 					<h2> Specjaliści w Twojej okolicy </h2>
 					<p>
 						W petsy znajdziesz najlepsze salony dla swoich
 						Ulubieńców w wygodnej dla was okolicy. Dowiedz się o
 						nich jak najwięcej - przeczytaj opinie innych klientów i
 						przejrzyj usługi jakie oferują. Oszczędź czas na
-						umawianiu wizyt. Dzięki petsy będziesz miał więcej czasu
+						umawianiu wizyt. Dzięki Petsy będziesz miał więcej czasu
 						na zabawę ze swoim Futrzakiem.
-						<strong>
-							Nasza aplikacja jest bardzo prosta w użyciu
-						</strong>
 					</p>
+					<strong>
+						Nasza aplikacja jest bardzo prosta w użyciu.
+					</strong>
 				</div>
 			</div>
 		</div>
