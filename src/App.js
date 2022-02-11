@@ -150,11 +150,6 @@ function App() {
 											/>
 										}
 									/>
-								)}
-							</Routes>
-							<Footer />
-
-
 									{currentUser && (
 										<Route
 											path="/profile"
@@ -171,8 +166,8 @@ function App() {
 										/>
 									)}
 								</Routes>
+								<Footer />
 							</ratingContext.Provider>
-
 						</modalDisplayContext.Provider>
 					</businessItemContext.Provider>
 				</serviceItemContext.Provider>

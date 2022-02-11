@@ -31,32 +31,42 @@ const Footer = () => {
 							<a
 								href="https://github.com/drozdowska-maria"
 								target="blank">
-								<img src={githublogo}></img>
+								<img
+									className={styles.photo}
+									src={githublogo}></img>
 							</a>
 
 							<span className={styles.author}>
 								Katarzyna<br></br> Kabała
 							</span>
 							<a href="https://github.com/Kasiaqu">
-								<img src={githublogo}></img>
+								<img
+									className={styles.photo}
+									src={githublogo}></img>
 							</a>
 							<span className={styles.author}>
 								Daniel<br></br> Jurkiewicz
 							</span>
 							<a href="https://github.com/daniel-jurkiewicz">
-								<img src={githublogo}></img>
+								<img
+									className={styles.photo}
+									src={githublogo}></img>
 							</a>
 							<span className={styles.author}>
 								Joanna <br></br>Florczak
 							</span>
 							<a href="https://github.com/Joanna35">
-								<img src={githublogo}></img>
+								<img
+									className={styles.photo}
+									src={githublogo}></img>
 							</a>
 							<span className={styles.author}>
 								Emilia <br></br>Brzezińska
 							</span>
 							<a href="https://github.com/emiliabrzezinska">
-								<img src={githublogo}></img>
+								<img
+									className={styles.photo}
+									src={githublogo}></img>
 							</a>
 						</div>
 					</div>
