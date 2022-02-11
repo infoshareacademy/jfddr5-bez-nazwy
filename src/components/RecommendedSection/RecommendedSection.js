@@ -1,5 +1,4 @@
 import styles from "./RecommendedSection.module.css";
-import sampleImage from "../../views/images/slideshow3.jpg";
 import Flickity from "react-flickity-component";
 import { useContext } from "react";
 import { businessListContext } from "../../contexts/BusinessListContext";
@@ -13,8 +12,6 @@ const RecommendedSection = () => {
 	const [businessList] = useContext(businessListContext);
 	const [ratingList] = useContext(ratingContext);
 
-	console.log(ratingList);
-
 	const ratings = ratingList
 		?.map(({ businessId, rating }) => {
 			const avg =
@@ -23,11 +20,11 @@ const RecommendedSection = () => {
 					.reduce((total, next) => total + next, 0) / rating.length;
 			return {
 				businessId,
-				avgRating: avg,
+				avgRating: avg.toFixed(1),
 				avgRatingLength: rating.length,
 			};
 		})
-		.sort((a, b) => a.avgRating - b.avgRating)
+		.sort((a, b) => b.avgRating - a.avgRating)
 		.map((item) => {
 			const business = businessList.find(
 				(business) => business.id === item.businessId,
@@ -37,50 +34,17 @@ const RecommendedSection = () => {
 				avgRating: item.avgRating,
 				avgRatingLength: item.avgRatingLength,
 			};
-		});
+		})
+		.slice(0, 5);
 
-	const topRating = ratings[0];
-	console.log(topRating);
-	console.log(ratings.map((item) => item.avgRating));
+	console.log(ratings);
+
 	//danke shon!
-
 	// et, voila! :D
-
 	// to dalej już się bawcie sami :D
 	//dobrze, dziękujęmy super bardzo <3
 	// AWWWW :D
-
 	//<333
-
-	// {
-	// 	ratings.map((item) => {
-	// 		return (
-	// 			<div className={styles.galleryItem}>
-	// 				<div className={styles.galleryItemRating}>
-	// 					<h4 className={styles.galleryItemRatingHeader}>
-	// 						{item.avgRating}
-	// 					</h4>
-	// 					<p className={styles.galleryItemRatingText}>
-	// 						{item.avgRatingLength} opinii
-	// 					</p>
-	// 				</div>
-	// 				<img
-	// 					className={styles.galleryItemImage}
-	// 					src={item.business.photo}></img>
-	// 				<div className={styles.galleryItemBanner}>
-	// 					<h3 className={styles.galleryItemTitle}>
-	// 						{item.business.name}
-	// 					</h3>
-	// 					<p className={styles.galleryItemAddress}>
-	// 						{item.business.city}
-	// 					</p>
-	// 				</div>
-	// 			</div>
-	// 		);
-	// 	});
-	// }
-
-	console.log(ratings);
 
 	return (
 		<div className={styles.contentWrapper}>
@@ -92,14 +56,14 @@ const RecommendedSection = () => {
 				disableImagesLoaded={false}
 				reloadOnUpdate
 				static>
-				{ratings?.map((item) => (
-					<div key={item.business.id} className={styles.galleryItem}>
+				{ratings?.map((item, index) => (
+					<div key={index} className={styles.galleryItem}>
 						<div className={styles.galleryItemRating}>
 							<h4 className={styles.galleryItemRatingHeader}>
 								{item.avgRating}
 							</h4>
 							<p className={styles.galleryItemRatingText}>
-								{item.avgRatingLength} opinii
+								Opinie: {item.avgRatingLength}
 							</p>
 						</div>
 						<img
@@ -109,75 +73,12 @@ const RecommendedSection = () => {
 							<h3 className={styles.galleryItemTitle}>
 								{item.business.name}
 							</h3>
-							<p className={styles.galleryItemAddress}>
-								{item.business.city}
+							<p className={styles.galleryItemDetails}>
+								{item.business.category} - {item.business.city}
 							</p>
 						</div>
 					</div>
 				))}
-				{ratings?.map((item) => (
-					<div key={item.business.id} className={styles.galleryItem}>
-						<div className={styles.galleryItemRating}>
-							<h4 className={styles.galleryItemRatingHeader}>
-								{item.avgRating}
-							</h4>
-							<p className={styles.galleryItemRatingText}>
-								{item.avgRatingLength} opinii
-							</p>
-						</div>
-						<img
-							className={styles.galleryItemImage}
-							src={item.business.photo}></img>
-						<div className={styles.galleryItemBanner}>
-							<h3 className={styles.galleryItemTitle}>
-								{item.business.name}
-							</h3>
-							<p className={styles.galleryItemAddress}>
-								{item.business.city}
-							</p>
-						</div>
-					</div>
-				))}
-				{ratings?.map((item) => (
-					<div key={item.business.id} className={styles.galleryItem}>
-						<div className={styles.galleryItemRating}>
-							<h4 className={styles.galleryItemRatingHeader}>
-								{item.avgRating}
-							</h4>
-							<p className={styles.galleryItemRatingText}>
-								{item.avgRatingLength} opinii
-							</p>
-						</div>
-						<img
-							className={styles.galleryItemImage}
-							src={item.business.photo}></img>
-						<div className={styles.galleryItemBanner}>
-							<h3 className={styles.galleryItemTitle}>
-								{item.business.name}
-							</h3>
-							<p className={styles.galleryItemAddress}>
-								{item.business.city}
-							</p>
-						</div>
-					</div>
-				))}
-				{/* <div className={styles.galleryItem}>
-					<div className={styles.galleryItemRating}>
-						<h4 className={styles.galleryItemRatingHeader}>
-							{topRating.avgRating}
-						</h4>
-						<p className={styles.galleryItemRatingText}>
-							12 opinii
-						</p>
-					</div>
-					<img
-						className={styles.galleryItemImage}
-						src={sampleImage}></img>
-					<div className={styles.galleryItemBanner}>
-						<h3 className={styles.galleryItemTitle}>Top C</h3>
-						<p className={styles.galleryItemAddress}>topcat</p>
-					</div>
-				</div> */}
 			</Flickity>
 		</div>
 	);
