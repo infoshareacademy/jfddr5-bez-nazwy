@@ -1,4 +1,7 @@
 
+
+
+
 .imgStyle {
     height: 400px;
     width: 500px; 
@@ -8,13 +11,16 @@
     justify-content: space-evenly;
 
 };
+.textBox {
+    width: 500px;
+    height: 500px;
 
+};
 .divStyle {
     display: flex;
-    position: relative;
-    margin: 10px;
+    margin: 0 auto;
     color: var(--white);
-    flex-wrap: wrap;
     justify-content: center;
-    font-weight: 300;
+    font-weight: 400;
+    /* width: 1200px; */
 };
