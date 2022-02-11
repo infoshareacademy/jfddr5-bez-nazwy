@@ -1,6 +1,7 @@
 .container {
 	display: flex;
 	flex-direction: row;
+	margin-top: 50px;
 	width: auto;
 	height: auto;
 	background-color: var(--black);
@@ -19,6 +20,7 @@
 	display: flex;
 	flex-direction: column;
 }
+
 .mark {
 	font-size: 35px;
 	margin: 0px 0px 60px 80px;
@@ -40,19 +42,20 @@
 }
 
 .rights {
-	font-size: small;
+	font-size: 12px;
 	margin-left: 80px;
 }
 
 .info {
 	display: flex;
 	flex-direction: column;
+	font-size: 14px;
 	margin-left: 80px;
 	line-height: 30px;
 }
 
 .contact {
-	font-size: 18px;
+	font-size: 16px;
 	text-decoration: underline;
 	margin-bottom: 5px;
 }
@@ -67,6 +70,7 @@
 	display: flex;
 	flex-direction: column;
 }
+
 .created {
 	text-decoration: underline;
 	font-size: 18px;
