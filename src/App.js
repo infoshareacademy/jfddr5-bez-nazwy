@@ -14,6 +14,7 @@ import { serviceItemContext } from "./contexts/ServiceItemContext";
 import { businessItemContext } from "./contexts/BusinessItemContext";
 import Footer from "./components/Footer/Footer";
 import { ratingContext } from "./contexts/RatingContext";
+import { connectFirestoreEmulator } from "firebase/firestore";
 
 
 
@@ -93,7 +94,7 @@ function App() {
 		() => [ratingList, setRatingList],
 		[ratingList],
 	);
-
+	console.log(modalDisplay);
 	return (
 		<businessListContext.Provider value={businessListContextValue}>
 			<currentUserContext.Provider value={currentUserContextValue}>

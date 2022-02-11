@@ -73,6 +73,12 @@
 	cursor: pointer;
 }
 
+.reservationButton:disabled {
+	opacity: 0.5;
+	background-color: var(--accent);
+	color: var(--white);
+}
+
 .loginButton {
 	width: fit-content;
 	position: relative;
@@ -107,6 +113,7 @@
 	z-index: -1;
 	transform: translateX(-100%);
 }
+
 .loginButton:hover::before,
 .reservationButton:hover::before {
 	transform: translateX(0);

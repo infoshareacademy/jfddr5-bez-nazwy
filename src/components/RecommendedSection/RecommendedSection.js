@@ -3,6 +3,8 @@ import Flickity from "react-flickity-component";
 import { useContext } from "react";
 import { businessListContext } from "../../contexts/BusinessListContext";
 import { ratingContext } from "../../contexts/RatingContext";
+import { businessItemContext } from "../../contexts/BusinessItemContext";
+import { useNavigate } from "react-router-dom";
 
 const flickityOptions = {
 	initialIndex: 1,
@@ -11,6 +13,13 @@ const flickityOptions = {
 const RecommendedSection = () => {
 	const [businessList] = useContext(businessListContext);
 	const [ratingList] = useContext(ratingContext);
+	const [activeBusiness, setActiveBusiness] = useContext(businessItemContext);
+	const navigate = useNavigate();
+
+	const handleClick = (business) => {
+		setActiveBusiness(business);
+		navigate(`/product/${business.id}`);
+	};
 
 	const ratings = ratingList
 		?.map(({ businessId, rating }) => {
@@ -67,6 +76,7 @@ const RecommendedSection = () => {
 							</p>
 						</div>
 						<img
+							onClick={() => handleClick(item.business)}
 							className={styles.galleryItemImage}
 							src={item.business.photo}></img>
 						<div className={styles.galleryItemBanner}>

@@ -39,6 +39,7 @@ const CalendarModal = ({
 	const handleUserForm = (callback) => {
 		setDisplayModal("user-form");
 		callback(true);
+		setDate("");
 	};
 
 	const handleReservationClick = () => {
@@ -72,7 +73,9 @@ const CalendarModal = ({
 				<p>
 					Data wizyty:
 					<span>
-						{date ? ` ${date.toLocaleString("pl-PL")}` : ""}
+						{date
+							? ` ${date.toLocaleString("pl-PL").slice(0, 10)}`
+							: ""}
 					</span>
 				</p>
 				<p>
@@ -92,6 +95,7 @@ const CalendarModal = ({
 						className={styles.reservationButton}
 						onClick={handleReservationClick}
 						disabled={
+							!date ||
 							usersReservations.length >= activeService.slot
 						}>
 						{usersReservations.length < activeService.slot

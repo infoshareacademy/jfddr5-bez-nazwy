@@ -5,6 +5,7 @@ import { SearchBar } from "./SearchBarModal/SearchBar";
 import UserFormModal from "./UserFormModal/UserFormModal";
 import styles from "./Modal.module.css";
 import ReservationConfirm from "./ReservationConfirm/ReservationConfirm";
+import SuccessAlert from "./SuccessAlert/SuccessAlert";
 
 const Modal = ({
 	showLogin,
@@ -22,6 +23,7 @@ const Modal = ({
 
 	const handleModalDisplay = () => {
 		setDisplayModal("");
+		setDate("");
 		setShowLogin(false);
 		setShowRegister(false);
 	};
@@ -56,6 +58,7 @@ const Modal = ({
 			{displayModal === "reservation-confirm" && date && (
 				<ReservationConfirm date={date} />
 			)}
+			{displayModal === "success-alert" && <SuccessAlert />}
 		</div>
 	);
 };

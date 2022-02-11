@@ -81,8 +81,12 @@
 	width: 400px;
 	height: 300px;
 	border-radius: 20px;
+	cursor: pointer;
 }
 
+.galleryItemImage:hover {
+	opacity: 0.5;
+}
 .galleryItemBanner {
 	display: flex;
 	align-items: center;

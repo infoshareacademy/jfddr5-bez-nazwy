@@ -11,7 +11,8 @@ const ReservationConfirm = ({ date }) => {
 	const [activeBusiness] = useContext(businessItemContext);
 	const [activeService] = useContext(serviceItemContext);
 	const [currentUser] = useContext(currentUserContext);
-	const handleReservation = () => {
+
+	const handleReservation = (e) => {
 		const dateNow = new Date().toLocaleString("pl-PL");
 		setCalendarForService(
 			activeBusiness.id,
@@ -29,16 +30,22 @@ const ReservationConfirm = ({ date }) => {
 			activeService.name,
 			dateNow,
 		);
+		setDisplayModal("success-alert");
 	};
 	return (
-		<div className={styles.confirmContent}>
+		<div
+			className={styles.confirmContent}
+			onClick={(e) => e.stopPropagation()}>
 			<p>
 				Salon: {activeBusiness.name}, {activeBusiness.city}
 			</p>
 			<p>
 				Typ wizyty: {activeService.name}, {activeService.price}zł
 			</p>
-			<p>Data wizyty: {date && `${date.toLocaleString("pl-PL")}`}</p>
+			<p>
+				Data wizyty:{" "}
+				{date && `${date.toLocaleString("pl-PL").slice(0, 10)}`}
+			</p>
 			<p>Czy na pewno chcesz zarezerwować ten termin?</p>
 			<button onClick={handleReservation}>Tak</button>
 			<button onClick={() => setDisplayModal("")}>Nie</button>
