@@ -33,40 +33,51 @@ const Footer = () => {
 								target="blank">
 								<img
 									className={styles.photo}
-									src={githublogo}></img>
+									src={githublogo}
+									alt="logo github"></img>
 							</a>
 
 							<span className={styles.author}>
 								Katarzyna<br></br> Kabała
 							</span>
-							<a href="https://github.com/Kasiaqu">
+							<a href="https://github.com/Kasiaqu" target="blank">
 								<img
 									className={styles.photo}
-									src={githublogo}></img>
+									src={githublogo}
+									alt="logo github"></img>
 							</a>
 							<span className={styles.author}>
 								Daniel<br></br> Jurkiewicz
 							</span>
-							<a href="https://github.com/daniel-jurkiewicz">
+							<a
+								href="https://github.com/daniel-jurkiewicz"
+								target="blank">
 								<img
 									className={styles.photo}
-									src={githublogo}></img>
+									src={githublogo}
+									alt="logo github"></img>
 							</a>
 							<span className={styles.author}>
 								Joanna <br></br>Florczak
 							</span>
-							<a href="https://github.com/Joanna35">
+							<a
+								href="https://github.com/Joanna35"
+								target="blank">
 								<img
 									className={styles.photo}
-									src={githublogo}></img>
+									src={githublogo}
+									alt="logo github"></img>
 							</a>
 							<span className={styles.author}>
 								Emilia <br></br>Brzezińska
 							</span>
-							<a href="https://github.com/emiliabrzezinska">
+							<a
+								href="https://github.com/emiliabrzezinska"
+								target="blank">
 								<img
 									className={styles.photo}
-									src={githublogo}></img>
+									src={githublogo}
+									alt="logo github"></img>
 							</a>
 						</div>
 					</div>
