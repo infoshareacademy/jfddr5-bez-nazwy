@@ -1,26 +1,27 @@
-
-
-
-
 .imgStyle {
     height: 400px;
     width: 500px; 
-    padding: 10px;
     border-radius: 10px;
     display: flex;
     justify-content: space-evenly;
 
 };
-.textBox {
-    width: 500px;
-    height: 500px;
 
-};
 .divStyle {
     display: flex;
     margin: 0 auto;
     color: var(--white);
     justify-content: center;
     font-weight: 400;
-    /* width: 1200px; */
+    width: 1200px;
+};
+.textBox {
+    width: 500px;
+    height: 500px;
+
+};
+.textBox2 {
+    width: 500px;
+    height: 500px;
+
 };
