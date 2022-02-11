@@ -17,6 +17,12 @@
 	margin: auto 20px;
 	min-width: 400px;
 }
+
+.businessData span {
+	color: var(--black);
+	font-weight: 300;
+	font-size: 20px;
+}
 .businessData:hover {
 	opacity: 0.7;
 	cursor: pointer;
@@ -54,6 +60,7 @@
 	border-radius: 10px;
 	cursor: pointer;
 	width: 350px;
+	box-shadow: 0px 0px 5px 2px #33333320;
 }
 .photo:hover {
 	opacity: 0.7;

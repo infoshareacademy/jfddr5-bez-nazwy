@@ -41,8 +41,7 @@ const ProductView = ({ servicesList, ratingList }) => {
 				<div className={styles.info}>
 					<div>
 						<h4>O nas</h4>
-						<p>{activeBusiness.about}</p>
-						{/* dodać product.info do bazy */}
+						<p>{activeBusiness.info}</p>
 					</div>
 					<div className={styles.infoHours}>
 						<h4>Godziny otwarcia </h4>
