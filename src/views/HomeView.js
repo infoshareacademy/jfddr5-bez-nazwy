@@ -7,6 +7,7 @@ import HeroSlideshow from "../components/Header/HeroSlideshow/HeroSlideshow";
 import ScrollingNavbar from "../components/Header/ScrollingNavbar/ScrollingNavbar";
 import RecommendedSection from "../components/RecommendedSection/RecommendedSection";
 
+import PageElements from "../PageElements"; 
 const HomeView = ({
 	currentUser,
 	product,
@@ -65,6 +66,10 @@ const HomeView = ({
 					<HeroSlideshow />
 				</div>
 				<RecommendedSection />
+			</div>
+			<div>
+			<PageElements
+			/>
 			</div>
 		</>
 	);

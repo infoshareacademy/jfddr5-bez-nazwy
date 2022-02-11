@@ -15,6 +15,8 @@ import { businessItemContext } from "./contexts/BusinessItemContext";
 import Footer from "./components/Footer/Footer";
 import { ratingContext } from "./contexts/RatingContext";
 
+
+
 function App() {
 	//USE STATES
 
@@ -171,6 +173,7 @@ function App() {
 						</modalDisplayContext.Provider>
 					</businessItemContext.Provider>
 				</serviceItemContext.Provider>
+			
 			</currentUserContext.Provider>
 		</businessListContext.Provider>
 	);
