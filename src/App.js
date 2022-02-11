@@ -12,6 +12,8 @@ import Modal from "./components/Modal/Modal";
 import { modalDisplayContext } from "./contexts/ModalDisplayContext";
 import { serviceItemContext } from "./contexts/ServiceItemContext";
 import { businessItemContext } from "./contexts/BusinessItemContext";
+import { pageElements } from "./PageElements";
+
 
 function App() {
 	//USE STATES
@@ -125,6 +127,7 @@ function App() {
 						</modalDisplayContext.Provider>
 					</businessItemContext.Provider>
 				</serviceItemContext.Provider>
+			
 			</currentUserContext.Provider>
 		</businessListContext.Provider>
 	);

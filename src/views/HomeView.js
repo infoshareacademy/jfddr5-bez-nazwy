@@ -5,7 +5,7 @@ import styles from "./HomeView.module.css";
 import CallToAction from "../components/Header/CallToAction/CallToAction";
 import HeroSlideshow from "../components/Header/HeroSlideshow/HeroSlideshow";
 import ScrollingNavbar from "../components/Header/ScrollingNavbar/ScrollingNavbar";
-
+import PageElements from "../PageElements"; 
 const HomeView = ({
 	currentUser,
 	product,
@@ -63,6 +63,10 @@ const HomeView = ({
 					</div>
 					<HeroSlideshow />
 				</div>
+			</div>
+			<div>
+			<PageElements
+			/>
 			</div>
 		</>
 	);
