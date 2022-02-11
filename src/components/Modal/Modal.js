@@ -1,9 +1,10 @@
-import { useContext } from "react";
+import { useContext, useState } from "react";
 import { modalDisplayContext } from "../../contexts/ModalDisplayContext";
 import CalendarModal from "./CalendarModal/CalendarModal";
 import { SearchBar } from "./SearchBarModal/SearchBar";
 import UserFormModal from "./UserFormModal/UserFormModal";
 import styles from "./Modal.module.css";
+import ReservationConfirm from "./ReservationConfirm/ReservationConfirm";
 
 const Modal = ({
 	showLogin,
@@ -17,6 +18,7 @@ const Modal = ({
 	setUsersReservations,
 }) => {
 	const [displayModal, setDisplayModal] = useContext(modalDisplayContext);
+	const [date, setDate] = useState("");
 
 	const handleModalDisplay = () => {
 		setDisplayModal("");
@@ -47,7 +49,12 @@ const Modal = ({
 					setShowRegister={setShowRegister}
 					usersReservations={usersReservations}
 					setUsersReservations={setUsersReservations}
+					date={date}
+					setDate={setDate}
 				/>
+			)}
+			{displayModal === "reservation-confirm" && date && (
+				<ReservationConfirm date={date} />
 			)}
 		</div>
 	);

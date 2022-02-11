@@ -17,9 +17,11 @@ const CalendarModal = ({
 	setShowRegister,
 	usersReservations,
 	setUsersReservations,
+	date,
+	setDate,
 }) => {
 	const [currentUser] = useContext(currentUserContext);
-	const [date, setDate] = useState("");
+
 	const [displayModal, setDisplayModal] = useContext(modalDisplayContext);
 	const [activeService] = useContext(serviceItemContext);
 	const [activeBusiness] = useContext(businessItemContext);
@@ -43,26 +45,7 @@ const CalendarModal = ({
 		const dateNow = new Date().toLocaleString("pl-PL");
 
 		if (currentUser && usersReservations.length < activeService.slot) {
-			setCalendarForService(
-				activeBusiness.id,
-				activeService.id,
-				date.toLocaleString("pl-PL"),
-				date,
-				currentUser.uid,
-			);
-			setServiceForUser(
-				dateNow,
-				date.toLocaleString("pl-PL"),
-				activeBusiness.id,
-				activeBusiness.name,
-				activeService.id,
-				activeService.name,
-				dateNow,
-			);
-
-			setDisplayModal("");
-		} else if (usersReservations.length === activeService.slot) {
-			// console.log("zajete");
+			setDisplayModal("reservation-confirm");
 		}
 	};
 	return (
@@ -70,39 +53,67 @@ const CalendarModal = ({
 		<div
 			className={styles.calendarModalContent}
 			onClick={(e) => e.stopPropagation()}>
-			<Calendar onClickDay={handleDayClicked} />
-			{date && (
-				<>
-					<p>Data wizyty: {date.toLocaleString()}</p>
-					<p>
-						Ilość wolnych miejsc: {usersReservations.length}/
-						{activeService.slot}
-					</p>
-					<p>Cena: {activeService.price}zł</p>
+			<h2>Wybierz dzień</h2>
+			<Calendar
+				tileDisabled={({ activeStartDate, date, view }) => {
+					return (
+						date.getDay() === 0 ||
+						date.getDay() === 6 ||
+						date <= Date.now()
+					);
+				}}
+				onClickDay={handleDayClicked}
+				className={styles.calendar}
+				tileClassName={styles.calendarTile}
+				locale="pl-PL"
+			/>
 
-					{currentUser ? (
+			<div className={styles.reservationDetails}>
+				<p>
+					Data wizyty:
+					<span>
+						{date ? ` ${date.toLocaleString("pl-PL")}` : ""}
+					</span>
+				</p>
+				<p>
+					Ilość wolnych miejsc:
+					<span>
+						{date
+							? ` ${usersReservations.length}/${activeService.slot}`
+							: ""}
+					</span>
+				</p>
+				<p>
+					Cena: <span>{activeService.price}zł</span>
+				</p>
+
+				{currentUser ? (
+					<button
+						className={styles.reservationButton}
+						onClick={handleReservationClick}
+						disabled={
+							usersReservations.length >= activeService.slot
+						}>
+						{usersReservations.length < activeService.slot
+							? "Zarezerwuj miejsce"
+							: "Brak wolnych miejsc"}
+					</button>
+				) : (
+					<div>
 						<button
-							onClick={handleReservationClick}
-							disabled={
-								usersReservations.length >= activeService.slot
-							}>
-							Zarezerwuj miejsce
+							className={styles.loginButton}
+							onClick={() => handleUserForm(setShowLogin)}>
+							Zaloguj się
 						</button>
-					) : (
-						<div>
-							<button
-								onClick={() => handleUserForm(setShowLogin)}>
-								Zaloguj się
-							</button>
 
-							<button
-								onClick={() => handleUserForm(setShowRegister)}>
-								Zarejestruj się
-							</button>
-						</div>
-					)}
-				</>
-			)}
+						<button
+							className={styles.loginButton}
+							onClick={() => handleUserForm(setShowRegister)}>
+							Zarejestruj się
+						</button>
+					</div>
+				)}
+			</div>
 		</div>
 	);
 };

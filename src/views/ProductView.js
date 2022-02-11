@@ -1,51 +1,79 @@
 import { useContext } from "react";
 import ServicesList from "../components/CategoryList/ServicesList";
 import { businessItemContext } from "../contexts/BusinessItemContext";
-import s from "./ProductView.module.css";
+import styles from "./ProductView.module.css";
 import RatingList from "../components/CategoryList/RatingList";
 
 const ProductView = ({ servicesList, ratingList }) => {
 	const [activeBusiness] = useContext(businessItemContext);
 	return (
-		<div className={s.content}>
-			<div className={s.leftSide}>
-				<img src={activeBusiness.photo} width="100%" />
-				<h1>{activeBusiness.name}</h1>
-				<h3>
-					{activeBusiness.city}, {activeBusiness.contact.street}
-				</h3>
-
-				<ServicesList
-					servicesList={servicesList}
-					business={activeBusiness}
-				/>
-			</div>
-			<div className={s.rightSide}>
-				<div>
-					<h4>O nas:</h4> {activeBusiness.info}
-					{/* dodać product.info do bazy */}
+		<div className={styles.content}>
+			<div className={styles.section}>
+				<div className={styles.photo}>
+					<img
+						src={activeBusiness.photo}
+						width="600px"
+						height="500px"
+					/>
 				</div>
-				<div>
-					<h4>Kontakt i godziny otwarcia: </h4>
-					{/* dodać godziny otwarcia */}
-					<p>Poniedziałek: 9:00 - 18:00</p>
-					<p>Wtorek: 9:00 - 18:00</p>
-					<p>Środa: 9:00 - 18:00</p>
-					<p>Czwartek: 9:00 - 18:00</p>
-					<p>Piątek: 9:00 - 18:00</p>
-					<p>Sobota: 9:00 - 18:00</p>
-					<p>Niedziela: 9:00 - 18:00</p>
-					<p>Nr tel: {activeBusiness.contact.phone}</p>
+				<div className={styles.header}>
+					<h1>{activeBusiness.name}</h1>
+					<h3>
+						{activeBusiness.city}, {activeBusiness.contact.street}
+					</h3>
 				</div>
-
-				<div>
-					<p>E-mail: {activeBusiness.contact.email}</p>
+				<div className={styles.services}>
+					<h2>Usługi</h2>
+					<ServicesList
+						servicesList={servicesList}
+						business={activeBusiness}
+					/>
 				</div>
-				<div>
+				<div className={styles.opinions}>
 					<RatingList
 						ratingList={ratingList}
 						key={activeBusiness.id}
 					/>
+				</div>
+			</div>
+			<div className={styles.infoWrapper}>
+				<div className={styles.info}>
+					<div>
+						<h4>O nas</h4>
+						<p>{activeBusiness.info}</p>
+					</div>
+					<div className={styles.infoHours}>
+						<h4>Godziny otwarcia </h4>
+						{/* dodać godziny otwarcia */}
+						<p>
+							Poniedziałek <span>10:00 - 16:00</span>
+						</p>
+						<p>
+							Wtorek <span>10:00 - 16:00</span>
+						</p>
+						<p>
+							Środa <span>10:00 - 16:00</span>
+						</p>
+						<p>
+							Czwartek <span>10:00 - 16:00</span>
+						</p>
+						<p>
+							Piątek <span>10:00 - 16:00</span>
+						</p>
+						<p>
+							Sobota <span>zamknięte</span>
+						</p>
+						<p>
+							Niedziela <span>zamknięte</span>
+						</p>
+						<h4>Kontakt</h4>
+						<p>
+							Telefon <span>{activeBusiness.contact.phone}</span>
+						</p>
+						<p>
+							E-mail <span>{activeBusiness.contact.email}</span>
+						</p>
+					</div>
 				</div>
 			</div>
 		</div>

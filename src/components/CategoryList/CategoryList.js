@@ -18,13 +18,16 @@ const CategoryList = ({ business, servicesList }) => {
 			<div
 				onClick={() => handleClick(business)}
 				className={styles.businessData}>
-				<h1>{business.name} </h1>
-				<h3>
-					{business.city}, {business.contact.street}
-				</h3>
+				<h2>
+					{business.name}{" "}
+					<span>
+						{business.city}, {business.contact.street}
+					</span>
+				</h2>
 			</div>
 			<div className={styles.panel}>
 				<img
+					onClick={() => handleClick(business)}
 					className={styles.photo}
 					src={business.photo}
 					width="350"

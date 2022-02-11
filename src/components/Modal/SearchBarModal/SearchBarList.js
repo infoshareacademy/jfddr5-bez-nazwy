@@ -1,3 +1,5 @@
+import styles from "./SearchBar.module.css";
+
 export const SearchBarList = ({
 	header,
 	setSearchValue,
@@ -15,7 +17,10 @@ export const SearchBarList = ({
 
 			if (myString.includes(myValue)) {
 				return (
-					<li key={business} onClick={() => setValue(business)}>
+					<li
+						className={styles.listItem}
+						key={business}
+						onClick={() => setValue(business)}>
 						{business}
 					</li>
 				);
@@ -25,7 +30,7 @@ export const SearchBarList = ({
 	};
 	return (
 		<div>
-			<h3>{header}</h3>
+			<h3 className={styles.listHeader}>{header}</h3>
 			<ul>
 				{header === "Salony" &&
 					mapList(

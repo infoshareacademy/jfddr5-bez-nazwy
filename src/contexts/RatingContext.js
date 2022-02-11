@@ -1,3 +1,3 @@
 import { createContext } from "react";
 
-export const raitingContext = createContext();
+export const ratingContext = createContext();

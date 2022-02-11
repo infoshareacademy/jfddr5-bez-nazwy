@@ -1,0 +1,9 @@
+.confirmContent {
+	width: 450px;
+	padding: 10px;
+
+	margin: auto auto;
+	background-color: rgb(255, 255, 255);
+	border-radius: 5px;
+	box-shadow: 0px 0px 10px 2px #33333380;
+}
