@@ -1,14 +1,10 @@
 import { useContext } from "react";
 import { createSearchParams, useNavigate } from "react-router-dom";
 import { businessListContext } from "../../../contexts/BusinessListContext";
-
-//import { raitingContext } from "../../../contexts/RatingContext";
-
-
 import { pathNormalize } from "../../../utils/pathNormalize";
 import styles from "./CategoryListBar.module.css";
 
-const CategoryListBar = ({ setCategory }) => {
+const CategoryListBar = ({ category, setCategory }) => {
 	const [businessList] = useContext(businessListContext);
 
 	const navigate = useNavigate();
@@ -18,13 +14,6 @@ const CategoryListBar = ({ setCategory }) => {
 
 	const handleCategory = (category) => {
 		setCategory(category);
-		// {city && navigate({
-		// 	pathname: "/s",
-		// 	search: `?${createSearchParams({
-		// 		category: pathNormalize(category),
-		// 		city: city,
-		// 	})}`,
-		// });}
 		navigate({
 			pathname: "/s",
 			search: `?${createSearchParams({
@@ -33,6 +22,7 @@ const CategoryListBar = ({ setCategory }) => {
 		});
 	};
 
+	console.log(category);
 
 	return (
 		<>
