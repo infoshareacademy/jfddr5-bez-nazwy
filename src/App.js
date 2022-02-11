@@ -13,6 +13,7 @@ import { modalDisplayContext } from "./contexts/ModalDisplayContext";
 import { serviceItemContext } from "./contexts/ServiceItemContext";
 import { businessItemContext } from "./contexts/BusinessItemContext";
 import { ratingContext } from "./contexts/RatingContext";
+import { connectFirestoreEmulator } from "firebase/firestore";
 
 function App() {
 	//USE STATES
@@ -90,7 +91,7 @@ function App() {
 		() => [ratingList, setRatingList],
 		[ratingList],
 	);
-
+	console.log(modalDisplay);
 	return (
 		//todo: simplifying contexts!!!! (businessContext value={[businessList, activeBusiness, setBusinessList, setActiveBusiness]})
 		<businessListContext.Provider value={businessListContextValue}>

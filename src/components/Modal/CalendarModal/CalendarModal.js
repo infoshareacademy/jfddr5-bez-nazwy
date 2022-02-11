@@ -39,6 +39,7 @@ const CalendarModal = ({
 	const handleUserForm = (callback) => {
 		setDisplayModal("user-form");
 		callback(true);
+		setDate("");
 	};
 
 	const handleReservationClick = () => {
@@ -92,6 +93,7 @@ const CalendarModal = ({
 						className={styles.reservationButton}
 						onClick={handleReservationClick}
 						disabled={
+							!date ||
 							usersReservations.length >= activeService.slot
 						}>
 						{usersReservations.length < activeService.slot
