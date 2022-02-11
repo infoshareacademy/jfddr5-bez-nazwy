@@ -2,7 +2,7 @@ import { Route, Routes } from "react-router-dom";
 import HomeView from "./views/HomeView";
 import ProductView from "./views/ProductView";
 import ProfileView from "./views/ProfileView";
-import { useState, useEffect } from "react";
+import { useState, useEffect, useMemo } from "react";
 import { auth, getBusinessList, getRating, getServicesList } from "./utils/db";
 import { businessListContext } from "./contexts/BusinessListContext";
 import { currentUserContext } from "./contexts/CurrentUserContext";
@@ -12,6 +12,7 @@ import Modal from "./components/Modal/Modal";
 import { modalDisplayContext } from "./contexts/ModalDisplayContext";
 import { serviceItemContext } from "./contexts/ServiceItemContext";
 import { businessItemContext } from "./contexts/BusinessItemContext";
+import { ratingContext } from "./contexts/RatingContext";
 
 function App() {
 	//USE STATES
@@ -64,77 +65,108 @@ function App() {
 		// console.log(servicesList);
 	}, [category]);
 
+	const businessListContextValue = useMemo(
+		() => [businessList, setBusinessList],
+		[businessList],
+	);
+	const currentUserContextValue = useMemo(
+		() => [currentUser, setCurrentUser],
+		[currentUser],
+	);
+	const serviceItemContextValue = useMemo(
+		() => [activeService, setActiveService],
+		[activeService],
+	);
+	const businessItemContextValue = useMemo(
+		() => [activeBusiness, setActiveBusiness],
+		[activeBusiness],
+	);
+	const modalDisplayContextValue = useMemo(
+		() => [modalDisplay, setModalDisplay],
+		[modalDisplay],
+	);
+
+	const ratingContextValue = useMemo(
+		() => [ratingList, setRatingList],
+		[ratingList],
+	);
+
 	return (
 		//todo: simplifying contexts!!!! (businessContext value={[businessList, activeBusiness, setBusinessList, setActiveBusiness]})
-		<businessListContext.Provider value={[businessList, setBusinessList]}>
-			<currentUserContext.Provider value={[currentUser, setCurrentUser]}>
-				<serviceItemContext.Provider
-					value={[activeService, setActiveService]}>
+		<businessListContext.Provider value={businessListContextValue}>
+			<currentUserContext.Provider value={currentUserContextValue}>
+				<serviceItemContext.Provider value={serviceItemContextValue}>
 					<businessItemContext.Provider
-						value={[activeBusiness, setActiveBusiness]}>
+						value={businessItemContextValue}>
 						<modalDisplayContext.Provider
-							value={[modalDisplay, setModalDisplay]}>
-							<Modal
-								showLogin={showLogin}
-								showRegister={showRegister}
-								setShowLogin={setShowLogin}
-								setShowRegister={setShowRegister}
-								setCategory={setCategory}
-								setCity={setCity}
-								city={city}
-								usersReservations={usersReservations}
-								setUsersReservations={setUsersReservations}
-							/>
-							<Routes>
-								<Route
-									path="/"
-									element={
-										<HomeView
-											setCategory={setCategory}
-											setCity={setCity}
-											city={city}
-											setShowLogin={setShowLogin}
-											setShowRegister={setShowRegister}
-										/>
-									}
+							value={modalDisplayContextValue}>
+							<ratingContext.Provider value={ratingContextValue}>
+								<Modal
+									showLogin={showLogin}
+									showRegister={showRegister}
+									setShowLogin={setShowLogin}
+									setShowRegister={setShowRegister}
+									setCategory={setCategory}
+									setCity={setCity}
+									city={city}
+									usersReservations={usersReservations}
+									setUsersReservations={setUsersReservations}
 								/>
-
-								<Route
-									path={`/product/${activeBusiness.id}`}
-									element={
-										<ProductView
-											servicesList={servicesList}
-											ratingList={ratingList}
-										/>
-									}
-								/>
-
-								<Route
-									path="/s"
-									element={
-										<CategoryView
-											setServicesList={setServicesList}
-											servicesList={servicesList}
-										/>
-									}
-								/>
-
-								{currentUser && (
+								<Routes>
 									<Route
-										path="/profile"
+										path="/"
 										element={
-											<ProfileView
-												usersReservations={
-													usersReservations
-												}
-												setUsersReservations={
-													setUsersReservations
+											<HomeView
+												setCategory={setCategory}
+												setCity={setCity}
+												city={city}
+												setShowLogin={setShowLogin}
+												setShowRegister={
+													setShowRegister
 												}
 											/>
 										}
 									/>
-								)}
-							</Routes>
+
+									<Route
+										path={`/product/${activeBusiness.id}`}
+										element={
+											<ProductView
+												servicesList={servicesList}
+												ratingList={ratingList}
+											/>
+										}
+									/>
+
+									<Route
+										path="/s"
+										element={
+											<CategoryView
+												setServicesList={
+													setServicesList
+												}
+												servicesList={servicesList}
+											/>
+										}
+									/>
+
+									{currentUser && (
+										<Route
+											path="/profile"
+											element={
+												<ProfileView
+													usersReservations={
+														usersReservations
+													}
+													setUsersReservations={
+														setUsersReservations
+													}
+												/>
+											}
+										/>
+									)}
+								</Routes>
+							</ratingContext.Provider>
 						</modalDisplayContext.Provider>
 					</businessItemContext.Provider>
 				</serviceItemContext.Provider>
