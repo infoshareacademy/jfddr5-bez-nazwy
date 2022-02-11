@@ -23,7 +23,7 @@ const Modal = ({
 
 	const handleModalDisplay = () => {
 		setDisplayModal("");
-		setDate("");
+
 		setShowLogin(false);
 		setShowRegister(false);
 	};

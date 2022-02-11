@@ -113,6 +113,7 @@
 	z-index: -1;
 	transform: translateX(-100%);
 }
+
 .loginButton:hover::before,
 .reservationButton:hover::before {
 	transform: translateX(0);

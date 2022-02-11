@@ -73,7 +73,9 @@ const CalendarModal = ({
 				<p>
 					Data wizyty:
 					<span>
-						{date ? ` ${date.toLocaleString("pl-PL")}` : ""}
+						{date
+							? ` ${date.toLocaleString("pl-PL").slice(0, 10)}`
+							: ""}
 					</span>
 				</p>
 				<p>

@@ -1,0 +1,19 @@
+.content {
+	background-color: var(--white);
+	border-radius: 10px;
+	display: flex;
+	flex-direction: column;
+	justify-content: center;
+	align-items: center;
+	padding: 30px;
+}
+
+.content button {
+	background-color: var(--accent);
+	color: var(--white);
+	margin-left: 10px;
+}
+
+.content button:hover {
+	font-weight: 600;
+}

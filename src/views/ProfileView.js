@@ -44,7 +44,9 @@ const ProfileView = () => {
 									{reservation.serviceName}
 								</div>
 								<div className={s.reservationDate}>
-									{reservation.date.toString()}
+									{reservation.date
+										.toLocaleString()
+										.splice(0, 10)}
 								</div>
 								<button
 									className={s.button}

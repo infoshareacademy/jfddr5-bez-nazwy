@@ -12,24 +12,25 @@ const ReservationConfirm = ({ date }) => {
 	const [activeService] = useContext(serviceItemContext);
 	const [currentUser] = useContext(currentUserContext);
 
-	const handleReservation = () => {
-		// const dateNow = new Date().toLocaleString("pl-PL");
-		// setCalendarForService(
-		// 	activeBusiness.id,
-		// 	activeService.id,
-		// 	date.toLocaleString("pl-PL"),
-		// 	date,
-		// 	currentUser.uid,
-		// );
-		// setServiceForUser(
-		// 	dateNow,
-		// 	date.toLocaleString("pl-PL"),
-		// 	activeBusiness.id,
-		// 	activeBusiness.name,
-		// 	activeService.id,
-		// 	activeService.name,
-		// 	dateNow,
-		// );
+	const handleReservation = (e) => {
+		e.stopPropagation();
+		const dateNow = new Date().toLocaleString("pl-PL");
+		setCalendarForService(
+			activeBusiness.id,
+			activeService.id,
+			date.toLocaleString("pl-PL"),
+			date,
+			currentUser.uid,
+		);
+		setServiceForUser(
+			dateNow,
+			date.toLocaleString("pl-PL"),
+			activeBusiness.id,
+			activeBusiness.name,
+			activeService.id,
+			activeService.name,
+			dateNow,
+		);
 		setDisplayModal("success-alert");
 	};
 	return (
