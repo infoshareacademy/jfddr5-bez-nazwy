@@ -1,26 +1,11 @@
-
-
-
-
-.imgStyle {
-    height: 400px;
-    width: 500px; 
-    padding: 10px;
-    border-radius: 10px;
-    display: flex;
-    justify-content: space-evenly;
-
-};
-.textBox {
-    width: 500px;
-    height: 500px;
-
-};
 .divStyle {
-    display: flex;
-    margin: 0 auto;
-    color: var(--white);
-    justify-content: center;
-    font-weight: 400;
-    /* width: 1200px; */
-};
+	display: flex;
+	flex-direction: column;
+	margin: 0 auto;
+}
+.textBox {
+	display: flex;
+}
+.imgStyle {
+	width: 300px;
+}
