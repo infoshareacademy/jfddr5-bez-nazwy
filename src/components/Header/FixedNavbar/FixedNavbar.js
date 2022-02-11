@@ -1,9 +1,9 @@
 import Header from "../Header";
-import styles from "./ScrollingNavbar.module.css";
+import styles from "./FixedNavbar.module.css";
 import { SearchBarMock } from "../SearchBarMock/SearchBarMock";
 import CategoryListBarDark from "../CategoryListBarDark/CategoryListBarDark";
 
-const ScrollingNavbar = ({
+const FixedNavbar = ({
 	product,
 	setProduct,
 	city,
@@ -41,10 +41,10 @@ const ScrollingNavbar = ({
 						city={city}
 					/>
 				</div>
-				{/* <CategoryListBarDark /> */}
+				<CategoryListBarDark />
 			</div>
 		</div>
 	);
 };
 
-export default ScrollingNavbar;
+export default FixedNavbar;
