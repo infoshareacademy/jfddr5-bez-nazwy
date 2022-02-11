@@ -49,20 +49,6 @@
 	padding-inline: 5px;
 }
 
-.galleryItemRating {
-	position: absolute;
-	display: flex;
-	flex-direction: column;
-	justify-content: center;
-	top: 0;
-	right: 5px;
-	width: 100px;
-	height: 75px;
-	border-radius: 0px 20px;
-	color: var(--white);
-	background-color: rgba(0, 0, 0, 0.6);
-}
-
 .galleryItemRatingHeader {
 	margin: 0;
 	margin-bottom: 5px;
@@ -85,8 +71,9 @@
 }
 
 .galleryItemImage:hover {
-	opacity: 0.5;
+	opacity: 0.7;
 }
+
 .galleryItemBanner {
 	display: flex;
 	align-items: center;
@@ -97,6 +84,20 @@
 	right: 5px;
 	padding-inline: 25px;
 	border-radius: 0px 0px 20px 20px;
+	color: var(--white);
+	background-color: rgba(0, 0, 0, 0.6);
+}
+
+.galleryItemRating {
+	position: absolute;
+	display: flex;
+	flex-direction: column;
+	justify-content: center;
+	top: 0;
+	right: 5px;
+	width: 100px;
+	height: 75px;
+	border-radius: 0px 20px;
 	color: var(--white);
 	background-color: rgba(0, 0, 0, 0.6);
 }

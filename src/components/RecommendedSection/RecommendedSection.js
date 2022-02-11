@@ -67,6 +67,10 @@ const RecommendedSection = () => {
 				static>
 				{ratings?.map((item, index) => (
 					<div key={index} className={styles.galleryItem}>
+						<img
+							onClick={() => handleClick(item.business)}
+							className={styles.galleryItemImage}
+							src={item.business.photo}></img>
 						<div className={styles.galleryItemRating}>
 							<h4 className={styles.galleryItemRatingHeader}>
 								{item.avgRating}
@@ -75,10 +79,6 @@ const RecommendedSection = () => {
 								Opinie: {item.avgRatingLength}
 							</p>
 						</div>
-						<img
-							onClick={() => handleClick(item.business)}
-							className={styles.galleryItemImage}
-							src={item.business.photo}></img>
 						<div className={styles.galleryItemBanner}>
 							<h3 className={styles.galleryItemTitle}>
 								{item.business.name}
