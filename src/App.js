@@ -12,6 +12,7 @@ import Modal from "./components/Modal/Modal";
 import { modalDisplayContext } from "./contexts/ModalDisplayContext";
 import { serviceItemContext } from "./contexts/ServiceItemContext";
 import { businessItemContext } from "./contexts/BusinessItemContext";
+import Footer from "./components/Footer/Footer";
 import { ratingContext } from "./contexts/RatingContext";
 
 function App() {
@@ -149,6 +150,10 @@ function App() {
 											/>
 										}
 									/>
+								)}
+							</Routes>
+							<Footer />
+
 
 									{currentUser && (
 										<Route
@@ -167,6 +172,7 @@ function App() {
 									)}
 								</Routes>
 							</ratingContext.Provider>
+
 						</modalDisplayContext.Provider>
 					</businessItemContext.Provider>
 				</serviceItemContext.Provider>
