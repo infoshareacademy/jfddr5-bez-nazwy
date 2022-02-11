@@ -1,7 +1,6 @@
 import Header from "../Header";
 import styles from "./ScrollingNavbar.module.css";
 import { SearchBarMock } from "../SearchBarMock/SearchBarMock";
-import CategoryListBarDark from "../CategoryListBarDark/CategoryListBarDark";
 
 const ScrollingNavbar = ({
 	product,
@@ -41,7 +40,6 @@ const ScrollingNavbar = ({
 						city={city}
 					/>
 				</div>
-				{/* <CategoryListBarDark /> */}
 			</div>
 		</div>
 	);

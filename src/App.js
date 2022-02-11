@@ -95,7 +95,6 @@ function App() {
 	);
 
 	return (
-		//todo: simplifying contexts!!!! (businessContext value={[businessList, activeBusiness, setBusinessList, setActiveBusiness]})
 		<businessListContext.Provider value={businessListContextValue}>
 			<currentUserContext.Provider value={currentUserContextValue}>
 				<serviceItemContext.Provider value={serviceItemContextValue}>
@@ -137,6 +136,13 @@ function App() {
 											<ProductView
 												servicesList={servicesList}
 												ratingList={ratingList}
+												setShowLogin={setShowLogin}
+												setShowRegister={
+													setShowRegister
+												}
+												setCategory={setCategory}
+												setCity={setCity}
+												city={city}
 											/>
 										}
 									/>
@@ -149,6 +155,13 @@ function App() {
 													setServicesList
 												}
 												servicesList={servicesList}
+												setShowLogin={setShowLogin}
+												setShowRegister={
+													setShowRegister
+												}
+												setCategory={setCategory}
+												setCity={setCity}
+												city={city}
 											/>
 										}
 									/>
@@ -163,6 +176,13 @@ function App() {
 													setUsersReservations={
 														setUsersReservations
 													}
+													setShowLogin={setShowLogin}
+													setShowRegister={
+														setShowRegister
+													}
+													setCategory={setCategory}
+													setCity={setCity}
+													city={city}
 												/>
 											}
 										/>

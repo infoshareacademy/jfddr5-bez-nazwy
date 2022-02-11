@@ -4,7 +4,7 @@
 	justify-content: space-around;
 	list-style: none;
 	margin-top: var(--categoryBarMargin);
-	margin-bottom: 6px;
+	padding-bottom: 6px;
 }
 
 .category {
