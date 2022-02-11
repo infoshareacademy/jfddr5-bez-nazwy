@@ -37,19 +37,19 @@ const Footer = () => {
 							<span className={styles.author}>
 								Katarzyna<br></br> Kabała
 							</span>
-							<a href="">
+							<a href="https://github.com/Kasiaqu">
 								<img src={githublogo}></img>
 							</a>
 							<span className={styles.author}>
 								Daniel<br></br> Jurkiewicz
 							</span>
-							<a href="">
+							<a href="https://github.com/daniel-jurkiewicz">
 								<img src={githublogo}></img>
 							</a>
 							<span className={styles.author}>
 								Joanna <br></br>Florczak
 							</span>
-							<a href="">
+							<a href="https://github.com/Joanna35">
 								<img src={githublogo}></img>
 							</a>
 							<span className={styles.author}>
