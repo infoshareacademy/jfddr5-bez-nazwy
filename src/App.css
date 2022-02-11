@@ -1,7 +1,9 @@
 :root {
 	--black: #1f2222;
 	--white: #fff;
+
 	--accent: #83ab8a;
+	--background-accent: #f1f1f1;
 
 	--searchBarColor: #1f2222;
 	--searchBarBackground: #fff;
@@ -22,6 +24,8 @@
 	--categoryBarHover: #83ab8a;
 	--categoryBarFontSize: 18px;
 	--categoryBarMargin: 100px;
+
+	/* buttons, borders, accents! */
 }
 
 body {

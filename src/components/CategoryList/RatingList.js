@@ -1,6 +1,7 @@
 import { useState, useEffect, useContext } from "react";
 import { businessItemContext } from "../../contexts/BusinessItemContext";
 import Rating from "./Rating";
+import styles from "./Rating.module.css";
 
 const RatingList = ({ ratingList }) => {
 	const [sort, setSort] = useState("default");
@@ -25,13 +26,29 @@ const RatingList = ({ ratingList }) => {
 
 	return (
 		<>
-			<button onClick={() => sortingOpinion("desc")}>
-				Sortuj od najwyższych ocen
-			</button>
-			<button onClick={() => sortingOpinion("asc")}>
-				Sortuj od najniższych ocen
-			</button>
-
+			<div className={styles.sortButtonsWrapper}>
+				<h2 className={styles.opinionsH2}>Opinie</h2>
+				<div>
+					<button
+						className={`${
+							sort === "desc"
+								? styles.sortButtonActive
+								: styles.sortButton
+						}`}
+						onClick={() => sortingOpinion("desc")}>
+						Sortuj od najwyższych ocen
+					</button>
+					<button
+						className={`${
+							sort === "asc"
+								? styles.sortButtonActive
+								: styles.sortButton
+						}`}
+						onClick={() => sortingOpinion("asc")}>
+						Sortuj od najniższych ocen
+					</button>
+				</div>
+			</div>
 			{ratingList?.map((bus) => (
 				<div key={bus.businessId}>
 					{bus.businessId === activeBusiness.id

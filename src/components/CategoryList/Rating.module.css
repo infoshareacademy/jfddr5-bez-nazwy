@@ -1,0 +1,94 @@
+.comment {
+	width: 430px;
+	margin: 10px;
+	margin-left: 40px;
+	padding: 15px 15px;
+	/* border: 1px solid var(--accent); */
+	border-radius: 10px;
+	/* border: 1px solid var(--accent); */
+	box-shadow: inset 0px 0px 5px 2px #33333330;
+}
+
+.opinionsHeader {
+	display: flex;
+	flex-direction: row;
+	width: 430px;
+	/* box-shadow: 0px 2px 5px 2px #33333320; */
+	background-color: var(--white);
+	/* color: var(--accent); */
+	border-radius: 10px;
+	/* padding: 0px 10px; */
+	justify-content: space-between;
+	align-items: center;
+}
+
+.opinionsHeader h3 {
+	line-height: 0.8em;
+	border-bottom: 1px solid var(--accent);
+	padding-right: 10px;
+	padding-bottom: 5px;
+	margin: 0px 0px 15px 0px;
+	font-weight: 500;
+}
+
+.starsContainer {
+	position: relative;
+	/* border: 1px solid black; */
+	border-radius: 10px;
+	background-color: var(--accent);
+	box-shadow: 2px 2px 5px 2px #33333320;
+	width: 100px;
+	height: 24px;
+	padding: 7px;
+	margin: -25px -14px 0px 0px;
+}
+
+.starWrapper {
+	display: flex;
+	flex-direction: row;
+	opacity: 0.7;
+	position: absolute;
+}
+
+.ratedStars {
+	display: flex;
+	flex-direction: row;
+	position: absolute;
+	opacity: 0.9;
+}
+
+.star {
+	opacity: inherit;
+	width: 20px;
+	height: 20px;
+	filter: invert(100%);
+}
+
+.sortButtonsWrapper {
+	display: flex;
+	align-items: center;
+	justify-content: space-between;
+}
+
+.sortButton {
+	width: fit-content;
+	height: 25px;
+	font-size: 11px;
+	padding: 5px;
+	margin-left: 10px;
+	font-weight: 600;
+}
+
+.sortButtonActive {
+	width: fit-content;
+	height: 25px;
+	font-size: 11px;
+	padding: 5px;
+	margin-left: 10px;
+	font-weight: 600;
+	background-color: var(--accent);
+	color: var(--white);
+}
+.opinionsH2 {
+	justify-self: flex-start;
+}
