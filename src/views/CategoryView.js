@@ -1,10 +1,23 @@
 import { useContext } from "react";
 import { useSearchParams } from "react-router-dom";
 import CategoryList from "../components/CategoryList/CategoryList";
+import FixedNavbar from "../components/Header/FixedNavbar/FixedNavbar";
 import { businessListContext } from "../contexts/BusinessListContext";
 import { pathNormalize } from "../utils/pathNormalize";
 
-const CategoryView = ({ setServicesList, servicesList }) => {
+const CategoryView = ({
+	setServicesList,
+	servicesList,
+	currentUser,
+	product,
+	setProduct,
+	setCategory,
+	setCity,
+	showLogin,
+	setShowLogin,
+	showRegister,
+	setShowRegister,
+}) => {
 	const [businessList] = useContext(businessListContext);
 	const [searchParams] = useSearchParams();
 
@@ -13,23 +26,38 @@ const CategoryView = ({ setServicesList, servicesList }) => {
 
 	return (
 		<div>
-			{businessList
-				.filter(
-					(business) =>
-						(pathNormalize(business.category) === category &&
-							!city) ||
-						(pathNormalize(business.city) === city && !category) ||
-						(pathNormalize(business.city) === city &&
-							pathNormalize(business.category) === category),
-				)
-				.map((business) => (
-					<CategoryList
-						key={business.id}
-						business={business}
-						setServicesList={setServicesList}
-						servicesList={servicesList}
-					/>
-				))}
+			<FixedNavbar
+				setProduct={setProduct}
+				product={product}
+				setCategory={setCategory}
+				setCity={setCity}
+				city={city}
+				currentUser={currentUser}
+				showLogin={showLogin}
+				setShowLogin={setShowLogin}
+				showRegister={showRegister}
+				setShowRegister={setShowRegister}
+			/>
+			<div>
+				{businessList
+					.filter(
+						(business) =>
+							(pathNormalize(business.category) === category &&
+								!city) ||
+							(pathNormalize(business.city) === city &&
+								!category) ||
+							(pathNormalize(business.city) === city &&
+								pathNormalize(business.category) === category),
+					)
+					.map((business) => (
+						<CategoryList
+							key={business.id}
+							business={business}
+							setServicesList={setServicesList}
+							servicesList={servicesList}
+						/>
+					))}
+			</div>
 		</div>
 	);
 };

@@ -4,7 +4,6 @@ import githublogo from "./images/github.png";
 const Footer = () => {
 	return (
 		<>
-			<div style={{ height: "1000px" }}></div>
 			<div className={styles.container}>
 				<div className={styles.left}>
 					<div className={styles.brand}>
