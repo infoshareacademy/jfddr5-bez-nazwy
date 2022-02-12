@@ -1,4 +1,5 @@
 import { useContext, useEffect, useState } from "react";
+import Footer from "../components/Footer/Footer";
 import FixedNavbar from "../components/Header/FixedNavbar/FixedNavbar";
 import { currentUserContext } from "../contexts/CurrentUserContext";
 import {
@@ -95,6 +96,7 @@ const ProfileView = ({
 					})}
 				</div>
 			</div>
+			<Footer />
 		</div>
 	);
 };

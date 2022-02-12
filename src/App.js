@@ -16,8 +16,6 @@ import Footer from "./components/Footer/Footer";
 import { ratingContext } from "./contexts/RatingContext";
 import { connectFirestoreEmulator } from "firebase/firestore";
 
-
-
 function App() {
 	//USE STATES
 
@@ -189,12 +187,10 @@ function App() {
 										/>
 									)}
 								</Routes>
-								<Footer />
 							</ratingContext.Provider>
 						</modalDisplayContext.Provider>
 					</businessItemContext.Provider>
 				</serviceItemContext.Provider>
-			
 			</currentUserContext.Provider>
 		</businessListContext.Provider>
 	);
