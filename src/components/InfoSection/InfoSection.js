@@ -12,18 +12,20 @@ const InfoSection = () => {
 					<p>
 						Chcesz umówić swojego pupila do groomera, hodowcy,
 						weterynarza, behawiorysty lub hotelu dla zwierząt w
-						swojej okolicy? Szukasz miejsca, w którym twoja pociecha
-						otrzyma najlepszą opiekę pod słońcem? Petsy to darmowa
-						aplikacja do rezerwacji, dzięki swojej łatwości w
-						obsłudze, bez poroblemu znajdziesz dogodny termin dla
-						siebie i swojego pupila. Bez wychodzenia z domu albo
-						sięgania po telefon-na petsy zarezerwujesz wygodny dla
-						was termin o każdej porze bez względu na miejsce.
+						swojej okolicy? Szukasz miejsca, w którym Twoja pociecha
+						otrzyma najlepszą opiekę pod słońcem? Petsy to darmowa i
+						łatwa w obsłudze aplikacja do rezerwacji, dzięki której
+						bez poroblemu znajdziecie dogodny termin dla Was i
+						Waszego pupila. Bez wychodzenia z domu lub sięgania po
+						telefon - na Petsy zarezerwujesz wygodny dla Was termin
+						o każdej porze bez względu na miejsce.
 					</p>
-					<strong>
-						Odkrywaj nowe usługi dla swoich Milusińskich i umawiaj
-						ich na wizyty z Petsy!{" "}
-					</strong>
+					<p>
+						<strong>
+							Odkrywaj nowe usługi dla swoich Milusińskich i
+							umawiaj ich na wizyty z Petsy!
+						</strong>
+					</p>
 				</div>
 				<div>
 					<img
@@ -45,16 +47,18 @@ const InfoSection = () => {
 				<div className={styles.textBox}>
 					<h2> Specjaliści w Twojej okolicy </h2>
 					<p>
-						W petsy znajdziesz najlepsze salony dla swoich
-						Ulubieńców w wygodnej dla was okolicy. Dowiedz się o
+						W Petsy znajdziesz najlepsze salony dla swoich
+						Ulubieńców w wygodnej dla Was okolicy. Dowiedz się o
 						nich jak najwięcej - przeczytaj opinie innych klientów i
 						przejrzyj usługi jakie oferują. Oszczędź czas na
 						umawianiu wizyt. Dzięki Petsy będziesz miał więcej czasu
 						na zabawę ze swoim Futrzakiem.
 					</p>
-					<strong>
-						Nasza aplikacja jest bardzo prosta w użyciu.
-					</strong>
+					<p>
+						<strong>
+							Nasza aplikacja jest bardzo prosta w użyciu.
+						</strong>
+					</p>
 				</div>
 			</div>
 		</div>
