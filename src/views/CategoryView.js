@@ -1,6 +1,7 @@
 import { useContext } from "react";
 import { useSearchParams } from "react-router-dom";
 import CategoryList from "../components/CategoryList/CategoryList";
+import Footer from "../components/Footer/Footer";
 import FixedNavbar from "../components/Header/FixedNavbar/FixedNavbar";
 import { businessListContext } from "../contexts/BusinessListContext";
 import { pathNormalize } from "../utils/pathNormalize";
@@ -58,6 +59,7 @@ const CategoryView = ({
 						/>
 					))}
 			</div>
+			<Footer />
 		</div>
 	);
 };
