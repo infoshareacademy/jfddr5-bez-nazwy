@@ -12,25 +12,19 @@ import Modal from "./components/Modal/Modal";
 import { modalDisplayContext } from "./contexts/ModalDisplayContext";
 import { serviceItemContext } from "./contexts/ServiceItemContext";
 import { businessItemContext } from "./contexts/BusinessItemContext";
-import Footer from "./components/Footer/Footer";
 import { ratingContext } from "./contexts/RatingContext";
-import { connectFirestoreEmulator } from "firebase/firestore";
 
 function App() {
 	//USE STATES
-
 	//context states
 	const [currentUser, setCurrentUser] = useState(null);
-
 	const [businessList, setBusinessList] = useState([]);
 	const [activeBusiness, setActiveBusiness] = useState("");
 	//service list state
 	//todo: assign to context!!!!
 	const [servicesList, setServicesList] = useState([]);
 	const [activeService, setActiveService] = useState("");
-
 	const [ratingList, setRatingList] = useState([]);
-
 	const [modalDisplay, setModalDisplay] = useState("");
 	//category & city states
 	const [category, setCategory] = useState("");
@@ -38,7 +32,6 @@ function App() {
 	//modal form state
 	const [showLogin, setShowLogin] = useState(false);
 	const [showRegister, setShowRegister] = useState(false);
-
 	const [usersReservations, setUsersReservations] = useState([]);
 
 	//USE EFFECTS - FETCHING DATA
@@ -52,7 +45,6 @@ function App() {
 	}, []);
 
 	useEffect(() => {
-		// setServicesList([]);
 		businessList.forEach((bus) => {
 			getServicesList(setServicesList, bus.id);
 			getRating(setRatingList, bus.id);

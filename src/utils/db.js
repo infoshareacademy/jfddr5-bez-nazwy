@@ -6,9 +6,7 @@ import {
 	collection,
 	getDocs,
 	updateDoc,
-	addDoc,
 	arrayUnion,
-	getDoc,
 	deleteDoc,
 	arrayRemove,
 } from "firebase/firestore";
@@ -63,6 +61,7 @@ const registerUser = async (username, email, password, city) => {
 				registerErrorMessage =
 					"Napotkaliśmy niespodziewany błąd, proszę spróbuj ponownie.";
 				break;
+			default:
 		}
 		return registerErrorMessage;
 	}
@@ -84,6 +83,7 @@ const loginUser = async (email, password) => {
 			case "auth/user-not-found":
 				loginErrorMessage = "Nie znaleziono użytkownika.";
 				break;
+			default:
 		}
 		return loginErrorMessage;
 	}

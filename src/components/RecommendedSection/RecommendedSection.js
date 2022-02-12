@@ -70,7 +70,8 @@ const RecommendedSection = () => {
 						<img
 							onClick={() => handleClick(item.business)}
 							className={styles.galleryItemImage}
-							src={item.business.photo}></img>
+							src={item.business.photo}
+							alt={"thumbnail"}></img>
 						<div className={styles.galleryItemRating}>
 							<h4 className={styles.galleryItemRatingHeader}>
 								{item.avgRating}

@@ -1,15 +1,11 @@
-import { useContext, useEffect, useState } from "react";
+import { useContext } from "react";
 import Calendar from "react-calendar";
 import "react-calendar/dist/Calendar.css";
 import { businessItemContext } from "../../../contexts/BusinessItemContext";
 import { currentUserContext } from "../../../contexts/CurrentUserContext";
 import { modalDisplayContext } from "../../../contexts/ModalDisplayContext";
 import { serviceItemContext } from "../../../contexts/ServiceItemContext";
-import {
-	getReservedSlots,
-	setCalendarForService,
-	setServiceForUser,
-} from "../../../utils/db";
+import { getReservedSlots } from "../../../utils/db";
 import styles from "./CalendarModal.module.css";
 
 const CalendarModal = ({

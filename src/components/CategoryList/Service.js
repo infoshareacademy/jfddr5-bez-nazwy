@@ -1,5 +1,5 @@
 import { useContext } from "react";
-import s from "./CategoryList.module.css";
+import styles from "./CategoryList.module.css";
 import { modalDisplayContext } from "../../contexts/ModalDisplayContext";
 import { serviceItemContext } from "../../contexts/ServiceItemContext";
 
@@ -13,12 +13,14 @@ const Service = ({ service }) => {
 	};
 	return (
 		<>
-			<div key={service.id} className={s.servicesList}>
-				<div className={s.servicesListName}>{service.name}</div>
-				<div className={s.servicesListPrice}>{service.price}zł</div>
+			<div key={service.id} className={styles.servicesList}>
+				<div className={styles.servicesListName}>{service.name}</div>
+				<div className={styles.servicesListPrice}>
+					{service.price}zł
+				</div>
 				<div>
 					<button
-						className={s.servicesButton}
+						className={styles.servicesButton}
 						onClick={handleServiceButton}>
 						Zarezerwuj
 					</button>

@@ -1,5 +1,6 @@
 import Service from "./Service";
 import styles from "./CategoryList.module.css";
+
 const ServicesList = ({ servicesList, business }) => {
 	return (
 		<>

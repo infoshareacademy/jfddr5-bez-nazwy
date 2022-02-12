@@ -7,7 +7,7 @@ import {
 	deleteServiceForUser,
 	updateCalendarForService,
 } from "../utils/db";
-import s from "./ProfileView.module.css";
+import styles from "./ProfileView.module.css";
 
 const ProfileView = ({
 	product,
@@ -51,9 +51,9 @@ const ProfileView = ({
 				showRegister={showRegister}
 				setShowRegister={setShowRegister}
 			/>
-			<div className={s.profileView}>
+			<div className={styles.profileView}>
 				<div>
-					<h2 className={s.title}>Lista rezerwacji:</h2>
+					<h2 className={styles.title}>Lista rezerwacji:</h2>
 					{serviceForUser.map((reservation) => {
 						const item = {
 							user: currentUser.uid,
@@ -62,21 +62,21 @@ const ProfileView = ({
 						return (
 							<div
 								key={reservation.id}
-								className={s.reservationRow}>
-								<div className={s.reservationField}>
-									<div className={s.businessName}>
+								className={styles.reservationRow}>
+								<div className={styles.reservationField}>
+									<div className={styles.businessName}>
 										{reservation.businessName}
 									</div>
-									<div className={s.serviceName}>
+									<div className={styles.serviceName}>
 										{reservation.serviceName}
 									</div>
-									<div className={s.reservationDate}>
+									<div className={styles.reservationDate}>
 										{reservation.date
 											.toString()
 											.slice(0, 10)}
 									</div>
 									<button
-										className={s.button}
+										className={styles.button}
 										onClick={() =>
 											handleDelete(
 												reservation.businessId,
@@ -90,7 +90,7 @@ const ProfileView = ({
 									</button>
 								</div>
 
-								<div className={s.line} />
+								<div className={styles.line} />
 							</div>
 						);
 					})}

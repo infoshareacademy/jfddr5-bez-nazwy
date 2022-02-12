@@ -1,5 +1,4 @@
 import React, { useContext, useState } from "react";
-import ReactDOM from "react-dom";
 import { modalDisplayContext } from "../../../contexts/ModalDisplayContext";
 import { loginUser, registerUser } from "../../../utils/db";
 import styles from "./UserFormModal.module.css";

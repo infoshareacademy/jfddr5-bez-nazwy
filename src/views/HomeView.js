@@ -6,9 +6,9 @@ import CallToAction from "../components/Header/CallToAction/CallToAction";
 import HeroSlideshow from "../components/Header/HeroSlideshow/HeroSlideshow";
 import ScrollingNavbar from "../components/Header/ScrollingNavbar/ScrollingNavbar";
 import RecommendedSection from "../components/RecommendedSection/RecommendedSection";
-
-import PageElements from "../PageElements";
 import Footer from "../components/Footer/Footer";
+import InfoSection from "../components/InfoSection/InfoSection";
+
 const HomeView = ({
 	currentUser,
 	product,
@@ -69,7 +69,7 @@ const HomeView = ({
 				<RecommendedSection />
 			</div>
 			<div>
-				<PageElements />
+				<InfoSection />
 			</div>
 			<Footer />
 		</>

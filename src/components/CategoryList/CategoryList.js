@@ -3,7 +3,6 @@ import { useNavigate } from "react-router-dom";
 import ServicesList from "./ServicesList";
 import { useContext } from "react";
 import { businessItemContext } from "../../contexts/BusinessItemContext";
-import Footer from "../Footer/Footer";
 
 const CategoryList = ({ business, servicesList }) => {
 	const [activeBusiness, setActiveBusiness] = useContext(businessItemContext);
@@ -32,7 +31,8 @@ const CategoryList = ({ business, servicesList }) => {
 					className={styles.photo}
 					src={business.photo}
 					width="350"
-					height="250"></img>
+					height="250"
+					alt={"thumbnail"}></img>
 				<ServicesList
 					servicesList={servicesList}
 					key={business.id}

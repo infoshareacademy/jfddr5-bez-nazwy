@@ -42,6 +42,7 @@ const ProductView = ({
 							src={activeBusiness.photo}
 							width="600px"
 							height="500px"
+							alt={"thumbnail"}
 						/>
 					</div>
 					<div className={styles.header}>
