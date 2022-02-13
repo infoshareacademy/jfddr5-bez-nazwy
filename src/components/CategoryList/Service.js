@@ -2,12 +2,15 @@ import { useContext } from "react";
 import styles from "./CategoryList.module.css";
 import { modalDisplayContext } from "../../contexts/ModalDisplayContext";
 import { serviceItemContext } from "../../contexts/ServiceItemContext";
+import { businessItemContext } from "../../contexts/BusinessItemContext";
 
-const Service = ({ service }) => {
+const Service = ({ service, business }) => {
 	const [displayModal, setDisplayModal] = useContext(modalDisplayContext);
 	const [activeService, setActiveService] = useContext(serviceItemContext);
+	const [activeBusiness, setActiveBusiness] = useContext(businessItemContext);
 
 	const handleServiceButton = () => {
+		setActiveBusiness(business);
 		setActiveService(service);
 		setDisplayModal("calendar");
 	};

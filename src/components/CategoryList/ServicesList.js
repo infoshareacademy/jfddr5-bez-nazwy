@@ -9,7 +9,11 @@ const ServicesList = ({ servicesList, business }) => {
 					<div key={business.id} className={styles.panelServices}>
 						{bus.services.map((service) => {
 							return (
-								<Service key={service.id} service={service} />
+								<Service
+									key={service.id}
+									service={service}
+									business={business}
+								/>
 							);
 						})}
 					</div>
