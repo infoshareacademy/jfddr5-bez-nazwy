@@ -24,7 +24,6 @@ const ProductView = ({
 
 	useEffect(() => {
 		window.scrollTo(0, 0);
-		setActiveBusiness(activeBusiness);
 	}, []);
 	return (
 		<div>

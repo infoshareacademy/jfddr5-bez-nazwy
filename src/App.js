@@ -20,6 +20,7 @@ import { serviceItemContext } from "./contexts/ServiceItemContext";
 import { businessItemContext } from "./contexts/BusinessItemContext";
 import { ratingContext } from "./contexts/RatingContext";
 import { usersListContext } from "./contexts/usersListContext";
+import ScrollToTop from "./utils/ScrollToTop";
 
 function App() {
 	//USE STATES
@@ -119,67 +120,59 @@ function App() {
 											setUsersReservations
 										}
 									/>
-									<Routes>
-										<Route
-											path="/"
-											element={
-												<HomeView
-													setCategory={setCategory}
-													setCity={setCity}
-													city={city}
-													setShowLogin={setShowLogin}
-													setShowRegister={
-														setShowRegister
-													}
-												/>
-											}
-										/>
-
-										<Route
-											path={`/product/${activeBusiness.id}`}
-											element={
-												<ProductView
-													servicesList={servicesList}
-													ratingList={ratingList}
-													setShowLogin={setShowLogin}
-													setShowRegister={
-														setShowRegister
-													}
-													setCategory={setCategory}
-													setCity={setCity}
-													city={city}
-												/>
-											}
-										/>
-
-										<Route
-											path="/s"
-											element={
-												<CategoryView
-													setServicesList={
-														setServicesList
-													}
-													servicesList={servicesList}
-													setShowLogin={setShowLogin}
-													setShowRegister={
-														setShowRegister
-													}
-													setCategory={setCategory}
-													setCity={setCity}
-													city={city}
-												/>
-											}
-										/>
-										{currentUser && (
+									<ScrollToTop>
+										<Routes>
 											<Route
-												path="/profile"
+												path="/"
 												element={
-													<ProfileView
-														usersReservations={
-															usersReservations
+													<HomeView
+														setCategory={
+															setCategory
 														}
-														setUsersReservations={
-															setUsersReservations
+														setCity={setCity}
+														city={city}
+														setShowLogin={
+															setShowLogin
+														}
+														setShowRegister={
+															setShowRegister
+														}
+													/>
+												}
+											/>
+
+											<Route
+												path={`/product/${activeBusiness.id}`}
+												element={
+													<ProductView
+														servicesList={
+															servicesList
+														}
+														ratingList={ratingList}
+														setShowLogin={
+															setShowLogin
+														}
+														setShowRegister={
+															setShowRegister
+														}
+														setCategory={
+															setCategory
+														}
+														setCity={setCity}
+														city={city}
+													/>
+												}
+											/>
+
+											<Route
+												path="/s"
+												element={
+													<CategoryView
+														setServicesList={
+															setServicesList
+														}
+														servicesList={
+															servicesList
 														}
 														setShowLogin={
 															setShowLogin
@@ -195,8 +188,34 @@ function App() {
 													/>
 												}
 											/>
-										)}
-									</Routes>
+											{currentUser && (
+												<Route
+													path="/profile"
+													element={
+														<ProfileView
+															usersReservations={
+																usersReservations
+															}
+															setUsersReservations={
+																setUsersReservations
+															}
+															setShowLogin={
+																setShowLogin
+															}
+															setShowRegister={
+																setShowRegister
+															}
+															setCategory={
+																setCategory
+															}
+															setCity={setCity}
+															city={city}
+														/>
+													}
+												/>
+											)}
+										</Routes>
+									</ScrollToTop>
 								</usersListContext.Provider>
 							</ratingContext.Provider>
 						</modalDisplayContext.Provider>
