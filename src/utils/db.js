@@ -162,10 +162,19 @@ const getRating = async (callback, id) => {
 		value: doc.data().value,
 		comment: doc.data().comment,
 	}));
-	callback((prevValue) => [
-		...prevValue,
-		{ rating: [...ratingList], businessId: id },
-	]);
+	callback((prevValue) => {
+		if (prevValue.some((value) => value.businessId === id)) {
+			return prevValue.map((value) => {
+				if (value.businessId === id) {
+					console.log(ratingList);
+					return { businessId: id, rating: ratingList };
+				}
+				return value;
+			});
+		} else {
+			return [...prevValue, { rating: [...ratingList], businessId: id }];
+		}
+	});
 };
 
 const setCalendarForService = async (
@@ -274,6 +283,25 @@ const updateCalendarForService = async (
 	);
 };
 
+//adding opinions
+const addOpinion = async (businessId, businessName, comment, value) => {
+	const dateNow = new Date().toLocaleString("pl-PL");
+	await setDoc(doc(db, `business/${businessId}/rating`, dateNow), {
+		comment: comment,
+		user: auth.currentUser.email,
+		value: value,
+	});
+	await setDoc(doc(db, `users/${auth.currentUser.uid}/opinions`, dateNow), {
+		business: {
+			name: businessName,
+			id: businessId,
+		},
+
+		comment: comment,
+		value: value,
+	});
+};
+
 export {
 	db,
 	auth,
@@ -289,4 +317,5 @@ export {
 	getServiceForUser,
 	deleteServiceForUser,
 	updateCalendarForService,
+	addOpinion,
 };

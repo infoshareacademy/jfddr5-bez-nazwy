@@ -1,11 +1,14 @@
 import { useState, useEffect, useContext } from "react";
 import { businessItemContext } from "../../contexts/BusinessItemContext";
+import { currentUserContext } from "../../contexts/CurrentUserContext";
+import { OpinionForm } from "./OpinionForm";
 import Rating from "./Rating";
 import styles from "./Rating.module.css";
 
 const RatingList = ({ ratingList }) => {
 	const [sort, setSort] = useState("default");
 	const [activeBusiness] = useContext(businessItemContext);
+	const [currentUser] = useContext(currentUserContext);
 	const sortingOpinion = (a) => {
 		setSort(a);
 	};
@@ -25,7 +28,7 @@ const RatingList = ({ ratingList }) => {
 	};
 
 	return (
-		<>
+		<div>
 			<div className={styles.sortButtonsWrapper}>
 				<h2 className={styles.opinionsH2}>Opinie</h2>
 				<div>
@@ -50,7 +53,7 @@ const RatingList = ({ ratingList }) => {
 				</div>
 			</div>
 			{ratingList?.map((bus) => (
-				<div key={bus.businessId}>
+				<div key={bus.businessId} className={styles.opinionWrapper}>
 					{bus.businessId === activeBusiness.id
 						? bus.rating
 								.sort(sorting)
@@ -60,7 +63,12 @@ const RatingList = ({ ratingList }) => {
 						: null}
 				</div>
 			))}
-		</>
+			{currentUser ? (
+				<OpinionForm />
+			) : (
+				<div>Musisz być zalogowanym, żeby dodawać opinie</div>
+			)}
+		</div>
 	);
 };
 

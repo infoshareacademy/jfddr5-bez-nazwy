@@ -30,7 +30,7 @@ const Rating = ({ rating }) => {
 					</div>
 				</div>
 			</div>
-			{rating.comment}
+			<p>{rating.comment}</p>
 		</div>
 	);
 };
