@@ -7,6 +7,7 @@ import {
 	deleteServiceForUser,
 	updateCalendarForService,
 } from "../utils/db";
+import { formatDate } from "../utils/formatDate";
 import styles from "./ProfileView.module.css";
 
 const ProfileView = ({
@@ -71,9 +72,7 @@ const ProfileView = ({
 										{reservation.serviceName}
 									</div>
 									<div className={styles.reservationDate}>
-										{reservation.date
-											.toString()
-											.slice(0, 10)}
+										{formatDate(reservation.date)}
 									</div>
 									<button
 										className={styles.button}

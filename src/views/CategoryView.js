@@ -1,4 +1,4 @@
-import { useContext } from "react";
+import { useContext, useEffect } from "react";
 import { useSearchParams } from "react-router-dom";
 import CategoryList from "../components/CategoryList/CategoryList";
 import Footer from "../components/Footer/Footer";
@@ -24,6 +24,10 @@ const CategoryView = ({
 
 	const city = pathNormalize(searchParams.get("city") ?? "");
 	const category = pathNormalize(searchParams.get("category") ?? "");
+
+	useEffect(() => {
+		window.scrollTo(0, 0);
+	}, []);
 
 	return (
 		<div>

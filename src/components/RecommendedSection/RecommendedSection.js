@@ -46,8 +46,6 @@ const RecommendedSection = () => {
 		})
 		.slice(0, 5);
 
-	console.log(ratings);
-
 	//danke shon!
 	// et, voila! :D
 	// to dalej już się bawcie sami :D

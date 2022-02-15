@@ -66,7 +66,9 @@ const RatingList = ({ ratingList }) => {
 			{currentUser ? (
 				<OpinionForm />
 			) : (
-				<div>Musisz być zalogowanym, żeby dodawać opinie</div>
+				<h3 className={styles.notLoggedHeader}>
+					Musisz być zalogowanym, żeby dodawać opinie
+				</h3>
 			)}
 		</div>
 	);

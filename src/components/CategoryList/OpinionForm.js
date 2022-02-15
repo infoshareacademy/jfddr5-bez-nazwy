@@ -5,33 +5,34 @@ import { serviceItemContext } from "../../contexts/ServiceItemContext";
 import { addOpinion, getRating } from "../../utils/db";
 import styles from "./Rating.module.css";
 import star from "./images/star.png";
+import { usersListContext } from "../../contexts/usersListContext";
+import { currentUserContext } from "../../contexts/CurrentUserContext";
 
 export const OpinionForm = () => {
 	const [activeBusiness] = useContext(businessItemContext);
 	const [activeService] = useContext(serviceItemContext);
 	const [ratingList, setRatingList] = useContext(ratingContext);
+	const [usersList] = useContext(usersListContext);
+	const [currentUser] = useContext(currentUserContext);
 
 	const [comment, setComment] = useState("");
 	const [ratingArray, setRatingArray] = useState([]);
 
 	const stars = [0, 1, 2, 3, 4];
 
-	useEffect(() => {
-		console.log(ratingArray.length);
-	}, [ratingArray]);
-
 	const handleOpinionSubmit = (e) => {
 		e.preventDefault();
 		if (ratingArray.length > 0) {
-			console.log(activeBusiness, activeService);
 			addOpinion(
 				activeBusiness.id,
 				activeBusiness.name,
 				comment,
 				ratingArray.length,
+				usersList?.find((user) => user.uid === currentUser.uid)
+					.username,
 			); //(businessId, businessName, serviceId, serviceName, comment, value)
 			getRating(setRatingList, activeBusiness.id);
-			console.log(ratingList);
+
 			setComment("");
 			setRatingArray([]);
 		}
@@ -57,9 +58,7 @@ export const OpinionForm = () => {
 						{stars.map((item) => (
 							<img
 								onClick={() => {
-									setRatingArray(
-										Array.from(Array(item + 1).keys()),
-									);
+									setRatingArray(stars.slice(0, item + 1));
 								}}
 								key={item}
 								src={star}

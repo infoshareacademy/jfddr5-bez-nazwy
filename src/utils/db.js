@@ -93,6 +93,17 @@ const logoutUser = () => {
 	signOut(auth);
 };
 
+const getUsers = async (callback) => {
+	const usersSnapshot = await getDocs(collection(db, "users"));
+	const usersList = usersSnapshot.docs.map((doc) => ({
+		uid: doc.id,
+		city: doc.data().city,
+		email: doc.data().email,
+		username: doc.data().username,
+	}));
+	callback(usersList);
+};
+
 const getBusinessList = async (callback) => {
 	const businessSnapshot = await getDocs(collection(db, "business")).catch(
 		() =>
@@ -166,7 +177,6 @@ const getRating = async (callback, id) => {
 		if (prevValue.some((value) => value.businessId === id)) {
 			return prevValue.map((value) => {
 				if (value.businessId === id) {
-					console.log(ratingList);
 					return { businessId: id, rating: ratingList };
 				}
 				return value;
@@ -284,11 +294,11 @@ const updateCalendarForService = async (
 };
 
 //adding opinions
-const addOpinion = async (businessId, businessName, comment, value) => {
+const addOpinion = async (businessId, businessName, comment, value, login) => {
 	const dateNow = new Date().toLocaleString("pl-PL");
 	await setDoc(doc(db, `business/${businessId}/rating`, dateNow), {
 		comment: comment,
-		user: auth.currentUser.email,
+		user: login,
 		value: value,
 	});
 	await setDoc(doc(db, `users/${auth.currentUser.uid}/opinions`, dateNow), {
@@ -318,4 +328,5 @@ export {
 	deleteServiceForUser,
 	updateCalendarForService,
 	addOpinion,
+	getUsers,
 };

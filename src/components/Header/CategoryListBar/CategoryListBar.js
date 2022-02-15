@@ -22,8 +22,6 @@ const CategoryListBar = ({ category, setCategory }) => {
 		});
 	};
 
-	console.log(category);
-
 	return (
 		<>
 			<ul className={styles.categoryBar}>

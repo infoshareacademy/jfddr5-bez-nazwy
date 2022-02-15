@@ -6,6 +6,7 @@ import { currentUserContext } from "../../../contexts/CurrentUserContext";
 import { modalDisplayContext } from "../../../contexts/ModalDisplayContext";
 import { serviceItemContext } from "../../../contexts/ServiceItemContext";
 import { getReservedSlots } from "../../../utils/db";
+import { formatDate } from "../../../utils/formatDate";
 import styles from "./CalendarModal.module.css";
 
 const CalendarModal = ({
@@ -68,11 +69,7 @@ const CalendarModal = ({
 			<div className={styles.reservationDetails}>
 				<p>
 					Data wizyty:
-					<span>
-						{date
-							? ` ${date.toLocaleString("pl-PL").slice(0, 10)}`
-							: ""}
-					</span>
+					<span>{date ? ` ${formatDate(date)}` : ""}</span>
 				</p>
 				<p>
 					Ilość wolnych miejsc:

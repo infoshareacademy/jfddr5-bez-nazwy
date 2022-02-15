@@ -3,7 +3,13 @@ import HomeView from "./views/HomeView";
 import ProductView from "./views/ProductView";
 import ProfileView from "./views/ProfileView";
 import { useState, useEffect, useMemo } from "react";
-import { auth, getBusinessList, getRating, getServicesList } from "./utils/db";
+import {
+	auth,
+	getBusinessList,
+	getRating,
+	getServicesList,
+	getUsers,
+} from "./utils/db";
 import { businessListContext } from "./contexts/BusinessListContext";
 import { currentUserContext } from "./contexts/CurrentUserContext";
 import "./App.css";
@@ -13,11 +19,13 @@ import { modalDisplayContext } from "./contexts/ModalDisplayContext";
 import { serviceItemContext } from "./contexts/ServiceItemContext";
 import { businessItemContext } from "./contexts/BusinessItemContext";
 import { ratingContext } from "./contexts/RatingContext";
+import { usersListContext } from "./contexts/usersListContext";
 
 function App() {
 	//USE STATES
 	//context states
 	const [currentUser, setCurrentUser] = useState(null);
+	const [usersList, setUsersList] = useState([]);
 	const [businessList, setBusinessList] = useState([]);
 	const [activeBusiness, setActiveBusiness] = useState("");
 	//service list state
@@ -41,6 +49,7 @@ function App() {
 
 	useEffect(() => {
 		getBusinessList(setBusinessList);
+		getUsers(setUsersList);
 		return () => setBusinessList([]);
 	}, []);
 
@@ -54,10 +63,6 @@ function App() {
 			return setServicesList([]), setRatingList([]);
 		};
 	}, [businessList]);
-
-	useEffect(() => {
-		// console.log(servicesList);
-	}, [category]);
 
 	const businessListContextValue = useMemo(
 		() => [businessList, setBusinessList],
@@ -84,7 +89,12 @@ function App() {
 		() => [ratingList, setRatingList],
 		[ratingList],
 	);
-	console.log(modalDisplay);
+
+	const usersListContextValue = useMemo(
+		() => [usersList, setUsersList],
+		[usersList],
+	);
+
 	return (
 		<businessListContext.Provider value={businessListContextValue}>
 			<currentUserContext.Provider value={currentUserContextValue}>
@@ -94,79 +104,43 @@ function App() {
 						<modalDisplayContext.Provider
 							value={modalDisplayContextValue}>
 							<ratingContext.Provider value={ratingContextValue}>
-								<Modal
-									showLogin={showLogin}
-									showRegister={showRegister}
-									setShowLogin={setShowLogin}
-									setShowRegister={setShowRegister}
-									setCategory={setCategory}
-									setCity={setCity}
-									city={city}
-									usersReservations={usersReservations}
-									setUsersReservations={setUsersReservations}
-								/>
-								<Routes>
-									<Route
-										path="/"
-										element={
-											<HomeView
-												setCategory={setCategory}
-												setCity={setCity}
-												city={city}
-												setShowLogin={setShowLogin}
-												setShowRegister={
-													setShowRegister
-												}
-											/>
+								<usersListContext.Provider
+									value={usersListContextValue}>
+									<Modal
+										showLogin={showLogin}
+										showRegister={showRegister}
+										setShowLogin={setShowLogin}
+										setShowRegister={setShowRegister}
+										setCategory={setCategory}
+										setCity={setCity}
+										city={city}
+										usersReservations={usersReservations}
+										setUsersReservations={
+											setUsersReservations
 										}
 									/>
-
-									<Route
-										path={`/product/${activeBusiness.id}`}
-										element={
-											<ProductView
-												servicesList={servicesList}
-												ratingList={ratingList}
-												setShowLogin={setShowLogin}
-												setShowRegister={
-													setShowRegister
-												}
-												setCategory={setCategory}
-												setCity={setCity}
-												city={city}
-											/>
-										}
-									/>
-
-									<Route
-										path="/s"
-										element={
-											<CategoryView
-												setServicesList={
-													setServicesList
-												}
-												servicesList={servicesList}
-												setShowLogin={setShowLogin}
-												setShowRegister={
-													setShowRegister
-												}
-												setCategory={setCategory}
-												setCity={setCity}
-												city={city}
-											/>
-										}
-									/>
-									{currentUser && (
+									<Routes>
 										<Route
-											path="/profile"
+											path="/"
 											element={
-												<ProfileView
-													usersReservations={
-														usersReservations
+												<HomeView
+													setCategory={setCategory}
+													setCity={setCity}
+													city={city}
+													setShowLogin={setShowLogin}
+													setShowRegister={
+														setShowRegister
 													}
-													setUsersReservations={
-														setUsersReservations
-													}
+												/>
+											}
+										/>
+
+										<Route
+											path={`/product/${activeBusiness.id}`}
+											element={
+												<ProductView
+													servicesList={servicesList}
+													ratingList={ratingList}
 													setShowLogin={setShowLogin}
 													setShowRegister={
 														setShowRegister
@@ -177,8 +151,53 @@ function App() {
 												/>
 											}
 										/>
-									)}
-								</Routes>
+
+										<Route
+											path="/s"
+											element={
+												<CategoryView
+													setServicesList={
+														setServicesList
+													}
+													servicesList={servicesList}
+													setShowLogin={setShowLogin}
+													setShowRegister={
+														setShowRegister
+													}
+													setCategory={setCategory}
+													setCity={setCity}
+													city={city}
+												/>
+											}
+										/>
+										{currentUser && (
+											<Route
+												path="/profile"
+												element={
+													<ProfileView
+														usersReservations={
+															usersReservations
+														}
+														setUsersReservations={
+															setUsersReservations
+														}
+														setShowLogin={
+															setShowLogin
+														}
+														setShowRegister={
+															setShowRegister
+														}
+														setCategory={
+															setCategory
+														}
+														setCity={setCity}
+														city={city}
+													/>
+												}
+											/>
+										)}
+									</Routes>
+								</usersListContext.Provider>
 							</ratingContext.Provider>
 						</modalDisplayContext.Provider>
 					</businessItemContext.Provider>

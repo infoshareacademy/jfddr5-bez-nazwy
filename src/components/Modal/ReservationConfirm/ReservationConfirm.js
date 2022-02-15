@@ -4,6 +4,7 @@ import { currentUserContext } from "../../../contexts/CurrentUserContext";
 import { modalDisplayContext } from "../../../contexts/ModalDisplayContext";
 import { serviceItemContext } from "../../../contexts/ServiceItemContext";
 import { setCalendarForService, setServiceForUser } from "../../../utils/db";
+import { formatDate } from "../../../utils/formatDate";
 import styles from "./ReservationConfirm.module.css";
 
 const ReservationConfirm = ({ date }) => {
@@ -42,10 +43,7 @@ const ReservationConfirm = ({ date }) => {
 			<p>
 				Typ wizyty: {activeService.name}, {activeService.price}zł
 			</p>
-			<p>
-				Data wizyty:{" "}
-				{date && `${date.toLocaleString("pl-PL").slice(0, 10)}`}
-			</p>
+			<p>Data wizyty: {date && ` ${formatDate(date)}`}</p>
 			<p>Czy na pewno chcesz zarezerwować ten termin?</p>
 			<button onClick={handleReservation}>Tak</button>
 			<button onClick={() => setDisplayModal("")}>Nie</button>

@@ -13,6 +13,7 @@ const Header = ({ setShowLogin, setShowRegister }) => {
 	const handleLogout = (e) => {
 		e.preventDefault();
 		logoutUser();
+		navigate("/");
 	};
 
 	const handleUserForm = (callback) => {

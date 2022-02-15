@@ -1,4 +1,4 @@
-import { useContext } from "react";
+import { useContext, useEffect } from "react";
 import ServicesList from "../components/CategoryList/ServicesList";
 import { businessItemContext } from "../contexts/BusinessItemContext";
 import styles from "./ProductView.module.css";
@@ -20,7 +20,12 @@ const ProductView = ({
 	showRegister,
 	setShowRegister,
 }) => {
-	const [activeBusiness] = useContext(businessItemContext);
+	const [activeBusiness, setActiveBusiness] = useContext(businessItemContext);
+
+	useEffect(() => {
+		window.scrollTo(0, 0);
+		setActiveBusiness(activeBusiness);
+	}, []);
 	return (
 		<div>
 			<FixedNavbar
