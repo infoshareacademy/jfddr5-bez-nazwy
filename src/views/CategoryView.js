@@ -18,16 +18,13 @@ const CategoryView = ({
 	setShowLogin,
 	showRegister,
 	setShowRegister,
+	city,
 }) => {
 	const [businessList] = useContext(businessListContext);
 	const [searchParams] = useSearchParams();
 
-	const city = pathNormalize(searchParams.get("city") ?? "");
-	const category = pathNormalize(searchParams.get("category") ?? "");
-
-	useEffect(() => {
-		window.scrollTo(0, 0);
-	}, []);
+	const cityPath = pathNormalize(searchParams.get("city") ?? "");
+	const categoryPath = pathNormalize(searchParams.get("category") ?? "");
 
 	return (
 		<div>
@@ -36,23 +33,25 @@ const CategoryView = ({
 				product={product}
 				setCategory={setCategory}
 				setCity={setCity}
-				city={city}
 				currentUser={currentUser}
 				showLogin={showLogin}
 				setShowLogin={setShowLogin}
 				showRegister={showRegister}
 				setShowRegister={setShowRegister}
+				city={city}
 			/>
 			<div>
 				{businessList
 					.filter(
 						(business) =>
-							(pathNormalize(business.category) === category &&
-								!city) ||
-							(pathNormalize(business.city) === city &&
-								!category) ||
-							(pathNormalize(business.city) === city &&
-								pathNormalize(business.category) === category),
+							(pathNormalize(business.category) ===
+								categoryPath &&
+								!cityPath) ||
+							(pathNormalize(business.city) === cityPath &&
+								!categoryPath) ||
+							(pathNormalize(business.city) === cityPath &&
+								pathNormalize(business.category) ===
+									categoryPath),
 					)
 					.map((business) => (
 						<CategoryList

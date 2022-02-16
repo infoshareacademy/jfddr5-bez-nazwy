@@ -62,6 +62,7 @@ const HomeView = ({
 						<CategoryListBar
 							category={category}
 							setCategory={setCategory}
+							setCity={setCity}
 						/>
 					</div>
 					<HeroSlideshow />

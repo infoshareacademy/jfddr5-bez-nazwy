@@ -20,3 +20,12 @@
 	color: var(--categoryBarHover);
 	border-bottom: 3px solid var(--categoryBarHover);
 }
+
+.categoryActive {
+	font-size: var(--categoryBarFontSize);
+	color: var(--categoryBarHover);
+	text-decoration: none;
+	padding-bottom: 10px;
+	border-bottom: 3px solid var(--categoryBarHover);
+	cursor: pointer;
+}

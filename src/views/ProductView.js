@@ -5,6 +5,7 @@ import styles from "./ProductView.module.css";
 import RatingList from "../components/CategoryList/RatingList";
 import FixedNavbar from "../components/Header/FixedNavbar/FixedNavbar";
 import Footer from "../components/Footer/Footer";
+import { useSearchParams } from "react-router-dom";
 
 const ProductView = ({
 	servicesList,
@@ -22,9 +23,6 @@ const ProductView = ({
 }) => {
 	const [activeBusiness, setActiveBusiness] = useContext(businessItemContext);
 
-	useEffect(() => {
-		window.scrollTo(0, 0);
-	}, []);
 	return (
 		<div>
 			<FixedNavbar

@@ -8,13 +8,13 @@ const Footer = () => {
 				<div className={styles.brand}>
 					<div className={styles.mark}>petsy</div>
 					<div className={styles.rights}>
-						@ 2022 petsy Inc. Wszystkie prawa zastrzeżone
+						@ 2022 petsy Inc. <p>Wszystkie prawa zastrzeżone</p>
 					</div>
 				</div>
 				<div className={styles.info}>
 					<div className={styles.contact}>KONTAKT</div>
+					<div>developerzy@petsy.com</div>
 					<div>ul. FrontEndowska 5</div>
-					<div>e-mail: najlepszi.developerzy@gmail.com</div>
 					<div>00-600 DevCity</div>
 				</div>
 			</div>

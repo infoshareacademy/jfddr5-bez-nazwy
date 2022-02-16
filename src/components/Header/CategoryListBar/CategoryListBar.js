@@ -1,11 +1,12 @@
-import { useContext } from "react";
+import { useContext, useState } from "react";
 import { createSearchParams, useNavigate } from "react-router-dom";
 import { businessListContext } from "../../../contexts/BusinessListContext";
 import { pathNormalize } from "../../../utils/pathNormalize";
 import styles from "./CategoryListBar.module.css";
 
-const CategoryListBar = ({ category, setCategory }) => {
+const CategoryListBar = ({ category, setCategory, setCity }) => {
 	const [businessList] = useContext(businessListContext);
+	const [activeCategory, setActiveCategory] = useState(category);
 
 	const navigate = useNavigate();
 	const categoryList = Array.from(
@@ -13,6 +14,8 @@ const CategoryListBar = ({ category, setCategory }) => {
 	);
 
 	const handleCategory = (category) => {
+		setCity("");
+		setActiveCategory(category);
 		setCategory(category);
 		navigate({
 			pathname: "/s",
@@ -29,7 +32,11 @@ const CategoryListBar = ({ category, setCategory }) => {
 					return (
 						<li
 							key={category}
-							className={styles.category}
+							className={
+								category === activeCategory
+									? styles.categoryActive
+									: styles.category
+							}
 							onClick={() => handleCategory(category)}>
 							{category}
 						</li>

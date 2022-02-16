@@ -41,7 +41,10 @@ const FixedNavbar = ({
 						city={city}
 					/>
 				</div>
-				<CategoryListBarDark setCategory={setCategory} />
+				<CategoryListBarDark
+					setCategory={setCategory}
+					setCity={setCity}
+				/>
 			</div>
 		</div>
 	);

@@ -63,6 +63,7 @@ export const SearchBar = ({ setProduct, setCategory, setCity, city }) => {
 
 			const categoryPath = pathNormalize(category ?? "");
 			const cityPath = pathNormalize(city ?? "");
+			console.log(city, category);
 			setCity(city);
 			setCategory(category);
 			(category &&

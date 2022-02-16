@@ -15,7 +15,7 @@ const InfoSection = () => {
 						swojej okolicy? Szukasz miejsca, w którym Twoja pociecha
 						otrzyma najlepszą opiekę pod słońcem? Petsy to darmowa i
 						łatwa w obsłudze aplikacja do rezerwacji, dzięki której
-						bez poroblemu znajdziecie dogodny termin dla Was i
+						bez problemu znajdziecie dogodny termin dla Was i
 						Waszego pupila. Bez wychodzenia z domu lub sięgania po
 						telefon - na Petsy zarezerwujesz wygodny dla Was termin
 						o każdej porze bez względu na miejsce.
