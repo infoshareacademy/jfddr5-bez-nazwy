@@ -54,7 +54,7 @@ const registerUser = async (username, email, password, city) => {
 			case "auth/invalid-email":
 				registerErrorMessage = "Podany adres e-mail jest niepoprawny.";
 				break;
-			case "auth/email-already-exists":
+			case "auth/email-already-in-use":
 				registerErrorMessage = "Podany adres e-mail jest już w użyciu.";
 				break;
 			case "auth/internal-error":
