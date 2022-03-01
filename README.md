@@ -1,70 +1,74 @@
-# Getting Started with Create React App
+# Petsy
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+Petsy is an application to book a visit for your pet.
 
-## Available Scripts
+Check it - [Petsy Web Page](https://petsy-83eb2.web.app/)
 
-In the project directory, you can run:
+Read only access is available to all users, but if you want book a visit or add opinion you must log in.
 
-### `npm start`
+To log in you must click in the button on the top right corner.
+![Login](./src/utils/photos/petsy6.png)
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
+## Technology
 
-The page will reload when you make changes.\
-You may also see any lint errors in the console.
+-   React
+-   Firebase
+-   CSS Modules
 
-### `npm test`
+## Views
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+### Home View
 
-### `npm run build`
+Home View consists of:
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+-   Search bar
+-   Recommended section - There are the five business with the best opinions.
+-   Info section - A few sentences about app.
+-   Footer - Contact information.
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
+![Home](./src/utils/photos/petsy1.png)
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+After you click on search bar you can search by category, business name or city.
 
-### `npm run eject`
+<img src='./src/utils/photos/petsy4.png' alt='searchbar1' style='width: 50%'/><img src='./src/utils/photos/petsy5.png' alt='searchbar2' style='width: 50%'/>
 
-**Note: this is a one-way operation. Once you `eject`, you can't go back!**
+### Category View
 
-If you aren't satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
+After you searched business per category or city you will go to Category View with list of businesses according to your preferences.
+In this step you can check the service and book a date.
 
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you're on your own.
+![Category](./src/utils/photos/petsy2.png)
 
-You don't have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn't feel obligated to use this feature. However we understand that this tool wouldn't be useful if you couldn't customize it when you are ready for it.
+### Product View
 
-## Learn More
+Product view consists of:
 
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
+-   image provided by the company
+-   information section
+-   list of services
+-   opinions
 
-To learn React, check out the [React documentation](https://reactjs.org/).
+![Product](./src/utils/photos/petsy3.png)
 
-### Code Splitting
+### Reservation
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
+To book a visit we use the React Calendar Component.
+After you will make a reservation, it will be present in your reservation list. You can change the date by deleting previous and adding new one.
 
-### Analyzing the Bundle Size
+![Calendar](./src/utils/photos/petsy7.png)
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
+More about [React Calendar](https://www.npmjs.com/package/react-calendar).
 
-### Making a Progressive Web App
+#
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
+## Our team
 
-### Advanced Configuration
+[Emilia Brzezińska](https://github.com/emiliabrzezinska)
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
+[Maria Drozdowska](https://github.com/drozdowska-maria)
 
-### Deployment
+[Daniel Jurkiewicz](https://github.com/daniel-jurkiewicz)
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
+[Joanna Florczak](https://github.com/Joanna35)
 
-### `npm run build` fails to minify
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
+[Katarzyna Kabała](https://github.com/Kasiaqu)
