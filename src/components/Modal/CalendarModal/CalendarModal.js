@@ -47,7 +47,6 @@ const CalendarModal = ({
 		}
 	};
 	return (
-		//todo: disabled niedziele i soboty
 		<div
 			className={styles.calendarModalContent}
 			onClick={(e) => e.stopPropagation()}>

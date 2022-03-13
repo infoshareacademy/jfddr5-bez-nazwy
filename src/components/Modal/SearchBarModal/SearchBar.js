@@ -6,6 +6,7 @@ import styles from "./SearchBar.module.css";
 import { pathNormalize } from "../../../utils/pathNormalize";
 import { modalDisplayContext } from "../../../contexts/ModalDisplayContext";
 import { businessItemContext } from "../../../contexts/BusinessItemContext";
+import { autocompleteHelper } from "../../../utils/autocompleteHelper";
 
 export const SearchBar = ({ setProduct, setCategory, setCity, city }) => {
 	const [searchValue, setSearchValue] = useState("");
@@ -19,9 +20,8 @@ export const SearchBar = ({ setProduct, setCategory, setCity, city }) => {
 	const cityInputRef = useRef();
 	const [businessList] = useContext(businessListContext);
 
-	const nameList = Array.from(
-		new Set(businessList.map((business) => business.name)),
-	);
+	//Lists of business names, categories, cities
+	const nameList = businessList.map((business) => business.name);
 
 	const categoryList = Array.from(
 		new Set(businessList.map((business) => business.category)),
@@ -31,41 +31,41 @@ export const SearchBar = ({ setProduct, setCategory, setCity, city }) => {
 		new Set(businessList.map((business) => business.city)),
 	);
 
-	const helper = (ref, array, length) => {
-		return (
-			document.activeElement === ref.current &&
-			ref.current.value.length >= length &&
-			array.some((item) =>
-				item.toLowerCase().includes(ref.current.value.toLowerCase()),
-			)
-		);
-	};
+	//submit button handler
 	const handleSubmit = (e) => {
 		e.preventDefault();
 		//name
 		if (businessList.some((business) => searchValue === business.name)) {
+			//find business object
 			const businessObj = businessList.find(
 				(business) => searchValue === business.name,
 			);
+			//set active business to this object
 			setActiveBusiness(businessObj);
+			//navigate to the site
 			navigate(`/product/${businessObj.id}`);
+			//close modal
 			setDisplayModal("");
 		}
-		//both
+		//category & city
 		else if (
 			categoryList.some((category) => searchValue === category) ||
 			cityList.some((city) => cityValue === city)
 		) {
+			//clear category
 			setCategory("");
+			//find category and city
 			const category =
 				categoryList.find((category) => searchValue === category) ?? "";
 			const city = cityList.find((city) => cityValue === city) ?? "";
-
-			const categoryPath = pathNormalize(category ?? "");
-			const cityPath = pathNormalize(city ?? "");
-			console.log(city, category);
+			//normalize paths
+			const categoryPath = pathNormalize(searchValue ?? "");
+			const cityPath = pathNormalize(cityValue ?? "");
+			//set city and category
 			setCity(city);
 			setCategory(category);
+
+			//navigate both
 			(category &&
 				city &&
 				navigate({
@@ -75,6 +75,7 @@ export const SearchBar = ({ setProduct, setCategory, setCity, city }) => {
 						category: categoryPath,
 					})}`,
 				})) ||
+				//navigate category - city is not set
 				(!city &&
 					navigate({
 						pathname: "/s",
@@ -82,6 +83,7 @@ export const SearchBar = ({ setProduct, setCategory, setCity, city }) => {
 							category: categoryPath,
 						})}`,
 					})) ||
+				//navigate city - category is not set
 				(!category &&
 					navigate({
 						pathname: "/s",
@@ -89,6 +91,7 @@ export const SearchBar = ({ setProduct, setCategory, setCity, city }) => {
 							city: cityPath,
 						})}`,
 					}));
+			//close modal
 			setDisplayModal("");
 		}
 	};
@@ -116,30 +119,38 @@ export const SearchBar = ({ setProduct, setCategory, setCity, city }) => {
 					{(document.activeElement === searchInputRef.current ||
 						cityInputRef.current) && (
 						<div>
-							{helper(searchInputRef, nameList, 3) && (
+							{autocompleteHelper(
+								searchInputRef,
+								nameList,
+								3,
+							) && (
 								<SearchBarList
-									nameList={nameList}
+									autocompleteList={nameList}
 									header="Salony"
-									searchInputRef={searchInputRef}
-									setSearchValue={setSearchValue}
+									inputRef={searchInputRef}
+									setValue={setSearchValue}
 								/>
 							)}
 
-							{helper(searchInputRef, categoryList, 3) && (
+							{autocompleteHelper(
+								searchInputRef,
+								categoryList,
+								3,
+							) && (
 								<SearchBarList
-									categoryList={categoryList}
+									autocompleteList={categoryList}
 									header="Usługi"
-									searchInputRef={searchInputRef}
-									setSearchValue={setSearchValue}
+									inputRef={searchInputRef}
+									setValue={setSearchValue}
 								/>
 							)}
 
-							{helper(cityInputRef, cityList, 1) && (
+							{autocompleteHelper(cityInputRef, cityList, 1) && (
 								<SearchBarList
-									cityList={cityList}
+									autocompleteList={cityList}
 									header="Miasta"
-									cityInputRef={cityInputRef}
-									setCityValue={setCityValue}
+									inputRef={cityInputRef}
+									setValue={setCityValue}
 								/>
 							)}
 						</div>
