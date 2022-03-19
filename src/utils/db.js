@@ -111,6 +111,7 @@ const getBusinessList = async (callback) => {
 				.then((res) => res.json())
 				.then((docs) => callback(docs.documents)),
 	);
+
 	const businessList = businessSnapshot.docs.map((doc) => ({
 		id: doc.id,
 		name: doc.data().name,
