@@ -1,11 +1,17 @@
-import { useContext, useState } from "react";
+import { Dispatch, SetStateAction, useState } from "react";
 import { createSearchParams, useNavigate } from "react-router-dom";
-import { businessListContext } from "../../../contexts/BusinessListContext";
+import { useBusinessListContext } from "../../../contexts/BusinessListContext";
 import { pathNormalize } from "../../../utils/pathNormalize";
 import styles from "./CategoryListBar.module.css";
 
-const CategoryListBar = ({ category, setCategory, setCity }) => {
-	const [businessList] = useContext(businessListContext);
+interface Props {
+	category?: string;
+	setCategory: (category: string) => void;
+	setCity: Dispatch<SetStateAction<string>>;
+}
+
+const CategoryListBar = ({ category, setCategory, setCity }: Props) => {
+	const [businessList] = useBusinessListContext();
 	const [activeCategory, setActiveCategory] = useState(category);
 
 	const navigate = useNavigate();
@@ -13,7 +19,7 @@ const CategoryListBar = ({ category, setCategory, setCity }) => {
 		new Set(businessList.map((business) => business.category)),
 	);
 
-	const handleCategory = (category) => {
+	const handleCategory = (category: string) => {
 		setCity("");
 		setActiveCategory(category);
 		setCategory(category);

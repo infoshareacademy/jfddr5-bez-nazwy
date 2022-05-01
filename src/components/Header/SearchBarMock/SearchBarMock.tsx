@@ -1,11 +1,14 @@
 import searchIcon from "./images/search.png";
 import pinIcon from "./images/pin.png";
 import styles from "./SearchBarMock.module.css";
-import { useContext } from "react";
-import { modalDisplayContext } from "../../../contexts/ModalDisplayContext";
+import { useModalDisplayContext } from "../../../contexts/ModalDisplayContext";
 
-export const SearchBarMock = ({ city }) => {
-	const [displayModal, setDisplayModal] = useContext(modalDisplayContext);
+interface Props {
+	city: string;
+}
+
+export const SearchBarMock = ({ city }: Props) => {
+	const [, setDisplayModal] = useModalDisplayContext();
 	const handleSearch = () => {
 		setDisplayModal("search-bar");
 	};

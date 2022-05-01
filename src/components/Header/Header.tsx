@@ -1,22 +1,29 @@
-import { useContext } from "react";
 import { logoutUser } from "../../utils/db";
-import { currentUserContext } from "../../contexts/CurrentUserContext";
+import { useCurrentUserContext } from "../../contexts/CurrentUserContext";
 import styles from "./Header.module.css";
-import { modalDisplayContext } from "../../contexts/ModalDisplayContext";
+import { useModalDisplayContext } from "../../contexts/ModalDisplayContext";
 import { useNavigate } from "react-router-dom";
+import React, { Dispatch, SetStateAction } from "react";
 
-const Header = ({ setShowLogin, setShowRegister }) => {
-	const [currentUser] = useContext(currentUserContext);
-	const [displayModal, setDisplayModal] = useContext(modalDisplayContext);
+interface Props {
+	setShowLogin: Dispatch<SetStateAction<boolean>>;
+	setShowRegister: Dispatch<SetStateAction<boolean>>;
+}
+
+const Header = ({ setShowLogin, setShowRegister }: Props) => {
+	const [currentUser] = useCurrentUserContext();
+	const [, setDisplayModal] = useModalDisplayContext();
 	const navigate = useNavigate();
 
-	const handleLogout = (e) => {
+	const handleLogout = (e: React.FormEvent): void => {
 		e.preventDefault();
 		logoutUser();
 		navigate("/");
 	};
 
-	const handleUserForm = (callback) => {
+	const handleUserForm = (
+		callback: Dispatch<SetStateAction<boolean>>,
+	): void => {
 		setDisplayModal("user-form");
 		callback(true);
 	};
