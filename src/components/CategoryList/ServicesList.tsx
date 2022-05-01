@@ -1,7 +1,13 @@
 import Service from "./Service";
 import styles from "./CategoryList.module.css";
+import { Business, BusinessService } from "../../utils/db";
 
-const ServicesList = ({ servicesList, business }) => {
+interface Props {
+	servicesList: BusinessService[];
+	business: Business;
+}
+
+const ServicesList = ({ servicesList, business }: Props) => {
 	return (
 		<>
 			{servicesList?.map((bus) =>

@@ -1,35 +1,38 @@
-import { useContext, useEffect, useState } from "react";
-import { businessItemContext } from "../../contexts/BusinessItemContext";
-import { ratingContext } from "../../contexts/RatingContext";
-import { serviceItemContext } from "../../contexts/ServiceItemContext";
-import { addOpinion, getRating } from "../../utils/db";
 import styles from "./Rating.module.css";
 import star from "./images/star.png";
-import { usersListContext } from "../../contexts/usersListContext";
-import { currentUserContext } from "../../contexts/CurrentUserContext";
+import React, { useState } from "react";
+import { addOpinion, getRating, User } from "../../utils/db";
+import { useBusinessItemContext } from "../../contexts/BusinessItemContext";
+import { useCurrentUserContext } from "../../contexts/CurrentUserContext";
+import { useRatingListContext } from "../../contexts/RatingContext";
+import { useUserListContext } from "../../contexts/usersListContext";
 
 export const OpinionForm = () => {
-	const [activeBusiness] = useContext(businessItemContext);
-	const [activeService] = useContext(serviceItemContext);
-	const [ratingList, setRatingList] = useContext(ratingContext);
-	const [usersList] = useContext(usersListContext);
-	const [currentUser] = useContext(currentUserContext);
-
+	const [activeBusiness] = useBusinessItemContext();
+	const [, setRatingList] = useRatingListContext();
+	const [usersList] = useUserListContext();
+	const [currentUser] = useCurrentUserContext();
 	const [comment, setComment] = useState("");
-	const [ratingArray, setRatingArray] = useState([]);
+
+	const [ratingArray, setRatingArray] = useState<number[]>([]);
 
 	const stars = [0, 1, 2, 3, 4];
 
-	const handleOpinionSubmit = (e) => {
+	const handleOpinionSubmit = (e: React.FormEvent): void => {
 		e.preventDefault();
+
+		const myUser = usersList.find((user) => user.uid === currentUser.uid);
+
+		if (myUser === undefined) {
+			return;
+		}
 		if (ratingArray.length > 0) {
 			addOpinion(
 				activeBusiness.id,
 				activeBusiness.name,
 				comment,
 				ratingArray.length,
-				usersList?.find((user) => user.uid === currentUser.uid)
-					.username,
+				myUser.username,
 			); //(businessId, businessName, serviceId, serviceName, comment, value)
 			getRating(setRatingList, activeBusiness.id);
 

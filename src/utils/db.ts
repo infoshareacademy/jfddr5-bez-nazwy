@@ -100,7 +100,7 @@ const loginUser = async (email: string, password: string) => {
 const logoutUser = () => {
 	signOut(auth);
 };
-interface User {
+export interface User {
 	uid: string;
 	city: string;
 	email: string;
@@ -160,7 +160,7 @@ const getBusinessList = async (callback: BusinessCallback) => {
 	callback(businessList);
 };
 
-interface Service {
+export interface Service {
 	id: string;
 	name: string;
 	price: string;
@@ -210,14 +210,14 @@ const getServicesList = async (
 	]);
 };
 
-interface Rating {
+export interface Rating {
 	id: string;
 	user: string;
 	value: number;
 	comment: string;
 }
 
-interface BusinessRating {
+export interface BusinessRating {
 	rating: Rating[];
 	businessId: string;
 }

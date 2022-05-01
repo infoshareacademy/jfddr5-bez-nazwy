@@ -1,22 +1,28 @@
-import { useState, useEffect, useContext } from "react";
-import { businessItemContext } from "../../contexts/BusinessItemContext";
-import { currentUserContext } from "../../contexts/CurrentUserContext";
+import { useState, useEffect } from "react";
+import { useBusinessItemContext } from "../../contexts/BusinessItemContext";
+import { useCurrentUserContext } from "../../contexts/CurrentUserContext";
+import { BusinessRating, Rating as Opinion } from "../../utils/db";
 import { OpinionForm } from "./OpinionForm";
 import Rating from "./Rating";
 import styles from "./Rating.module.css";
 
-const RatingList = ({ ratingList }) => {
+interface Props {
+	ratingList: BusinessRating[];
+}
+
+const RatingList = ({ ratingList }: Props) => {
 	const [sort, setSort] = useState("default");
-	const [activeBusiness] = useContext(businessItemContext);
-	const [currentUser] = useContext(currentUserContext);
-	const sortingOpinion = (a) => {
+	const [activeBusiness] = useBusinessItemContext();
+	const [currentUser] = useCurrentUserContext();
+
+	const sortingOpinion = (a: string): void => {
 		setSort(a);
 	};
 	useEffect(() => {
 		return () => setSort("default");
 	}, []);
 
-	const sorting = (n1, n2) => {
+	const sorting = (n1: Opinion, n2: Opinion): number => {
 		if (sort === "default") {
 			return n1.value === n2.value ? 1 : -1;
 		}

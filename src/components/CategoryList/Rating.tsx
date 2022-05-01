@@ -1,7 +1,12 @@
+import { Rating as RatingType } from "../../utils/db";
 import star from "./images/star.png";
 import styles from "./Rating.module.css";
 
-const Rating = ({ rating }) => {
+interface Props {
+	rating: RatingType;
+}
+
+const Rating = ({ rating }: Props) => {
 	const stars = [0, 1, 2, 3, 4];
 	const ratingArray = stars.slice(0, rating.value);
 

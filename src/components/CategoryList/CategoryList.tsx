@@ -6,7 +6,7 @@ import { Business, BusinessService } from "../../utils/db";
 
 interface Props {
 	business: Business;
-	servicesList: BusinessService;
+	servicesList: BusinessService[];
 }
 
 const CategoryList = ({ business, servicesList }: Props) => {

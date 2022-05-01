@@ -1,13 +1,18 @@
-import { useContext } from "react";
 import styles from "./CategoryList.module.css";
-import { modalDisplayContext } from "../../contexts/ModalDisplayContext";
-import { serviceItemContext } from "../../contexts/ServiceItemContext";
-import { businessItemContext } from "../../contexts/BusinessItemContext";
+import { useBusinessItemContext } from "../../contexts/BusinessItemContext";
+import { useModalDisplayContext } from "../../contexts/ModalDisplayContext";
+import { useServiceItemContext } from "../../contexts/ServiceItemContext";
+import { Business, Service as ServiceType } from "../../utils/db";
 
-const Service = ({ service, business }) => {
-	const [displayModal, setDisplayModal] = useContext(modalDisplayContext);
-	const [activeService, setActiveService] = useContext(serviceItemContext);
-	const [activeBusiness, setActiveBusiness] = useContext(businessItemContext);
+interface Props {
+	business: Business;
+	service: ServiceType;
+}
+
+const Service = ({ service, business }: Props) => {
+	const [, setDisplayModal] = useModalDisplayContext();
+	const [, setActiveService] = useServiceItemContext();
+	const [, setActiveBusiness] = useBusinessItemContext();
 
 	const handleServiceButton = () => {
 		setActiveBusiness(business);
