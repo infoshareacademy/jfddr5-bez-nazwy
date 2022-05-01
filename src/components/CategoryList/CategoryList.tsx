@@ -1,14 +1,19 @@
 import styles from "./CategoryList.module.css";
 import { useNavigate } from "react-router-dom";
 import ServicesList from "./ServicesList";
-import { useContext } from "react";
-import { businessItemContext } from "../../contexts/BusinessItemContext";
+import { useBusinessItemContext } from "../../contexts/BusinessItemContext";
+import { Business, BusinessService } from "../../utils/db";
 
-const CategoryList = ({ business, servicesList }) => {
-	const [activeBusiness, setActiveBusiness] = useContext(businessItemContext);
+interface Props {
+	business: Business;
+	servicesList: BusinessService;
+}
+
+const CategoryList = ({ business, servicesList }: Props) => {
+	const [, setActiveBusiness] = useBusinessItemContext();
 
 	const navigate = useNavigate();
-	const handleClick = (business) => {
+	const handleClick = (business: Business) => {
 		setActiveBusiness(business);
 		navigate(`/product/${business.id}`);
 	};

@@ -1,4 +1,4 @@
-import { initializeApp } from "firebase/app";
+import { FirebaseError, initializeApp } from "firebase/app";
 import {
 	getFirestore,
 	setDoc,
@@ -16,6 +16,7 @@ import {
 	signInWithEmailAndPassword,
 	signOut,
 } from "firebase/auth";
+import { Dispatch, SetStateAction } from "react";
 
 const firebaseConfig = {
 	apiKey: "AIzaSyDyt3k2BzoM2Oav67VHJh38Dbtp3T0Vn_4",
@@ -30,7 +31,12 @@ const app = initializeApp(firebaseConfig);
 const db = getFirestore(app);
 const auth = getAuth(app);
 
-const registerUser = async (username, email, password, city) => {
+const registerUser = async (
+	username: string,
+	email: string,
+	password: string,
+	city: string,
+) => {
 	let registerErrorMessage;
 	try {
 		const response = await createUserWithEmailAndPassword(
@@ -45,7 +51,8 @@ const registerUser = async (username, email, password, city) => {
 			email,
 			city,
 		});
-	} catch (error) {
+	} catch (e) {
+		const error = e as FirebaseError;
 		switch (error.code) {
 			case "auth/weak-password":
 				registerErrorMessage =
@@ -67,11 +74,12 @@ const registerUser = async (username, email, password, city) => {
 	}
 };
 
-const loginUser = async (email, password) => {
+const loginUser = async (email: string, password: string) => {
 	let loginErrorMessage;
 	try {
 		await signInWithEmailAndPassword(auth, email, password);
-	} catch (error) {
+	} catch (e) {
+		const error = e as FirebaseError;
 		switch (error.code) {
 			case "auth/wrong-password":
 				loginErrorMessage =
@@ -92,8 +100,16 @@ const loginUser = async (email, password) => {
 const logoutUser = () => {
 	signOut(auth);
 };
-
-const getUsers = async (callback) => {
+interface User {
+	uid: string;
+	city: string;
+	email: string;
+	username: string;
+}
+interface UserCallback {
+	(user: User[]): void;
+}
+const getUsers = async (callback: UserCallback) => {
 	const usersSnapshot = await getDocs(collection(db, "users"));
 	const usersList = usersSnapshot.docs.map((doc) => ({
 		uid: doc.id,
@@ -104,13 +120,33 @@ const getUsers = async (callback) => {
 	callback(usersList);
 };
 
-const getBusinessList = async (callback) => {
+export interface Business {
+	id: string;
+	name: string;
+	category: string;
+	city: string;
+	contact: {
+		street: string;
+	};
+	photo: string;
+	info: string;
+}
+
+interface BusinessCallback {
+	(business: Business[]): void;
+}
+
+const getBusinessList = async (callback: BusinessCallback) => {
 	const businessSnapshot = await getDocs(collection(db, "business")).catch(
 		() =>
 			fetch("http://localhost:3000/sampleData.json")
 				.then((res) => res.json())
 				.then((docs) => callback(docs.documents)),
 	);
+
+	if (businessSnapshot === undefined) {
+		return;
+	}
 
 	const businessList = businessSnapshot.docs.map((doc) => ({
 		id: doc.id,
@@ -124,7 +160,24 @@ const getBusinessList = async (callback) => {
 	callback(businessList);
 };
 
-const getServicesList = async (callback, id) => {
+interface Service {
+	id: string;
+	name: string;
+	price: string;
+	slot: string;
+}
+
+export interface BusinessService {
+	services: Service[];
+	businessId: string;
+}
+
+type BusinessServiceCallback = Dispatch<SetStateAction<BusinessService[]>>;
+
+const getServicesList = async (
+	callback: BusinessServiceCallback,
+	id: string,
+) => {
 	const servicesSnapshot = await getDocs(
 		collection(db, `business/${id}/services`),
 	).catch(() =>
@@ -140,6 +193,10 @@ const getServicesList = async (callback, id) => {
 			),
 	);
 
+	if (servicesSnapshot === undefined) {
+		return;
+	}
+
 	const servicesList = servicesSnapshot.docs.map((doc) => ({
 		id: doc.id,
 		name: doc.data().name,
@@ -153,7 +210,21 @@ const getServicesList = async (callback, id) => {
 	]);
 };
 
-const getRating = async (callback, id) => {
+interface Rating {
+	id: string;
+	user: string;
+	value: number;
+	comment: string;
+}
+
+interface BusinessRating {
+	rating: Rating[];
+	businessId: string;
+}
+
+type BusinessRatingCallback = Dispatch<SetStateAction<BusinessRating[]>>;
+
+const getRating = async (callback: BusinessRatingCallback, id: string) => {
 	const ratingSnapshot = await getDocs(
 		collection(db, `business/${id}/rating`),
 	).catch(() =>
@@ -168,12 +239,18 @@ const getRating = async (callback, id) => {
 				]),
 			),
 	);
+
+	if (ratingSnapshot === undefined) {
+		return;
+	}
+
 	const ratingList = ratingSnapshot.docs.map((doc) => ({
 		id: doc.id,
 		user: doc.data().user,
 		value: doc.data().value,
 		comment: doc.data().comment,
 	}));
+
 	callback((prevValue) => {
 		if (prevValue.some((value) => value.businessId === id)) {
 			return prevValue.map((value) => {
@@ -189,11 +266,11 @@ const getRating = async (callback, id) => {
 };
 
 const setCalendarForService = async (
-	businessId,
-	serviceId,
-	dateId,
-	date,
-	user,
+	businessId: string,
+	serviceId: string,
+	dateId: string,
+	date: string,
+	user: string,
 ) => {
 	await setDoc(
 		doc(
@@ -213,14 +290,17 @@ const setCalendarForService = async (
 };
 
 const setServiceForUser = async (
-	reservationId,
-	date,
-	businessId,
-	businessName,
-	serviceId,
-	serviceName,
-	dateNow,
+	reservationId: string,
+	date: string,
+	businessId: string,
+	businessName: string,
+	serviceId: string,
+	serviceName: string,
+	dateNow: string,
 ) => {
+	if (auth.currentUser === null) {
+		return;
+	}
 	await setDoc(
 		doc(db, "users", auth.currentUser.uid, "reservations", reservationId),
 		{
@@ -238,7 +318,21 @@ const setServiceForUser = async (
 	);
 };
 
-const getReservedSlots = async (businessId, serviceId, callback, dateId) => {
+interface UsersReservationsPerDay {
+	time: string;
+	user: string;
+}
+
+type UsersReservationsCallback = Dispatch<
+	SetStateAction<UsersReservationsPerDay[]>
+>;
+
+const getReservedSlots = async (
+	businessId: string,
+	serviceId: string,
+	callback: UsersReservationsCallback,
+	dateId: Date,
+) => {
 	const reservationsPerDaySnapshot = await getDocs(
 		collection(db, `business/${businessId}/services/${serviceId}/calendar`),
 	);
@@ -255,7 +349,24 @@ const getReservedSlots = async (businessId, serviceId, callback, dateId) => {
 	callback(() => (slotItem ? slotItem.usersReservations : []));
 };
 
-const getServiceForUser = async (callback) => {
+interface UserReservations {
+	id: string;
+	date: string;
+	businessName: string;
+	businessId: string;
+	serviceName: string;
+	serviceId: string;
+}
+
+interface UserReservationsCallback {
+	(userReservations: UserReservations[]): void;
+}
+
+const getServiceForUser = async (callback: UserReservationsCallback) => {
+	if (auth.currentUser === null) {
+		return;
+	}
+
 	const userReservationDocuments = await getDocs(
 		collection(db, "users", auth.currentUser.uid, "reservations"),
 	);
@@ -269,7 +380,17 @@ const getServiceForUser = async (callback) => {
 	}));
 	callback(userReservationsList);
 };
-const deleteServiceForUser = async (docId, callback) => {
+
+type ServiceForUserCallback = Dispatch<SetStateAction<UserReservations[]>>;
+
+const deleteServiceForUser = async (
+	docId: string,
+	callback: ServiceForUserCallback,
+) => {
+	if (auth.currentUser === null) {
+		return;
+	}
+
 	await deleteDoc(
 		doc(db, "users", auth.currentUser.uid, "reservations", docId),
 	);
@@ -277,10 +398,10 @@ const deleteServiceForUser = async (docId, callback) => {
 };
 
 const updateCalendarForService = async (
-	businessId,
-	serviceId,
-	dateId,
-	item,
+	businessId: string,
+	serviceId: string,
+	dateId: string,
+	item: UsersReservationsPerDay,
 ) => {
 	await updateDoc(
 		doc(
@@ -295,13 +416,24 @@ const updateCalendarForService = async (
 };
 
 //adding opinions
-const addOpinion = async (businessId, businessName, comment, value, login) => {
+const addOpinion = async (
+	businessId: string,
+	businessName: string,
+	comment: string,
+	value: number,
+	login: string,
+) => {
 	const dateNow = new Date().toLocaleString("pl-PL");
 	await setDoc(doc(db, `business/${businessId}/rating`, dateNow), {
 		comment: comment,
 		user: login,
 		value: value,
 	});
+
+	if (auth.currentUser === null) {
+		return;
+	}
+
 	await setDoc(doc(db, `users/${auth.currentUser.uid}/opinions`, dateNow), {
 		business: {
 			name: businessName,
