@@ -1,40 +1,40 @@
-import { useContext, useEffect } from "react";
 import ServicesList from "../components/CategoryList/ServicesList";
-import { businessItemContext } from "../contexts/BusinessItemContext";
+import { useBusinessItemContext } from "../contexts/BusinessItemContext";
 import styles from "./ProductView.module.css";
 import RatingList from "../components/CategoryList/RatingList";
 import FixedNavbar from "../components/Header/FixedNavbar/FixedNavbar";
 import Footer from "../components/Footer/Footer";
-import { useSearchParams } from "react-router-dom";
+import { BusinessRating, BusinessService } from "../utils/db";
+import { Dispatch, SetStateAction } from "react";
+
+interface Props {
+	servicesList: BusinessService[];
+	ratingList: BusinessRating[];
+	city: string;
+	setCategory: Dispatch<SetStateAction<string>>;
+	setCity: Dispatch<SetStateAction<string>>;
+	setShowLogin: Dispatch<SetStateAction<boolean>>;
+	setShowRegister: Dispatch<SetStateAction<boolean>>;
+}
 
 const ProductView = ({
 	servicesList,
 	ratingList,
-	currentUser,
-	product,
-	setProduct,
 	setCategory,
 	city,
 	setCity,
-	showLogin,
 	setShowLogin,
-	showRegister,
 	setShowRegister,
-}) => {
-	const [activeBusiness, setActiveBusiness] = useContext(businessItemContext);
+}: Props) => {
+	const [activeBusiness] = useBusinessItemContext();
 
 	return (
 		<div>
 			<FixedNavbar
-				setProduct={setProduct}
-				product={product}
 				setCategory={setCategory}
 				setCity={setCity}
 				city={city}
-				currentUser={currentUser}
-				showLogin={showLogin}
 				setShowLogin={setShowLogin}
-				showRegister={showRegister}
 				setShowRegister={setShowRegister}
 			/>
 			<div className={styles.content}>

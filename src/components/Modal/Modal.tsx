@@ -1,11 +1,27 @@
-import { useContext, useState } from "react";
-import { modalDisplayContext } from "../../contexts/ModalDisplayContext";
+import { Dispatch, SetStateAction, useContext, useState } from "react";
+import {
+	modalDisplayContext,
+	useModalDisplayContext,
+} from "../../contexts/ModalDisplayContext";
 import CalendarModal from "./CalendarModal/CalendarModal";
 import { SearchBar } from "./SearchBarModal/SearchBar";
 import UserFormModal from "./UserFormModal/UserFormModal";
 import styles from "./Modal.module.css";
 import ReservationConfirm from "./ReservationConfirm/ReservationConfirm";
 import SuccessAlert from "./SuccessAlert/SuccessAlert";
+import { UsersReservationsPerDay } from "../../utils/db";
+
+interface Props {
+	showLogin: boolean;
+	showRegister: boolean;
+	setShowLogin: Dispatch<SetStateAction<boolean>>;
+	setShowRegister: Dispatch<SetStateAction<boolean>>;
+	setCategory: Dispatch<SetStateAction<string>>;
+	setCity: Dispatch<SetStateAction<string>>;
+	city: string;
+	usersReservations: UsersReservationsPerDay[];
+	setUsersReservations: Dispatch<SetStateAction<UsersReservationsPerDay[]>>;
+}
 
 const Modal = ({
 	showLogin,
@@ -17,13 +33,13 @@ const Modal = ({
 	city,
 	usersReservations,
 	setUsersReservations,
-}) => {
-	const [displayModal, setDisplayModal] = useContext(modalDisplayContext);
-	const [date, setDate] = useState("");
+}: Props) => {
+	const [displayModal, setDisplayModal] = useModalDisplayContext();
+	const [date, setDate] = useState<Date | null>(null);
 
 	const handleModalDisplay = () => {
 		setDisplayModal("");
-		setDate("");
+		setDate(null);
 		setShowLogin(false);
 		setShowRegister(false);
 	};
@@ -40,10 +56,10 @@ const Modal = ({
 				/>
 			)}
 			{displayModal === "user-form" && showLogin && (
-				<UserFormModal showLogin={showLogin} />
+				<UserFormModal showLogin={showLogin} showRegister={false} />
 			)}
 			{displayModal === "user-form" && showRegister && (
-				<UserFormModal showRegister={showRegister} />
+				<UserFormModal showRegister={showRegister} showLogin={false} />
 			)}
 			{displayModal === "calendar" && (
 				<CalendarModal

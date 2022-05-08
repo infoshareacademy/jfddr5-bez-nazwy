@@ -1,18 +1,27 @@
-import React, { useContext, useState } from "react";
-import { modalDisplayContext } from "../../../contexts/ModalDisplayContext";
+import React, { FormEvent, useState } from "react";
+import { useModalDisplayContext } from "../../../contexts/ModalDisplayContext";
 import { loginUser, registerUser } from "../../../utils/db";
 import styles from "./UserFormModal.module.css";
 
-const UserFormModal = ({ showLogin, showRegister }) => {
-	const [displayModal, setDisplayModal] = useContext(modalDisplayContext);
+interface Props {
+	showLogin: boolean;
+	showRegister: boolean;
+}
+
+const UserFormModal = ({ showLogin, showRegister }: Props) => {
+	const [, setDisplayModal] = useModalDisplayContext();
 	const [username, setUsername] = useState("");
 	const [email, setEmail] = useState("");
 	const [password, setPassword] = useState("");
 	const [city, setCity] = useState("");
-	const [registerErrorMessage, setRegisterErrorMessage] = useState(null);
-	const [loginErrorMessage, setLoginErrorMessage] = useState(null);
+	const [registerErrorMessage, setRegisterErrorMessage] = useState<
+		string | undefined
+	>("");
+	const [loginErrorMessage, setLoginErrorMessage] = useState<
+		string | undefined
+	>("");
 
-	const handleRegister = async (e) => {
+	const handleRegister = async (e: FormEvent): Promise<void> => {
 		e.preventDefault();
 		const returnedMessage = await registerUser(
 			username,
@@ -30,7 +39,7 @@ const UserFormModal = ({ showLogin, showRegister }) => {
 		}
 	};
 
-	const handleLogin = async (e) => {
+	const handleLogin = async (e: FormEvent): Promise<void> => {
 		e.preventDefault();
 		const returnedMessage = await loginUser(email, password);
 		setLoginErrorMessage(returnedMessage);

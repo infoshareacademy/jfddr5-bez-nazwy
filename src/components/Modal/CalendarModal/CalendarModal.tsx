@@ -1,13 +1,22 @@
-import { useContext } from "react";
+import { Dispatch, SetStateAction } from "react";
 import Calendar from "react-calendar";
 import "react-calendar/dist/Calendar.css";
-import { businessItemContext } from "../../../contexts/BusinessItemContext";
-import { currentUserContext } from "../../../contexts/CurrentUserContext";
-import { modalDisplayContext } from "../../../contexts/ModalDisplayContext";
-import { serviceItemContext } from "../../../contexts/ServiceItemContext";
-import { getReservedSlots } from "../../../utils/db";
+import { useBusinessItemContext } from "../../../contexts/BusinessItemContext";
+import { useCurrentUserContext } from "../../../contexts/CurrentUserContext";
+import { useModalDisplayContext } from "../../../contexts/ModalDisplayContext";
+import { useServiceItemContext } from "../../../contexts/ServiceItemContext";
+import { getReservedSlots, UsersReservationsPerDay } from "../../../utils/db";
 import { formatDate } from "../../../utils/formatDate";
 import styles from "./CalendarModal.module.css";
+
+interface Props {
+	setShowLogin: Dispatch<SetStateAction<boolean>>;
+	setShowRegister: Dispatch<SetStateAction<boolean>>;
+	usersReservations: UsersReservationsPerDay[];
+	setUsersReservations: Dispatch<SetStateAction<UsersReservationsPerDay[]>>;
+	date: Date | null;
+	setDate: Dispatch<SetStateAction<Date | null>>;
+}
 
 const CalendarModal = ({
 	setShowLogin,
@@ -16,14 +25,14 @@ const CalendarModal = ({
 	setUsersReservations,
 	date,
 	setDate,
-}) => {
-	const [currentUser] = useContext(currentUserContext);
+}: Props) => {
+	const [currentUser] = useCurrentUserContext();
 
-	const [displayModal, setDisplayModal] = useContext(modalDisplayContext);
-	const [activeService] = useContext(serviceItemContext);
-	const [activeBusiness] = useContext(businessItemContext);
+	const [, setDisplayModal] = useModalDisplayContext();
+	const [activeService] = useServiceItemContext();
+	const [activeBusiness] = useBusinessItemContext();
 
-	const handleDayClicked = (value) => {
+	const handleDayClicked = (value: Date) => {
 		getReservedSlots(
 			activeBusiness.id,
 			activeService.id,
@@ -33,15 +42,15 @@ const CalendarModal = ({
 		setDate(value);
 	};
 
-	const handleUserForm = (callback) => {
+	const handleUserForm = (
+		callback: Dispatch<SetStateAction<boolean>>,
+	): void => {
 		setDisplayModal("user-form");
 		callback(true);
-		setDate("");
+		setDate(null);
 	};
 
 	const handleReservationClick = () => {
-		const dateNow = new Date().toLocaleString("pl-PL");
-
 		if (currentUser && usersReservations.length < activeService.slot) {
 			setDisplayModal("reservation-confirm");
 		}
@@ -52,11 +61,11 @@ const CalendarModal = ({
 			onClick={(e) => e.stopPropagation()}>
 			<h2>Wybierz dzień</h2>
 			<Calendar
-				tileDisabled={({ activeStartDate, date, view }) => {
+				tileDisabled={({ date }) => {
 					return (
 						date.getDay() === 0 ||
 						date.getDay() === 6 ||
-						date <= Date.now()
+						date <= new Date()
 					);
 				}}
 				onClickDay={handleDayClicked}

@@ -1,24 +1,42 @@
-import { useContext, useRef, useState } from "react";
+import {
+	Dispatch,
+	FormEvent,
+	MutableRefObject,
+	Ref,
+	RefObject,
+	SetStateAction,
+	useContext,
+	useRef,
+	useState,
+} from "react";
 import { createSearchParams, useNavigate } from "react-router-dom";
-import { businessListContext } from "../../../contexts/BusinessListContext";
+import { useBusinessListContext } from "../../../contexts/BusinessListContext";
 import { SearchBarList } from "./SearchBarList";
 import styles from "./SearchBar.module.css";
 import { pathNormalize } from "../../../utils/pathNormalize";
-import { modalDisplayContext } from "../../../contexts/ModalDisplayContext";
-import { businessItemContext } from "../../../contexts/BusinessItemContext";
+import { useModalDisplayContext } from "../../../contexts/ModalDisplayContext";
+import { useBusinessItemContext } from "../../../contexts/BusinessItemContext";
 import { autocompleteHelper } from "../../../utils/autocompleteHelper";
+import { Business } from "../../../utils/db";
 
-export const SearchBar = ({ setProduct, setCategory, setCity, city }) => {
-	const [searchValue, setSearchValue] = useState("");
-	const [cityValue, setCityValue] = useState(city);
-	const [displayModal, setDisplayModal] = useContext(modalDisplayContext);
-	const [activeBusiness, setActiveBusiness] = useContext(businessItemContext);
+interface Props {
+	setCategory: Dispatch<SetStateAction<string>>;
+	setCity: Dispatch<SetStateAction<string>>;
+	city: string;
+}
+
+export const SearchBar = ({ setCategory, setCity, city }: Props) => {
+	const [searchValue, setSearchValue] = useState<string>("");
+	const [cityValue, setCityValue] = useState<string>(city);
+	const [businessList] = useBusinessListContext();
+	const [, setDisplayModal] = useModalDisplayContext();
+	const [, setActiveBusiness] = useBusinessItemContext();
 
 	const navigate = useNavigate();
 
-	const searchInputRef = useRef();
-	const cityInputRef = useRef();
-	const [businessList] = useContext(businessListContext);
+	type Value = RefObject<HTMLInputElement> | null;
+	const searchInputRef = useRef<HTMLInputElement | null>(null);
+	const cityInputRef = useRef<HTMLInputElement | null>(null);
 
 	//Lists of business names, categories, cities
 	const nameList = businessList.map((business) => business.name);
@@ -32,20 +50,23 @@ export const SearchBar = ({ setProduct, setCategory, setCity, city }) => {
 	);
 
 	//submit button handler
-	const handleSubmit = (e) => {
+	const handleSubmit = (e: FormEvent): void => {
 		e.preventDefault();
 		//name
 		if (businessList.some((business) => searchValue === business.name)) {
 			//find business object
+
 			const businessObj = businessList.find(
 				(business) => searchValue === business.name,
 			);
-			//set active business to this object
-			setActiveBusiness(businessObj);
-			//navigate to the site
-			navigate(`/product/${businessObj.id}`);
-			//close modal
-			setDisplayModal("");
+			if (businessObj !== undefined) {
+				//set active business to this object
+				setActiveBusiness(businessObj);
+				//navigate to the site
+				navigate(`/product/${businessObj.id}`);
+				//close modal
+				setDisplayModal("");
+			}
 		}
 		//category & city
 		else if (
@@ -116,8 +137,8 @@ export const SearchBar = ({ setProduct, setCategory, setCity, city }) => {
 						ref={cityInputRef}></input>
 				</div>
 				<div className={styles.searchBarModalList}>
-					{(document.activeElement === searchInputRef.current ||
-						cityInputRef.current) && (
+					{(document.activeElement === searchInputRef?.current ||
+						cityInputRef?.current) && (
 						<div>
 							{autocompleteHelper(
 								searchInputRef,

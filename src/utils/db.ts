@@ -127,6 +127,8 @@ export interface Business {
 	city: string;
 	contact: {
 		street: string;
+		email: string;
+		phone: string;
 	};
 	photo: string;
 	info: string;
@@ -164,7 +166,7 @@ export interface Service {
 	id: string;
 	name: string;
 	price: string;
-	slot: string;
+	slot: number;
 }
 
 export interface BusinessService {
@@ -269,7 +271,7 @@ const setCalendarForService = async (
 	businessId: string,
 	serviceId: string,
 	dateId: string,
-	date: string,
+	date: Date,
 	user: string,
 ) => {
 	await setDoc(
@@ -318,8 +320,8 @@ const setServiceForUser = async (
 	);
 };
 
-interface UsersReservationsPerDay {
-	time: string;
+export interface UsersReservationsPerDay {
+	time: Date;
 	user: string;
 }
 
@@ -349,9 +351,9 @@ const getReservedSlots = async (
 	callback(() => (slotItem ? slotItem.usersReservations : []));
 };
 
-interface UserReservations {
+export interface UserReservations {
 	id: string;
-	date: string;
+	date: Date;
 	businessName: string;
 	businessId: string;
 	serviceName: string;

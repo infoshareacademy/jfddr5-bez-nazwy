@@ -1,19 +1,22 @@
-import { useContext } from "react";
-import { businessItemContext } from "../../../contexts/BusinessItemContext";
-import { currentUserContext } from "../../../contexts/CurrentUserContext";
-import { modalDisplayContext } from "../../../contexts/ModalDisplayContext";
-import { serviceItemContext } from "../../../contexts/ServiceItemContext";
+import { useBusinessItemContext } from "../../../contexts/BusinessItemContext";
+import { useCurrentUserContext } from "../../../contexts/CurrentUserContext";
+import { useModalDisplayContext } from "../../../contexts/ModalDisplayContext";
+import { useServiceItemContext } from "../../../contexts/ServiceItemContext";
 import { setCalendarForService, setServiceForUser } from "../../../utils/db";
 import { formatDate } from "../../../utils/formatDate";
 import styles from "./ReservationConfirm.module.css";
 
-const ReservationConfirm = ({ date }) => {
-	const [displayModal, setDisplayModal] = useContext(modalDisplayContext);
-	const [activeBusiness] = useContext(businessItemContext);
-	const [activeService] = useContext(serviceItemContext);
-	const [currentUser] = useContext(currentUserContext);
+interface Props {
+	date: Date;
+}
 
-	const handleReservation = (e) => {
+const ReservationConfirm = ({ date }: Props) => {
+	const [, setDisplayModal] = useModalDisplayContext();
+	const [activeBusiness] = useBusinessItemContext();
+	const [activeService] = useServiceItemContext();
+	const [currentUser] = useCurrentUserContext();
+
+	const handleReservation = () => {
 		const dateNow = new Date().toLocaleString("pl-PL");
 		setCalendarForService(
 			activeBusiness.id,

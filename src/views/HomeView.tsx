@@ -8,57 +8,43 @@ import ScrollingNavbar from "../components/Header/ScrollingNavbar/ScrollingNavba
 import RecommendedSection from "../components/RecommendedSection/RecommendedSection";
 import Footer from "../components/Footer/Footer";
 import InfoSection from "../components/InfoSection/InfoSection";
+import { Dispatch, SetStateAction } from "react";
+
+interface Props {
+	category: string;
+	city: string;
+	setCategory: Dispatch<SetStateAction<string>>;
+	setCity: Dispatch<SetStateAction<string>>;
+	setShowLogin: Dispatch<SetStateAction<boolean>>;
+	setShowRegister: Dispatch<SetStateAction<boolean>>;
+}
 
 const HomeView = ({
-	currentUser,
-	product,
-	setProduct,
 	category,
 	setCategory,
 	city,
 	setCity,
-	showLogin,
 	setShowLogin,
-	showRegister,
 	setShowRegister,
-}) => {
+}: Props) => {
 	return (
 		<>
 			<div className={styles.wrapper}>
 				<ScrollingNavbar
-					setProduct={setProduct}
-					product={product}
-					setCategory={setCategory}
 					setCity={setCity}
-					city={city}
-					currentUser={currentUser}
-					showLogin={showLogin}
+					setCategory={setCategory}
 					setShowLogin={setShowLogin}
-					showRegister={showRegister}
+					city={city}
 					setShowRegister={setShowRegister}
 				/>
 				<div className={styles.slideshowWrapper}>
 					<div className={styles.contentWrapper}>
 						<Header
-							setProduct={setProduct}
-							product={product}
-							setCategory={setCategory}
-							setCity={setCity}
-							city={city}
-							currentUser={currentUser}
-							showLogin={showLogin}
 							setShowLogin={setShowLogin}
-							showRegister={showRegister}
 							setShowRegister={setShowRegister}
 						/>
 						<CallToAction />
-						<SearchBarMock
-							product={product}
-							setProduct={setProduct}
-							setCategory={setCategory}
-							setCity={setCity}
-							city={city}
-						/>
+						<SearchBarMock city={city} />
 						<CategoryListBar
 							category={category}
 							setCategory={setCategory}

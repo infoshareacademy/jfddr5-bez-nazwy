@@ -1,10 +1,9 @@
-import { useContext } from "react";
 import { useNavigate } from "react-router-dom";
-import { modalDisplayContext } from "../../../contexts/ModalDisplayContext";
+import { useModalDisplayContext } from "../../../contexts/ModalDisplayContext";
 import styles from "./SuccessAlert.module.css";
 
 const SuccessAlert = () => {
-	const [displayModal, setDisplayModal] = useContext(modalDisplayContext);
+	const [, setDisplayModal] = useModalDisplayContext();
 	const navigate = useNavigate();
 	return (
 		<div className={styles.content}>

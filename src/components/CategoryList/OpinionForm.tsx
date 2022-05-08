@@ -1,6 +1,6 @@
 import styles from "./Rating.module.css";
 import star from "./images/star.png";
-import React, { useState } from "react";
+import React, { FormEvent, useState } from "react";
 import { addOpinion, getRating, User } from "../../utils/db";
 import { useBusinessItemContext } from "../../contexts/BusinessItemContext";
 import { useCurrentUserContext } from "../../contexts/CurrentUserContext";
@@ -18,7 +18,7 @@ export const OpinionForm = () => {
 
 	const stars = [0, 1, 2, 3, 4];
 
-	const handleOpinionSubmit = (e: React.FormEvent): void => {
+	const handleOpinionSubmit = (e: FormEvent): void => {
 		e.preventDefault();
 
 		const myUser = usersList.find((user) => user.uid === currentUser.uid);

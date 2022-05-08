@@ -48,6 +48,7 @@ const RecommendedSection = () => {
 			if (business === undefined) {
 				return;
 			}
+
 			return {
 				business,
 				avgRating: item.avgRating,

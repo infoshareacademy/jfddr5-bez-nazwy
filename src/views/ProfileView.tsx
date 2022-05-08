@@ -1,39 +1,59 @@
-import { useContext, useEffect, useState } from "react";
+import {
+	Dispatch,
+	SetStateAction,
+	useContext,
+	useEffect,
+	useState,
+} from "react";
 import Footer from "../components/Footer/Footer";
 import FixedNavbar from "../components/Header/FixedNavbar/FixedNavbar";
-import { currentUserContext } from "../contexts/CurrentUserContext";
+import {
+	currentUserContext,
+	useCurrentUserContext,
+} from "../contexts/CurrentUserContext";
 import {
 	getServiceForUser,
 	deleteServiceForUser,
 	updateCalendarForService,
+	UserReservations,
+	UsersReservationsPerDay,
 } from "../utils/db";
 import { formatDate } from "../utils/formatDate";
 import styles from "./ProfileView.module.css";
 
+interface Props {
+	city: string;
+	setCity: Dispatch<SetStateAction<string>>;
+	setCategory: Dispatch<SetStateAction<string>>;
+	setShowLogin: Dispatch<SetStateAction<boolean>>;
+	setShowRegister: Dispatch<SetStateAction<boolean>>;
+}
+
 const ProfileView = ({
-	product,
-	setProduct,
 	city,
 	setCity,
 	setCategory,
-	showLogin,
 	setShowLogin,
-	showRegister,
 	setShowRegister,
-}) => {
-	const [serviceForUser, setServiceForUser] = useState([]);
-	const [currentUser] = useContext(currentUserContext);
+}: Props) => {
+	const [serviceForUser, setServiceForUser] = useState<UserReservations[]>(
+		[],
+	);
+	const [currentUser] = useCurrentUserContext();
 
 	useEffect(() => {
 		getServiceForUser(setServiceForUser);
 	}, []);
 
 	const handleDelete = async (
-		businessId,
-		serviceId,
-		reservationId,
-		dateId,
-		item,
+		businessId: string,
+		serviceId: string,
+		reservationId: string,
+		dateId: string,
+		item: {
+			user: string;
+			time: Date;
+		},
 	) => {
 		deleteServiceForUser(reservationId, setServiceForUser);
 		updateCalendarForService(businessId, serviceId, dateId, item);
@@ -41,15 +61,10 @@ const ProfileView = ({
 	return (
 		<div>
 			<FixedNavbar
-				setProduct={setProduct}
-				product={product}
 				setCategory={setCategory}
 				setCity={setCity}
 				city={city}
-				currentUser={currentUser}
-				showLogin={showLogin}
 				setShowLogin={setShowLogin}
-				showRegister={showRegister}
 				setShowRegister={setShowRegister}
 			/>
 			<div className={styles.profileView}>
