@@ -1,9 +1,11 @@
 import { createContext, Dispatch, SetStateAction, useContext } from "react";
-import { User } from "../utils/db";
+import { CurrentUser } from "../App";
 
-type Value<T> = [T, Dispatch<SetStateAction<T>>];
+type Value<T> = [T | null, Dispatch<SetStateAction<T | null>>];
 
-export const currentUserContext = createContext<Value<User> | null>(null);
+export const currentUserContext = createContext<Value<CurrentUser> | null>(
+	null,
+);
 
 export const useCurrentUserContext = () => {
 	const value = useContext(currentUserContext);

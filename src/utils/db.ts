@@ -321,7 +321,7 @@ const setServiceForUser = async (
 };
 
 export interface UsersReservationsPerDay {
-	time: Date;
+	time: string;
 	user: string;
 }
 
@@ -353,7 +353,7 @@ const getReservedSlots = async (
 
 export interface UserReservations {
 	id: string;
-	date: Date;
+	date: string;
 	businessName: string;
 	businessId: string;
 	serviceName: string;

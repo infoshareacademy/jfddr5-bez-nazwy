@@ -18,6 +18,14 @@ const ReservationConfirm = ({ date }: Props) => {
 
 	const handleReservation = () => {
 		const dateNow = new Date().toLocaleString("pl-PL");
+		if (
+			activeBusiness === null ||
+			activeService === null ||
+			currentUser === null
+		) {
+			return;
+		}
+
 		setCalendarForService(
 			activeBusiness.id,
 			activeService.id,
@@ -36,6 +44,10 @@ const ReservationConfirm = ({ date }: Props) => {
 		);
 		setDisplayModal("success-alert");
 	};
+
+	if (activeBusiness === null || activeService === null) {
+		return <div> Page not found</div>;
+	}
 	return (
 		<div
 			className={styles.confirmContent}

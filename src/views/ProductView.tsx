@@ -28,6 +28,10 @@ const ProductView = ({
 }: Props) => {
 	const [activeBusiness] = useBusinessItemContext();
 
+	if (activeBusiness === null) {
+		return <div>Page not found</div>;
+	}
+
 	return (
 		<div>
 			<FixedNavbar

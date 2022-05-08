@@ -2,13 +2,19 @@ import { Route, Routes } from "react-router-dom";
 import HomeView from "./views/HomeView";
 import ProductView from "./views/ProductView";
 import ProfileView from "./views/ProfileView";
-import { useState, useEffect, useMemo } from "react";
+import { useState, useEffect, useMemo, SetStateAction, Dispatch } from "react";
 import {
 	auth,
+	Business,
+	BusinessRating,
+	BusinessService,
 	getBusinessList,
 	getRating,
 	getServicesList,
 	getUsers,
+	Service,
+	User,
+	UsersReservationsPerDay,
 } from "./utils/db";
 import { businessListContext } from "./contexts/BusinessListContext";
 import { currentUserContext } from "./contexts/CurrentUserContext";
@@ -22,26 +28,32 @@ import { ratingContext } from "./contexts/RatingContext";
 import { usersListContext } from "./contexts/usersListContext";
 import ScrollToTop from "./utils/ScrollToTop";
 
+export interface CurrentUser {
+	email: string | null;
+	uid: string;
+}
+
 function App() {
 	//USE STATES
 	//context states
-	const [currentUser, setCurrentUser] = useState(null);
-	const [usersList, setUsersList] = useState([]);
-	const [businessList, setBusinessList] = useState([]);
-	const [activeBusiness, setActiveBusiness] = useState("");
+	const [currentUser, setCurrentUser] = useState<CurrentUser | null>(null);
+	const [usersList, setUsersList] = useState<User[]>([]);
+	const [businessList, setBusinessList] = useState<Business[]>([]);
+	const [activeBusiness, setActiveBusiness] = useState<Business | null>(null);
 	//service list state
-	//todo: assign to context!!!!
-	const [servicesList, setServicesList] = useState([]);
-	const [activeService, setActiveService] = useState("");
-	const [ratingList, setRatingList] = useState([]);
-	const [modalDisplay, setModalDisplay] = useState("");
+	const [servicesList, setServicesList] = useState<BusinessService[]>([]);
+	const [activeService, setActiveService] = useState<Service | null>(null);
+	const [ratingList, setRatingList] = useState<BusinessRating[]>([]);
+	const [modalDisplay, setModalDisplay] = useState<string>("");
 	//category & city states
-	const [category, setCategory] = useState("");
-	const [city, setCity] = useState("");
+	const [category, setCategory] = useState<string>("");
+	const [city, setCity] = useState<string>("");
 	//modal form state
-	const [showLogin, setShowLogin] = useState(false);
-	const [showRegister, setShowRegister] = useState(false);
-	const [usersReservations, setUsersReservations] = useState([]);
+	const [showLogin, setShowLogin] = useState<boolean>(false);
+	const [showRegister, setShowRegister] = useState<boolean>(false);
+	const [usersReservations, setUsersReservations] = useState<
+		UsersReservationsPerDay[]
+	>([]);
 
 	//USE EFFECTS - FETCHING DATA
 	useEffect(() => {
@@ -65,33 +77,36 @@ function App() {
 		};
 	}, [businessList]);
 
-	const businessListContextValue = useMemo(
+	type Value1<T> = [T | null, Dispatch<SetStateAction<T | null>>];
+	type Value2<T> = [T, Dispatch<SetStateAction<T>>];
+
+	const businessListContextValue = useMemo<Value2<Business[]> | null>(
 		() => [businessList, setBusinessList],
 		[businessList],
 	);
-	const currentUserContextValue = useMemo(
+	const currentUserContextValue = useMemo<Value1<CurrentUser> | null>(
 		() => [currentUser, setCurrentUser],
 		[currentUser],
 	);
-	const serviceItemContextValue = useMemo(
+	const serviceItemContextValue = useMemo<Value1<Service> | null>(
 		() => [activeService, setActiveService],
 		[activeService],
 	);
-	const businessItemContextValue = useMemo(
+	const businessItemContextValue = useMemo<Value1<Business | null>>(
 		() => [activeBusiness, setActiveBusiness],
 		[activeBusiness],
 	);
-	const modalDisplayContextValue = useMemo(
+	const modalDisplayContextValue = useMemo<Value2<string>>(
 		() => [modalDisplay, setModalDisplay],
 		[modalDisplay],
 	);
 
-	const ratingContextValue = useMemo(
+	const ratingContextValue = useMemo<Value2<BusinessRating[]>>(
 		() => [ratingList, setRatingList],
 		[ratingList],
 	);
 
-	const usersListContextValue = useMemo(
+	const usersListContextValue = useMemo<Value2<User[]>>(
 		() => [usersList, setUsersList],
 		[usersList],
 	);
@@ -126,6 +141,7 @@ function App() {
 												path="/"
 												element={
 													<HomeView
+														category={category}
 														setCategory={
 															setCategory
 														}
@@ -142,7 +158,7 @@ function App() {
 											/>
 
 											<Route
-												path={`/product/${activeBusiness.id}`}
+												path={`/product/${activeBusiness?.id}`}
 												element={
 													<ProductView
 														servicesList={
@@ -168,9 +184,6 @@ function App() {
 												path="/s"
 												element={
 													<CategoryView
-														setServicesList={
-															setServicesList
-														}
 														servicesList={
 															servicesList
 														}
@@ -188,17 +201,11 @@ function App() {
 													/>
 												}
 											/>
-											{currentUser && (
+											{currentUser !== null && (
 												<Route
 													path="/profile"
 													element={
 														<ProfileView
-															usersReservations={
-																usersReservations
-															}
-															setUsersReservations={
-																setUsersReservations
-															}
 															setShowLogin={
 																setShowLogin
 															}

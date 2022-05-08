@@ -21,9 +21,9 @@ export const OpinionForm = () => {
 	const handleOpinionSubmit = (e: FormEvent): void => {
 		e.preventDefault();
 
-		const myUser = usersList.find((user) => user.uid === currentUser.uid);
+		const myUser = usersList.find((user) => user.uid === currentUser?.uid);
 
-		if (myUser === undefined) {
+		if (myUser === undefined || activeBusiness === null) {
 			return;
 		}
 		if (ratingArray.length > 0) {

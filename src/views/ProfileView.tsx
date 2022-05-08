@@ -1,22 +1,12 @@
-import {
-	Dispatch,
-	SetStateAction,
-	useContext,
-	useEffect,
-	useState,
-} from "react";
+import { Dispatch, SetStateAction, useEffect, useState } from "react";
 import Footer from "../components/Footer/Footer";
 import FixedNavbar from "../components/Header/FixedNavbar/FixedNavbar";
-import {
-	currentUserContext,
-	useCurrentUserContext,
-} from "../contexts/CurrentUserContext";
+import { useCurrentUserContext } from "../contexts/CurrentUserContext";
 import {
 	getServiceForUser,
 	deleteServiceForUser,
 	updateCalendarForService,
 	UserReservations,
-	UsersReservationsPerDay,
 } from "../utils/db";
 import { formatDate } from "../utils/formatDate";
 import styles from "./ProfileView.module.css";
@@ -52,12 +42,13 @@ const ProfileView = ({
 		dateId: string,
 		item: {
 			user: string;
-			time: Date;
+			time: string;
 		},
 	) => {
 		deleteServiceForUser(reservationId, setServiceForUser);
 		updateCalendarForService(businessId, serviceId, dateId, item);
 	};
+
 	return (
 		<div>
 			<FixedNavbar
@@ -71,9 +62,12 @@ const ProfileView = ({
 				<div>
 					<h2 className={styles.title}>Lista rezerwacji:</h2>
 					{serviceForUser.map((reservation) => {
+						if (currentUser === null) {
+							return;
+						}
 						const item = {
 							user: currentUser.uid,
-							time: reservation.id.toLocaleString("pl-PL"),
+							time: reservation.id,
 						};
 						return (
 							<div

@@ -1,7 +1,7 @@
 import { createContext, Dispatch, SetStateAction, useContext } from "react";
 import { Business } from "../utils/db";
 
-type Value<T> = [T, Dispatch<SetStateAction<T>>];
+type Value<T> = [T | null, Dispatch<SetStateAction<T | null>>];
 
 export const businessItemContext = createContext<Value<Business> | null>(null);
 

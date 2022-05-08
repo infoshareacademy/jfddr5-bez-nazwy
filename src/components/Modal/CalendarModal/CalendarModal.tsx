@@ -33,6 +33,10 @@ const CalendarModal = ({
 	const [activeBusiness] = useBusinessItemContext();
 
 	const handleDayClicked = (value: Date) => {
+		if (activeBusiness === null || activeService === null) {
+			return;
+		}
+
 		getReservedSlots(
 			activeBusiness.id,
 			activeService.id,
@@ -51,10 +55,17 @@ const CalendarModal = ({
 	};
 
 	const handleReservationClick = () => {
+		if (activeService === null) {
+			return;
+		}
 		if (currentUser && usersReservations.length < activeService.slot) {
 			setDisplayModal("reservation-confirm");
 		}
 	};
+
+	if (activeService === null) {
+		return <div>Page not found</div>;
+	}
 	return (
 		<div
 			className={styles.calendarModalContent}

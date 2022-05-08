@@ -60,7 +60,7 @@ const RatingList = ({ ratingList }: Props) => {
 			</div>
 			{ratingList?.map((bus) => (
 				<div key={bus.businessId} className={styles.opinionWrapper}>
-					{bus.businessId === activeBusiness.id
+					{bus.businessId === activeBusiness?.id
 						? bus.rating
 								.sort(sorting)
 								.map((rating) => (
